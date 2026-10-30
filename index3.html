@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Chế độ No-Cache đảm bảo luôn tải phiên bản mới nhất trên GitHub Pages -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>III. Luật Học (40 Câu Mở Rộng) - Phật Học Phổ Thông & Oai Nghi Cảnh Sách</title>
+    <style>
+        :root {
+            --gold: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.35);
+            --cyan: #00f2fe;
+            --emerald: #00e676;
+            --crimson: #ff5252;
+            --card-bg: rgba(15, 23, 42, 0.82);
+            --border-glass: rgba(255, 255, 255, 0.14);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #050814;
+            color: #e2e8f0;
+            line-height: 1.65;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas Vũ Trụ Sao Chuyển Động */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 25px 18px 60px;
+        }
+
+        header {
+            text-align: center;
+            padding: 28px 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-glow);
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            color: var(--gold);
+            font-size: 1.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Thanh Tiến Độ Thuộc Bài */
+        .mastery-bar-wrap {
+            margin-top: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .progress-track {
+            flex: 1;
+            min-width: 200px;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--emerald));
+            transition: width 0.4s ease;
+        }
+
+        /* Điều hướng Chế độ (Tabs) */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(30, 41, 59, 0.8);
+            color: #cbd5e1;
+            border: 1px solid var(--border-glass);
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--gold);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(0, 242, 254, 0.18));
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 18px var(--gold-glow);
+        }
+
+        .mode-section { display: none; }
+        .mode-section.active { display: block; animation: fadeIn 0.35s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Công cụ tìm kiếm và lọc trong Chế độ Đề Cương */
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 220px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 0.98rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--gold);
+        }
+
+        /* Danh sách thẻ Câu Hỏi */
+        .qa-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .qa-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            border-left: 4px solid var(--gold);
+            border-radius: 14px;
+            padding: 18px 20px;
+            transition: all 0.25s ease;
+        }
+
+        .qa-card.mastered {
+            border-left-color: var(--emerald);
+            background: rgba(16, 42, 45, 0.75);
+        }
+
+        .qa-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .qa-question {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .master-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #cbd5e1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .qa-card.mastered .master-toggle {
+            background: rgba(0, 230, 118, 0.2);
+            border-color: var(--emerald);
+            color: var(--emerald);
+        }
+
+        .qa-answer {
+            color: #f1f5f9;
+            font-size: 1rem;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.12);
+        }
+
+        .qa-answer.hidden-ans {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .qa-answer.hidden-ans:hover {
+            filter: blur(3px);
+        }
+
+        .keyword-box {
+            margin-top: 10px;
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--cyan);
+        }
+
+        strong.hl {
+            color: #00ffcc;
+            font-weight: 700;
+        }
+
+        .verse-box {
+            background: rgba(255, 215, 0, 0.08);
+            border-left: 3px solid var(--gold);
+            padding: 10px 14px;
+            margin: 8px 0;
+            border-radius: 6px;
+            font-style: italic;
+        }
+
+        /* CHẾ ĐỘ FLASHCARD 3D */
+        .flashcard-wrapper {
+            max-width: 720px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .flashcard-scene {
+            width: 100%;
+            height: 410px;
+            perspective: 1200px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard-scene.is-flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, rgba(20, 30, 55, 0.94), rgba(10, 15, 30, 0.96));
+            border: 2px solid var(--gold);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+            border-color: var(--cyan);
+        }
+
+        .fc-badge {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin-bottom: 14px;
+        }
+
+        .fc-Controls {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* CHẾ ĐỘ TRÒ CHƠI ĐẤU TRƯỜNG TRÍ TUỆ */
+        .game-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid var(--border-glass);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.45);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .quiz-question-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 18px;
+            border-left: 4px solid var(--cyan);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .opt-btn {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #e2e8f0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--gold);
+            transform: translateX(4px);
+        }
+
+        .opt-btn.correct {
+            background: rgba(0, 230, 118, 0.25) !important;
+            border-color: var(--emerald) !important;
+            color: #fff !important;
+            font-weight: 700;
+        }
+
+        .opt-btn.wrong {
+            background: rgba(255, 82, 82, 0.25) !important;
+            border-color: var(--crimson) !important;
+            color: #ffb4b4 !important;
+        }
+
+        .feedback-box {
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(0, 242, 254, 0.1);
+            border-left: 4px solid var(--cyan);
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        /* Cấu hình In A4 Ngang (@media print) */
+        @media print {
+            @page { size: A4 landscape; margin: 12mm; }
+            body { background: #fff !important; color: #000 !important; }
+            #starfield, .nav-tabs, .toolbar, .master-toggle, .mastery-bar-wrap { display: none !important; }
+            .container { max-width: 100%; padding: 0; margin: 0; }
+            header { box-shadow: none; border: 1px solid #000; background: #fff; color: #000; padding: 10px; margin-bottom: 15px; }
+            header h1 { color: #000; text-shadow: none; font-size: 1.4rem; }
+            .mode-section { display: none !important; }
+            #mode-study { display: block !important; }
+            .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+            .qa-card { background: #fff !important; border: 1px solid #444 !important; page-break-inside: avoid; padding: 10px; }
+            .qa-question { color: #000 !important; font-size: 0.95rem; }
+            .qa-answer { color: #111 !important; filter: none !important; font-size: 0.9rem; }
+            strong.hl, .keyword-box, .verse-box { color: #000 !important; border-color: #666 !important; background: #f5f5f5 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="container">
+    <header>
+        <h1>III. LUẬT HỌC (GIỚI LUẬT – TỲ NI – OAI NGHI – CẢNH SÁCH)</h1>
+        <p>Biên soạn theo "Phật Học Phổ Thông" (HT. Thiện Hoa) & "Tỳ-kheo Sa-di Oai Nghi Cảnh Sách" (HT. Thích Đạt Dương)</p>
+        
+        <div class="mastery-bar-wrap">
+            <span>🎯 Tiến độ thuộc bài: <strong id="mastery-count" style="color: var(--gold);">0 / 40</strong> câu</span>
+            <div class="progress-track">
+                <div class="progress-fill" id="mastery-fill"></div>
+            </div>
+            <button class="action-btn" onclick="resetMastery()" style="padding: 5px 12px; font-size: 0.82rem;">Đặt lại tiến độ</button>
+        </div>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchMode('study', this)">📖 Đề Cương Chi Tiết (40 Câu)</button>
+        <button class="tab-btn" onclick="switchMode('flashcard', this)">🃏 Thẻ Nhớ Flashcard 3D</button>
+        <button class="tab-btn" onclick="switchMode('game', this)">🎮 Game Đấu Trường Trí Tuệ</button>
+    </div>
+
+    <!-- CHẾ ĐỘ 1: ĐỀ CƯƠNG CHI TIẾT -->
+    <section id="mode-study" class="mode-section active">
+        <div class="toolbar">
+            <input type="text" id="search-box" class="search-input" placeholder="🔍 Tìm theo số câu, thuật ngữ (Tam tụ, Khai giá trì phạm, Tà mạng thực, Ngũ y, Thất y, Ẩm thủy...)" oninput="renderStudyList()">
+            <button class="action-btn" id="btn-toggle-ans" onclick="toggleAllAnswers()">🙈 Ẩn đáp án để tự dò bài</button>
+            <button class="action-btn" onclick="filterUnmastered()" id="btn-filter-unmastered">📌 Chỉ hiện câu chưa thuộc</button>
+            <button class="action-btn" onclick="window.print()">🖨️ In A4 Ngang</button>
+        </div>
+        <div class="qa-grid" id="study-container"></div>
+    </section>
+
+    <!-- CHẾ ĐỘ 2: FLASHCARD 3D -->
+    <section id="mode-flashcard" class="mode-section">
+        <div class="flashcard-wrapper">
+            <div class="flashcard-scene" id="fc-scene" onclick="flipCard()">
+                <div class="flashcard-inner">
+                    <div class="flashcard-face flashcard-front">
+                        <div class="fc-badge" id="fc-counter">CÂU 1 / 40 (Nhấp vào thẻ hoặc nhấn phím Space để lật)</div>
+                        <h3 id="fc-question" style="color: var(--gold); font-size: 1.3rem; margin-bottom: 18px;"></h3>
+                        <div class="keyword-box" id="fc-hint"></div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <div class="fc-badge" style="color: var(--cyan);">ĐÁP ÁN CHI TIẾT</div>
+                        <div id="fc-answer" style="font-size: 1rem; text-align: left; max-width: 96%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="fc-Controls">
+                <button class="action-btn" onclick="prevCard()">◀ Câu trước</button>
+                <button class="action-btn" onclick="flipCard()" style="border-color: var(--gold); color: var(--gold);">🔄 Lật thẻ</button>
+                <button class="action-btn" onclick="toggleCurrentCardMastery()" id="fc-master-btn">✅ Đánh dấu Đã thuộc</button>
+                <button class="action-btn" onclick="randomCard()">🎲 Ngẫu nhiên</button>
+                <button class="action-btn" onclick="nextCard()">Câu tiếp ▶</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHẾ ĐỘ 3: TRÒ CHƠI THỬ THÁCH -->
+    <section id="mode-game" class="mode-section">
+        <div class="game-panel">
+            <div class="game-stats">
+                <div class="stat-box">
+                    <div>Câu hỏi</div>
+                    <div class="stat-val" id="game-q-num">1 / 40</div>
+                </div>
+                <div class="stat-box">
+                    <div>Điểm số</div>
+                    <div class="stat-val" id="game-score" style="color: var(--emerald);">0</div>
+                </div>
+                <div class="stat-box">
+                    <div>Chuỗi đúng (Streak)</div>
+                    <div class="stat-val" id="game-streak" style="color: var(--cyan);">🔥 0</div>
+                </div>
+                <div class="stat-box">
+                    <div>Kỷ lục</div>
+                    <div class="stat-val" id="game-best">0</div>
+                </div>
+            </div>
+
+            <div id="game-play-area">
+                <div class="quiz-question-box" id="quiz-question"></div>
+                <div class="options-grid" id="quiz-options"></div>
+                <div class="feedback-box" id="quiz-feedback"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button class="action-btn" onclick="startNewGame()">🔄 Chơi lại từ đầu (Xáo trộn câu)</button>
+                    <button class="action-btn" id="btn-next-quiz" onclick="nextQuizQuestion()" style="display: none; background: rgba(0, 230, 118, 0.25); border-color: var(--emerald);">Câu tiếp theo ▶</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+const QA_DATA = [
+    {
+        id: 1,
+        q: "Câu 1. Giới luật là gì? Vì sao người xuất gia phải học và giữ gìn giới luật?",
+        a: "- <strong>Giới luật:</strong> Là những quy tắc đạo đức, điều răn cấm và pháp chế do chính Đức Phật chế định nhằm giúp hàng đệ tử phòng hộ thân, khẩu, ý khỏi các điều sai quấy và hướng đến sự thanh tịnh, giải thoát.<br>- <strong>Vì sao người xuất gia phải học và giữ gìn giới luật:</strong> Vì giới luật là <strong class='hl'>thọ mạng của Phật pháp</strong> (<em>“Tỳ-ni tạng trụ, Phật pháp cửu trụ”</em>) và là nền tảng sinh khởi mọi công đức lành. Không học giới thì không biết điều gì nên làm hay cần tránh; không giữ giới thì ba nghiệp ô nhiễm, không thể phát sinh <strong class='hl'>Thiền định và Trí tuệ</strong>, chẳng những uổng phí một đời xuất gia mà còn mang nợ tín thí đàn-na.",
+        kw: "Quy tắc đạo đức Phật chế phòng hộ 3 nghiệp • Thọ mạng của Phật pháp • Nền tảng phát sinh Thiền định và Trí tuệ",
+        quiz: {
+            options: [
+                "Là những điều răn và pháp tắc Phật chế phòng hộ 3 nghiệp; người xuất gia phải học và giữ giới vì giới luật là thọ mạng của Phật pháp và là nền tảng phát sinh Thiền định, Trí tuệ",
+                "Là những quy định hành chính thế gian; người xuất gia học chỉ để đối phó với các kỳ thi khảo hạch",
+                "Là các bài chú cầu tài lộc; người xuất gia giữ giới để được giàu sang ở đời sau",
+                "Chỉ dành riêng cho người mới tập sự, khi đã thọ Cụ túc giới thì không cần học và giữ giới nữa"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 2,
+        q: "Câu 2. Thế nào là Giới, thế nào là Luật? Giới và Luật có mối quan hệ với nhau như thế nào?",
+        a: "- <strong>Giới (Śīla):</strong> Nghĩa là <em>phòng phi chỉ ác</em> (ngăn ngừa điều quấy, đình chỉ việc ác), mang tính chất <strong class='hl'>tự nguyện, tự giác thúc liễm thân tâm từ bên trong</strong> để giữ gìn đạo đức thanh lương.<br>- <strong>Luật (Vinaya):</strong> Nghĩa là <em>pháp tắc, điều phục, diệt ác</em>, bao gồm hệ thống quy chế, yết-ma phán quyết và chế tài trị phạt của Tăng đoàn từ <strong class='hl'>bên ngoài</strong> đối với người vi phạm.<br>- <strong>Mối quan hệ:</strong> Giới và Luật gắn bó mật thiết như <strong class='hl'>trong với ngoài, gốc với ngọn</strong>: tự giác giữ <strong>Giới</strong> thì không vi phạm vào <strong>Luật</strong>; có <strong>Luật</strong> nghiêm minh thì mới bảo hộ được sự trang nghiêm của <strong>Giới</strong> và sự thanh tịnh của Tăng đoàn.",
+        kw: "Giới = Tự giác phòng phi chỉ ác (bên trong) • Luật = Pháp tắc điều phục trị phạt (bên ngoài) • Quan hệ mật thiết trong - ngoài",
+        quiz: {
+            options: [
+                "Giới là tự giác ngăn quấy dừng ác từ bên trong; Luật là pháp tắc điều phục, chế tài từ bên ngoài; hai mặt gắn bó mật thiết giúp bảo hộ phẩm hạnh cá nhân và kỷ cương Tăng đoàn",
+                "Giới dành cho cư sĩ tại gia, còn Luật chỉ dành cho người xuất gia, hai thứ không liên quan nhau",
+                "Giới là các bộ kinh Đại thừa, còn Luật là các bộ luận giải thích triết học",
+                "Giới và Luật hoàn toàn đối lập nhau trong quá trình tu tập"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 3,
+        q: "Câu 3. Đức Phật chế định giới luật nhằm những mục đích gì?",
+        a: "Theo Luật tạng, Đức Phật chế định giới luật vì <strong class='hl'>10 mục đích (Thập lợi)</strong>:<br>1. <strong class='hl'>Nhiếp Tăng</strong> (Thu nhiếp đại chúng hòa hợp).<br>2. <strong class='hl'>Cực nhiếp Tăng</strong> (Nhiếp phục Tăng chúng một cách rốt ráo tốt đẹp).<br>3. <strong class='hl'>An lạc Tăng</strong> (Đem lại sự an ổn cho Tăng đoàn).<br>4. <strong class='hl'>Chiết phục người vô tàm</strong> (Hàng phục kẻ không biết hổ thẹn).<br>5. <strong class='hl'>An lạc người có tàm quý</strong> (Giúp người trọng giới yên tâm tu học).<br>6. <strong class='hl'>Khiến người chưa tin sanh lòng tin</strong>.<br>7. <strong class='hl'>Khiến người đã tin càng tăng trưởng niềm tin</strong>.<br>8. <strong class='hl'>Đoạn trừ các pháp hữu lậu đời hiện tại</strong>.<br>9. <strong class='hl'>Ngăn ngừa các pháp hữu lậu đời vị lai</strong>.<br>10. <strong class='hl'>Khiến Chánh pháp được trụ lâu dài ở thế gian (Chánh pháp cửu trụ)</strong>.",
+        kw: "10 lợi ích (Thập lợi): Nhiếp Tăng, Cực nhiếp Tăng, An lạc Tăng, Chiết phục vô tàm, An lạc tàm quý, Chưa tin sanh tin, Đã tin tăng trưởng, Đoạn hiện tại lậu, Đoạn vị lai lậu, Chánh pháp cửu trụ",
+        quiz: {
+            options: [
+                "Nhằm 10 mục đích (Thập lợi): Nhiếp Tăng, an lạc Tăng, chiết phục người vô tàm, an lạc người tàm quý, khiến người chưa tin sanh tin, người đã tin tăng trưởng, đoạn hữu lậu hiện tại và vị lai, giúp Chánh pháp cửu trụ",
+                "Nhằm mục đích hạn chế tự do và bắt các đệ tử phải tu khổ hạnh ép xác như ngoại đạo",
+                "Nhằm mục đích phân chia giai cấp cao thấp trong nội bộ Tăng đoàn",
+                "Chỉ nhằm mục đích đối phó với sự phê bình của các giáo phái đương thời tại Ấn Độ"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 4,
+        q: "Câu 4. Vì sao người xuất gia phải lấy giới luật làm thầy?",
+        a: "Trong <em>Kinh Di Giáo</em>, trước khi nhập Niết-bàn, Đức Phật đã ân cần di huấn: <strong class='hl'>“Sau khi Như Lai diệt độ, các ông phải tôn kính Ba-la-đề-mộc-xoa (Giới luật) như đêm tối gặp đèn sáng, như người nghèo được của báu; phải biết giới luật chính là bậc Đại Đạo sư của các ông (Dĩ giới vi sư), dù Như Lai còn tại thế cũng không khác gì giới luật này”</strong>.<br>Người xuất gia phải lấy giới luật làm thầy vì giới luật thay mặt Đức Phật răn nhắc, chỉ đường sáng giúp hành giả phòng hộ ba nghiệp, không sa vào đường ác và tiến thẳng đến giải thoát.",
+        kw: "Di huấn Kinh Di Giáo: 'Dĩ giới vi sư' (Lấy Giới luật làm Đại Đạo sư) • Như đêm tối gặp đèn, người nghèo được báu • Thay Phật chỉ đường giải thoát",
+        quiz: {
+            options: [
+                "Vì theo lời di huấn trong Kinh Di Giáo, sau khi Phật nhập diệt, Giới luật chính là bậc Đại Đạo sư thay Phật chỉ đường sáng, bảo hộ người tu thoát khổ đạt giác ngộ",
+                "Vì trong chùa không có vị Hòa thượng hay Thượng tọa nào dạy học nên phải đọc sách Luật",
+                "Vì lấy giới luật làm thầy thì không cần phải học thêm Kinh tạng và Luận tạng nữa",
+                "Vì đó là quy định riêng của các tổ sư đời sau chứ Đức Phật không dạy"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 5,
+        q: "Câu 5. Giới luật có vai trò như thế nào đối với sự tồn tại và phát triển của Tăng đoàn?",
+        a: "Giới luật giữ vai trò là <strong class='hl'>mạng mạch sống còn</strong> đối với sự tồn tại và phát triển của Tăng đoàn:<br>1. Thiết lập kỷ cương, giữ gìn sự <strong class='hl'>thanh tịnh và hòa hợp (Lục hòa)</strong> của tập thể Tăng-già.<br>2. Bảo vệ phẩm hạnh đạo đức của người tu sĩ, giúp Tăng đoàn xứng đáng là <strong class='hl'>ruộng phước (Phước điền) tối thắng</strong> cho trời và người quy ngưỡng, hộ trì.<br>3. Đúng như lời dạy <em>“Tỳ-ni tạng trụ, Phật pháp cửu trụ”</em>: Giới luật còn được hành trì thì Tăng đoàn còn hưng thịnh và Chánh pháp còn trường tồn.",
+        kw: "Mạng mạch sống còn • Giữ Tăng đoàn thanh tịnh hòa hợp • Làm Phước điền cho trời người • Giới luật còn thì Phật pháp còn",
+        quiz: {
+            options: [
+                "Là mạng mạch sống còn giúp Tăng đoàn thanh tịnh, hòa hợp, xứng đáng làm Phước điền cho trời người và giúp Chánh pháp trường tồn",
+                "Chỉ có vai trò trang식 hình thức bên ngoài, không ảnh hưởng đến sự hưng suy của Tăng đoàn",
+                "Giúp Tăng đoàn mở rộng việc kinh doanh buôn bán và tích lũy tài sản",
+                "Chỉ áp dụng cho Tăng đoàn thời kỳ đầu ở Ấn Độ, ngày nay không còn vai trò gì"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 6,
+        q: "Câu 6. Thế nào là trì giới và phạm giới?",
+        a: "- <strong class='hl'>Trì giới:</strong> Là vâng giữ, bảo hộ và thực hành đúng đắn các giới pháp mà Đức Phật đã chế định, giữ cho thân, khẩu, ý luôn thanh tịnh, không vượt qua ranh giới tội lỗi.<br>- <strong class='hl'>Phạm giới:</strong> Là buông lung thất niệm, làm trái lại những điều Đức Phật đã ngăn cấm hoặc cố ý bỏ bê những bổn phận mà Đức Phật đã dạy làm, khiến giới thể bị tổn hoại, nhơ nhớp.",
+        kw: "Trì giới = Vâng giữ, thực hành đúng giới pháp • Phạm giới = Làm trái điều Phật cấm hoặc bỏ bê điều Phật dạy",
+        quiz: {
+            options: [
+                "Trì giới là vâng giữ và thực hành đúng giới pháp Phật chế; Phạm giới là làm trái điều Phật cấm hoặc cố ý không làm điều Phật dạy",
+                "Trì giới là cầm quyển sách giới luật trên tay; Phạm giới là cất quyển sách giới luật vào tủ",
+                "Trì giới là bắt người khác giữ giới; Phạm giới là khuyên người khác xuất gia",
+                "Trì giới và phạm giới đều mang lại kết quả phước báo giống nhau"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 7,
+        q: "Câu 7. Thế nào là chỉ trì và tác trì?",
+        a: "Đây là hai mặt thực hành trọn vẹn của sự Trì giới:<br>- <strong class='hl'>Chỉ trì:</strong> <em>“Chỉ”</em> là dừng lại, đình chỉ; <em>“Trì”</em> là giữ gìn. Chỉ trì là <strong class='hl'>dừng lại, không làm tất cả các điều ác, điều quấy</strong> mà Đức Phật đã ngăn cấm (như không sát, không đạo, không dâm, không vọng... ứng với <em>“Chư ác mạc tác”</em>).<br>- <strong class='hl'>Tác trì:</strong> <em>“Tác”</em> là tạo tác, thực hiện. Tác trì là <strong class='hl'>tích cực vâng làm, thực hành các việc lành, các pháp thiện</strong> mà Đức Phật đã dạy bảo (như tụng giới bố-tát, an cư, hầu thầy, độ sanh... ứng với <em>“Chúng thiện phụng hành”</em>).",
+        kw: "Chỉ trì = Dừng lại không làm các điều ác (Chư ác mạc tác) • Tác trì = Tích cực vâng làm các điều thiện (Chúng thiện phụng hành)",
+        quiz: {
+            options: [
+                "Chỉ trì là dừng lại không làm các điều ác Phật cấm; Tác trì là tích cực vâng làm các điều lành Phật dạy",
+                "Chỉ trì là đứng yên một chỗ không đi lại; Tác trì là làm việc lao động tay chân suốt ngày",
+                "Chỉ trì dành cho hàng Sa-di; Tác trì dành cho hàng cư sĩ tại gia",
+                "Nếu không làm điều thiện (bỏ Tác trì) thì hoàn toàn không có lỗi gì cả"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 8,
+        q: "Câu 8. Thế nào là khai, giá, trì, phạm trong giới luật?",
+        a: "Đây là 4 nguyên tắc cốt yếu cần thông suốt khi học Luật:<br>1. <strong class='hl'>Khai (Mở):</strong> Là sự <strong class='hl'>cho phép, châm chước tạm thời</strong> trong những duyên sự đặc biệt (như khi bệnh nặng, gặp tai nạn nguy hiểm tính mạng hoặc vì lợi ích lớn của Tam Bảo) thì làm không phạm tội.<br>2. <strong class='hl'>Giá (Ngăn):</strong> Là sự <strong class='hl'>ngăn cấm, đình chỉ</strong> không cho phép làm trong hoàn cảnh bình thường để ngăn lỗi.<br>3. <strong class='hl'>Trì (Giữ):</strong> Là sự giữ gìn đúng pháp (biết rõ lúc nào Phật cấm để dừng, lúc nào Phật khai để tùy duyên đúng mực).<br>4. <strong class='hl'>Phạm (Vi phạm):</strong> Là làm trái giới luật (chỗ Phật cấm lại cố làm, hoặc không có duyên bệnh nạn mà tự ý viện cớ phạm giới).",
+        kw: "Khai (mở cho phép khi có duyên đặc biệt) • Giá (ngăn cấm) • Trì (giữ đúng pháp) • Phạm (làm trái giới luật)",
+        quiz: {
+            options: [
+                "Khai là mở cho phép khi có duyên đặc biệt; Giá là ngăn cấm; Trì là giữ đúng pháp; Phạm là làm trái giới luật",
+                "Khai là khai giảng khóa học; Giá là giá trị tiền bạc; Trì là trì chú; Phạm là phạm nhân thế tục",
+                "Khai là xóa bỏ hoàn toàn giới luật để ai muốn làm gì thì làm",
+                "Giá là bắt buộc mọi người phải nhịn ăn tuyệt đối trong mọi hoàn cảnh"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 9,
+        q: "Câu 9. Tam vô lậu học gồm những gì? Giới có vai trò như thế nào trong Tam vô lậu học?",
+        a: "- <strong>Tam vô lậu học</strong> (3 môn học không còn rỉ chảy vào sinh tử luân hồi) gồm: <strong class='hl'>Giới học, Định học, và Tuệ học</strong>.<br>- <strong>Vai trò của Giới:</strong> Giới là <strong class='hl'>nền tảng căn bản đầu tiên</strong> (như mặt đất kiên cố nâng đỡ vạn vật). Nhờ giữ <strong>Giới</strong> thanh tịnh nên thân tâm không loạn động hay hổ thẹn, từ đó mới phát sinh được <strong>Thiền định</strong> (<em>Nhơn giới sanh định</em>); nhờ có Định tâm vắng lặng sáng suốt mới phát sinh <strong>Trí tuệ vô lậu</strong> (<em>Nhơn định phát huệ</em>) giúp đoạn tận phiền não, chứng quả giải thoát.",
+        kw: "Tam vô lậu học: Giới - Định - Tuệ • Vai trò của Giới: Nền tảng căn bản (Nhơn giới sanh định, nhơn định phát huệ)",
+        quiz: {
+            options: [
+                "Gồm Giới, Định, Tuệ; Giới là nền tảng căn bản đầu tiên giúp thân tâm thanh tịnh để phát sinh Thiền định và Trí tuệ vô lậu (Nhơn giới sanh định, nhơn định phát huệ)",
+                "Gồm Kinh, Luật, Luận; Giới chỉ là phần phụ không cần thiết khi đã có Trí tuệ",
+                "Gồm Tín, Nguyện, Hạnh; Giới không nằm trong Tam vô lậu học",
+                "Gồm Văn tuệ, Tư tuệ, Tu tuệ; chỉ cần học lý thuyết là đủ"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 10,
+        q: "Câu 10. Tam tụ tịnh giới là gì? Hãy kể tên và giải thích ý nghĩa của từng loại tịnh giới.",
+        a: "<strong>Tam tụ tịnh giới</strong> là 3 nhóm giới pháp thanh tịnh thâu nhiếp toàn bộ giới luật Đại thừa:<br>1. <strong class='hl'>Nhiếp luật nghi giới:</strong> Giữ gìn trọn vẹn các điều luật Phật chế từ nhẹ đến nặng, nguyện <strong class='hl'>đoạn trừ tất cả các điều ác</strong> dù nhỏ nhặt nhất (<em>Thệ đoạn nhất thiết ác</em>).<br>2. <strong class='hl'>Nhiếp thiện pháp giới:</strong> Siêng năng tu tập mọi công đức lành nơi thân, khẩu, ý, nguyện <strong class='hl'>tu tất cả các pháp lành</strong> giúp thành tựu Vô thượng Bồ-đề (<em>Thệ tu nhất thiết thiện</em>).<br>3. <strong class='hl'>Nhiêu ích hữu tình giới:</strong> Đem lòng từ bi vô ngã làm lợi lạc, cứu khổ ban vui và nguyện <strong class='hl'>hóa độ tất cả muôn loài chúng sanh</strong> (<em>Thệ độ nhất thiết chúng sanh</em>).",
+        kw: "3 nhóm giới thanh tịnh: Nhiếp luật nghi giới (Đoạn tất cả ác) • Nhiếp thiện pháp giới (Tu tất cả thiện) • Nhiêu ích hữu tình giới (Độ tất cả chúng sanh)",
+        quiz: {
+            options: [
+                "Gồm Nhiếp luật nghi giới (đoạn tất cả điều ác), Nhiếp thiện pháp giới (tu tất cả pháp lành) và Nhiêu ích hữu tình giới (hóa độ làm lợi ích tất cả chúng sanh)",
+                "Gồm Ngũ giới tại gia, Bát quan trai giới và Thập giới Sa-di",
+                "Gồm Giới tại gia, Giới xuất gia và Giới thế pháp",
+                "Gồm Tam quy y: Quy y Phật, Quy y Pháp và Quy y Tăng"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 11,
+        q: "Câu 11. Tam tụ tịnh giới thể hiện tinh thần tự lợi và lợi tha của người xuất gia như thế nào?",
+        a: "Tam tụ tịnh giới kết hợp viên mãn cả hai phương diện <strong>Tự lợi</strong> và <strong>Lợi tha</strong> của người xuất gia:<br>1. <strong class='hl'>Tinh thần Tự lợi (Tự giác):</strong> Thể hiện qua <strong>Nhiếp luật nghi giới</strong> và <strong>Nhiếp thiện pháp giới</strong>. Nhờ ngăn dứt mọi điều ác và tu tập mọi pháp lành, người xuất gia tự gột rửa ba nghiệp thanh tịnh, đoạn trừ phiền não (thành tựu <em>Đoạn đức</em>) và khai mở trí tuệ giác ngộ (thành tựu <em>Trí đức</em>).<br>2. <strong class='hl'>Tinh thần Lợi tha (Giác tha):</strong> Thể hiện qua <strong>Nhiêu ích hữu tình giới</strong>. Người xuất gia không giữ giới chỉ để cầu giải thoát cho riêng mình mà luôn đem công đức và lòng đại bi phụng sự, giáo hóa muôn loài cùng thoát khổ (thành tựu <em>Ân đức</em>).",
+        kw: "Tự lợi: Nhiếp luật nghi & Nhiếp thiện pháp (thành tựu Đoạn đức, Trí đức) • Lợi tha: Nhiêu ích hữu tình (thành tựu Ân đức độ sanh)",
+        quiz: {
+            options: [
+                "Nhiếp luật nghi giới và Nhiếp thiện pháp giới thể hiện Tự lợi (đoạn ác, tu thiện, thành tựu Đoạn đức và Trí đức); Nhiêu ích hữu tình giới thể hiện Lợi tha (cứu độ chúng sanh, thành tựu Ân đức)",
+                "Cả ba tụ tịnh giới chỉ nhằm mục đích Tự lợi cho riêng cá nhân người tu, không liên quan đến chúng sanh",
+                "Cả ba tụ tịnh giới chỉ làm công việc từ thiện xã hội mà không cần giữ giới hay tu sửa tự tâm",
+                "Tự lợi là tìm kiếm danh lợi cho bản thân, Lợi tha là chia tiền bạc cho người thân"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 12,
+        q: "Câu 12. Bát quan trai giới dành cho những đối tượng nào? Hãy kể đầy đủ tám giới theo thứ tự.",
+        a: "- <strong>Đối tượng:</strong> Dành cho <strong class='hl'>người Phật tử tại gia (Cư sĩ nam nữ)</strong> tập sự sống đời xuất gia thanh tịnh trong một ngày một đêm (24 giờ).<br>- <strong>Tám giới theo thứ tự:</strong><br>1. <strong class='hl'>Không sát sanh</strong>.<br>2. <strong class='hl'>Không trộm cắp</strong>.<br>3. <strong class='hl'>Không dâm dục</strong> (đoạn hẳn cả chánh dâm và tà dâm trong ngày thọ giới).<br>4. <strong class='hl'>Không nói dối</strong>.<br>5. <strong class='hl'>Không uống rượu</strong>.<br>6. <strong class='hl'>Không đeo tràng hoa thơm, không xức dầu thơm vào mình; không ca múa hát xướng và cố ý đi xem nghe</strong>.<br>7. <strong class='hl'>Không nằm ngồi giường cao rộng lớn đẹp đẽ</strong>.<br>8. <strong class='hl'>Không ăn phi thời</strong> (không ăn quá giờ ngọ cho đến rạng sáng hôm sau).",
+        kw: "Đối tượng: Phật tử tại gia tập sự xuất gia (1 ngày 1 đêm) • 8 giới: Sát, Đạo, Dâm, Vọng, Tửu, Hương hoa & Ca vũ, Cao sàng, Phi thời thực",
+        quiz: {
+            options: [
+                "Dành cho Phật tử tại gia tập sự xuất gia; gồm 8 giới: Không sát sanh, trộm cắp, dâm dục, nói dối, uống rượu, trang điểm dầu thơm & ca múa xem nghe, nằm ngồi giường cao rộng, ăn phi thời",
+                "Dành riêng cho hàng Tỳ-kheo và Tỳ-kheo-ni đã thọ Cụ túc giới",
+                "Dành cho người xuất gia thọ trì trọn đời gồm 10 giới có thêm giới không giữ tiền bạc",
+                "Dành cho trẻ em dưới 7 tuổi chưa biết phân biệt thiện ác"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 13,
+        q: "Câu 13. Hãy kể đầy đủ giới Sa-di (Thức-xoa) theo thứ tự.",
+        a: "- <strong>Mười giới Sa-di (Sa-di-ni) theo thứ tự:</strong><br>1. Không sát sanh (<em>Bất sát sanh</em>).<br>2. Không trộm cắp (<em>Bất thâu đạo</em>).<br>3. Không dâm dục (<em>Bất dâm dục</em>).<br>4. Không nói dối (<em>Bất vọng ngữ</em>).<br>5. Không uống rượu (<em>Bất ẩm tửu</em>).<br>6. Không đeo tràng hoa thơm, không xức dầu thơm vào mình (<em>Bất trước hương hoa man, bất hương dầu đồ thân</em>).<br>7. Không ca múa hát xướng và cố ý đi xem nghe (<em>Bất ca vũ xướng kỹ cập cố vãng quan thính</em>).<br>8. Không ngồi nằm giường cao rộng lớn (<em>Bất tọa cao quảng đại sàng</em>).<br>9. Không ăn phi thời / quá ngọ (<em>Bất phi thời thực</em>).<br>10. Không cất giữ tiền bạc, vàng ngọc, châu báu (<em>Bất tróc trì sanh tượng kim ngân bảo vật</em>).<br>- <strong>Sáu pháp của Thức-xoa-ma-na (Lục pháp học trong 2 năm):</strong> Ngoài 10 giới Sa-di-ni, vị Thức-xoa học chuyên sâu 6 pháp: <strong class='hl'>(1) Không dâm dục</strong> (kể cả nhiễm tâm xúc chạm người nam), <strong class='hl'>(2) Không trộm cắp</strong> (dù dưới 5 tiền), <strong class='hl'>(3) Không đoạn mạng súc sanh</strong>, <strong class='hl'>(4) Không nói dối</strong> (tiểu vọng ngữ), <strong class='hl'>(5) Không ăn phi thời</strong>, <strong class='hl'>(6) Không uống rượu</strong>.",
+        kw: "10 giới Sa-di: Sát, Đạo, Dâm, Vọng, Tửu, Hương hoa, Ca vũ, Cao sàng, Phi thời thực, Kim ngân bảo vật • 6 pháp Thức-xoa: Dâm, Đạo, Sát, Vọng, Phi thời thực, Tửu",
+        quiz: {
+            options: [
+                "10 giới Sa-di (Sát, Đạo, Dâm, Vọng, Tửu, Hương hoa, Ca vũ, Cao sàng, Phi thời thực, Kim ngân bảo vật) và 6 pháp Thức-xoa-ma-na (Dâm, Đạo, Sát, Vọng, Phi thời thực, Tửu)",
+                "Chỉ có 5 giới căn bản như người cư sĩ tại gia",
+                "Chỉ có 8 giới Bát quan trai, không có giới thứ 10 về tiền bạc vàng ngọc",
+                "Gồm 250 giới Tỳ-kheo và 348 giới Tỳ-kheo-ni"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 14,
+        q: "Câu 14. Hãy đọc Âm giới “Bất sát sanh”.",
+        a: "<div class='verse-box'><strong class='hl'>“Nhất viết bất sát sanh”</strong><br><em>Khai triển theo Sa-di Luật Nghi:</em> “Nhất viết bất sát sanh: Kinh tải: Từ tâm bất sát. Luật chế: Thượng tự chư Phật, Thánh nhân, Sư tăng, phụ mẫu, hạ chí quyên phi xuẩn động, vi tế côn trùng, đản hữu mạng giả, bất đắc cố sát; hoặc tự sát, hoặc giáo tha sát, hoặc kiến sát tùy hỷ, quảng như luật trung...”</div><strong>Nghĩa:</strong> Thứ nhất không được sát sanh: Trên từ chư Phật, Thánh nhân, Thầy Tổ, cha mẹ, dưới đến các loài bay bò máy động, côn trùng nhỏ nhặt, hễ loài nào có mạng sống thì không được cố ý giết.",
+        kw: "Nhất viết bất sát sanh • Thượng tự chư Phật, Thánh nhân, Sư tăng, phụ mẫu, hạ chí quyên phi xuẩn động... đản hữu mạng giả, bất đắc cố sát",
+        quiz: {
+            options: [
+                "Nhất viết bất sát sanh: Thượng tự chư Phật, Thánh nhân, Sư tăng, phụ mẫu, hạ chí quyên phi xuẩn động, vi tế côn trùng, đản hữu mạng giả, bất đắc cố sát...",
+                "Nhị viết bất thâu đạo: Tự kim ngân bảo vật, dĩ chí nhất châm nhất thảo, bất dữ bất thủ...",
+                "Tam viết bất dâm dục: Tại gia ngũ giới duy chế tà dâm, xuất gia thập giới toàn đoạn dâm dục...",
+                "Tứ viết bất vọng ngữ: Tâm khẩu tương vi, sở thuyết bất thật..."
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 15,
+        q: "Câu 15. Hãy đọc Âm giới “Bất thâu đạo”.",
+        a: "<div class='verse-box'><strong class='hl'>“Nhị viết bất thâu đạo”</strong><br><em>Khai triển theo Sa-di Luật Nghi:</em> “Nhị viết bất thâu đạo: Tự kim ngân bảo vật, dĩ chí nhất châm nhất thảo, bất dữ bất thủ. Nhược thường trụ vật, nhược tín thí vật, nhược tăng chúng vật, nhược quan vật, nhược dân vật, nhất thiết tha vật, hoặc minh thủ, hoặc ám thủ...”</div><strong>Nghĩa:</strong> Thứ hai không được trộm cắp: Từ vàng bạc châu báu cho đến một cây kim, một ngọn cỏ, người không cho thì không được tự tiện lấy.",
+        kw: "Nhị viết bất thâu đạo • Tự kim ngân bảo vật, dĩ chí nhất châm nhất thảo, bất dữ bất thủ",
+        quiz: {
+            options: [
+                "Nhị viết bất thâu đạo: Tự kim ngân bảo vật, dĩ chí nhất châm nhất thảo, bất dữ bất thủ...",
+                "Nhất viết bất sát sanh: Từ tâm bất sát, đản hữu mạng giả bất đắc cố sát...",
+                "Ngũ viết bất ẩm tửu: Tửu năng loạn tính, phá chư thiện pháp...",
+                "Thập viết bất tróc trì sanh tượng kim ngân bảo vật..."
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 16,
+        q: "Câu 16. Hãy đọc Âm “Bất dâm dục”.",
+        a: "<div class='verse-box'><strong class='hl'>“Tam viết bất dâm dục”</strong><br><em>Khai triển theo Sa-di Luật Nghi:</em> “Tam viết bất dâm dục: Tại gia ngũ giới, duy chế tà dâm; xuất gia thập giới, toàn đoạn dâm dục. Đản can thế giới, tức hoại phạm hạnh...”</div><strong>Nghĩa:</strong> Thứ ba không được dâm dục: Tại gia năm giới chỉ cấm tà dâm; xuất gia mười giới phải đoạn tuyệt hoàn toàn dâm dục. Hễ phạm vào giới này liền hư hoại phạm hạnh thanh tịnh.",
+        kw: "Tam viết bất dâm dục • Tại gia ngũ giới duy chế tà dâm; xuất gia thập giới toàn đoạn dâm dục",
+        quiz: {
+            options: [
+                "Tam viết bất dâm dục: Tại gia ngũ giới, duy chế tà dâm; xuất gia thập giới, toàn đoạn dâm dục. Đản can thế giới, tức hoại phạm hạnh...",
+                "Tam viết bất tà dâm: Duy chế tà dâm, bất chế chánh dâm...",
+                "Lục viết bất trước hương hoa man, bất hương dầu đồ thân...",
+                "Thất viết bất ca vũ xướng kỹ cập cố vãng quan thính..."
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 17,
+        q: "Câu 17. Sa-di (Thức-xoa-ma-na) phải giữ gìn giới hạnh như thế nào để chuẩn bị thọ Cụ túc giới?",
+        a: "Để chuẩn bị tấn thọ Cụ túc giới (Tỳ-kheo / Tỳ-kheo-ni), vị Sa-di (Thức-xoa-ma-na) cần:<br>1. <strong class='hl'>Giữ gìn thanh tịnh trọn vẹn 10 giới Sa-di và 6 pháp Thức-xoa</strong> không để khuyết phạm, đứt quãng; nếu có lỡ phạm các lỗi uy nghi nhỏ nhặt phải kịp thời phát lồ sám hối cho thân tâm trong sạch.<br>2. <strong class='hl'>Thuộc lòng và thực hành nhuần nhuyễn</strong> các pháp học căn bản: hai thời Công phu, <em>Tỳ-ni nhật dụng</em>, 24 môn <em>Oai nghi Sa-di</em> và <em>Quy Sơn Cảnh Sách</em>.<br>3. <strong class='hl'>Phát tâm Bồ-đề thượng phẩm</strong> (thệ đoạn tất cả ác, thệ tu tất cả thiện, thệ độ tất cả chúng sanh) để khi đăng đàn truyền giới phát đắc <strong>thượng phẩm Vô tác giới thể</strong>.",
+        kw: "Giữ thanh tịnh 10 giới Sa-di & 6 pháp Thức-xoa • Sám hối sạch lỗi lầm • Thuần thục Công phu, Tỳ-ni, Oai nghi • Phát tâm thượng phẩm cầu đắc giới thể Cụ túc",
+        quiz: {
+            options: [
+                "Giữ thanh tịnh 10 giới Sa-di và 6 pháp Thức-xoa, sám hối sạch lỗi lầm, thực hành thuần thục Tỳ-ni Oai nghi và phát tâm thượng phẩm để đắc giới thể Cụ túc",
+                "Chỉ cần chuẩn bị đủ y áo mới mà không cần giữ giới hay học thuộc các bài kệ Tỳ-ni",
+                "Đối với Thức-xoa-ma-na dù có phạm vào 6 pháp trong 2 năm học giới cũng không cần học lại",
+                "Chỉ cần đóng lệ phí thi khảo hạch là đương nhiên đắc giới Tỳ-kheo"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 18,
+        q: "Câu 18. Người muốn thọ giới Tỳ-kheo (Tỳ-kheo-ni) phải hội đủ những điều kiện căn bản nào?",
+        a: "Theo Luật định và Quy chế Ban Tăng sự, người muốn thọ giới Tỳ-kheo (Tỳ-kheo-ni) phải hội đủ các điều kiện căn bản:<br>1. <strong class='hl'>Về tuổi đời:</strong> Phải tròn đủ <strong class='hl'>20 tuổi trở lên đến dưới 70 tuổi</strong>.<br>2. <strong class='hl'>Về phẩm cấp tập sự:</strong> Đã thọ giới Sa-di (với nam) hoặc đã thọ và học mãn 2 năm Lục pháp Thức-xoa-ma-na thanh tịnh (với nữ).<br>3. <strong class='hl'>Về căn thân và già nạn:</strong> Sáu căn đầy đủ, thân thể lành lặn, tâm thần minh mẫn, <strong class='hl'>không phạm Thập tam nạn (13 nạn trọng) và Thập lục già (16 điều ngăn trở)</strong> trong Luật (như không phạm biên tội, không giết cha mẹ, không phá hòa hợp Tăng...).<br>4. <strong class='hl'>Về duyên sự và pháp cụ:</strong> Được cha mẹ và Bổn sư cho phép, <strong class='hl'>hội đủ Tam y (Ngũ y, Thất y, Đại y), Bình bát, Tọa cụ, Đãy lọc nước</strong> và vượt qua kỳ khảo hạch tại Đại giới đàn.",
+        kw: "Tuổi từ đủ 20 đến dưới 70 • Đã qua Sa-di / 2 năm Thức-xoa • Sáu căn đầy đủ, không phạm 13 nạn 16 già • Đủ Tam y, Bình bát, Tọa cụ & đạt khảo hạch",
+        quiz: {
+            options: [
+                "Đủ 20 tuổi trở lên, đã qua giai đoạn Sa-di/Thức-xoa đúng hạn, sáu căn đầy đủ, không phạm 13 nạn 16 già, được cha mẹ và Bổn sư cho phép, hội đủ Tam y Bình bát và đạt kỳ khảo hạch",
+                "Từ 10 tuổi trở lên và chưa từng thọ giới Sa-di cũng có thể thọ thẳng giới Tỳ-kheo",
+                "Không cần Tam y và Bình bát, chỉ cần mặc thường phục lên đàn giới",
+                "Người đã phạm 4 giới trọng (Ba-la-di) vẫn được phép đăng đàn thọ giới Tỳ-kheo bình thường"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 19,
+        q: "Câu 19. Tỳ-kheo (Tỳ-kheo-ni) có nghĩa là gì?",
+        a: "Danh từ <strong>Tỳ-kheo</strong> (<em>Bhikkhu</em>) và <strong>Tỳ-kheo-ni</strong> (<em>Bhikkhunī</em>) dịch nghĩa từ tiếng Phạn sang Hán Việt có <strong class='hl'>3 nghĩa căn bản</strong>:<br>1. <strong class='hl'>Khất sĩ:</strong> Trên thì <strong class='hl'>xin giáo pháp của chư Phật</strong> để nuôi lớn giới thân huệ mạng; dưới thì <strong class='hl'>xin thức ăn của đàn-na tín thí</strong> để nuôi dưỡng sắc thân tu đạo và giúp chúng sanh gieo phước.<br>2. <strong class='hl'>Phá ác:</strong> Dùng chánh trí và giới đức để <strong class='hl'>phá trừ các ác pháp phiền não (tham, sân, si)</strong> trong tâm mình.<br>3. <strong class='hl'>Bố ma:</strong> Khi phát tâm thọ Cụ túc giới và tu phạm hạnh, cung điện ma vương chấn động, <strong class='hl'>làm cho thiên ma Ba-tuần kinh sợ</strong> vì biết có người sắp thoát khỏi tam giới.",
+        kw: "3 nghĩa của Tỳ-kheo: Khất sĩ (trên xin pháp Phật, dưới xin ăn tín thí) • Phá ác (phá phiền não) • Bố ma (làm ma vương kinh sợ)",
+        quiz: {
+            options: [
+                "Có 3 nghĩa: Khất sĩ (trên xin pháp Phật, dưới xin thức ăn tín thí), Phá ác (phá trừ phiền não) và Bố ma (làm thiên ma kinh sợ)",
+                "Có 3 nghĩa: Tức từ, Cầu tịch và Cần sách (đây là 3 nghĩa của Sa-di)",
+                "Có 2 nghĩa: Người thông thái và Người cai quản tự viện",
+                "Có 1 nghĩa duy nhất là Bậc đã thành Phật hoàn toàn"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 20,
+        q: "Câu 20. Hãy kể tên và giải thích bốn hình thức tà mạng thực của người xuất gia?",
+        a: "Theo <em>Kinh Di Giáo</em> và Luật tạng, người xuất gia phải tuyệt đối xa lánh <strong class='hl'>4 hình thức tà mạng thực</strong> (4 cách mưu sinh bất chánh làm ô uế phạm hạnh):<br>1. <strong class='hl'>Hạ khẩu thực (Cúi mặt kiếm ăn):</strong> Cúi đầu cày ruộng, cuốc đất trồng trọt hoặc chế thuốc làm nghề thầy thuốc để kiếm sống.<br>2. <strong class='hl'>Ngưỡng khẩu thực (Ngửa mặt kiếm ăn):</strong> Ngẩng đầu xem trăng sao, đoán thiên văn, thời tiết nắng mưa, nhật thực, nguyệt thực để cầu lợi.<br>3. <strong class='hl'>Phương khẩu thực (Chạy vạy bốn phương kiếm ăn):</strong> Giao du, bợ đỡ, xu nịnh hàng quyền quý thế lực khắp bốn phương, làm sứ giả đưa tin để cầu danh lợi.<br>4. <strong class='hl'>Duy khẩu thực (Dùng bùa chú, bói toán kiếm ăn):</strong> Dùng tà thuật, bùa chú, xem bói tốt xấu, tướng số, đốt lửa tế tự để mưu sinh.",
+        kw: "4 tà mạng thực: Hạ khẩu thực (trồng trọt, làm thuốc) • Ngưỡng khẩu thực (xem sao đoán thời tiết) • Phương khẩu thực (xu nịnh quyền quý 4 phương) • Duy khẩu thực (bùa chú, bói toán)",
+        quiz: {
+            options: [
+                "Hạ khẩu thực (cúi mặt trồng trọt, làm thuốc), Ngưỡng khẩu thực (ngửa mặt xem sao đoán thời tiết), Phương khẩu thực (xu nịnh quyền quý bốn phương) và Duy khẩu thực (dùng bùa chú, bói toán kiếm ăn)",
+                "Ăn sáng, ăn trưa, ăn chiều và ăn khuya",
+                "Khất thực, thọ trai tại chùa, thọ trai tại nhà tín chủ và ăn cháo buổi sáng",
+                "Tài thí, Pháp thí, Vô úy thí và Đồng sự nhiếp"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 21,
+        q: "Câu 21. Bốn thứ cần thiết của người xuất gia là gì? Người xuất gia cần có thái độ như thế nào khi thọ dụng các thứ ấy?",
+        a: "- <strong>Bốn thứ cần thiết (Tứ sự):</strong> Gồm <strong class='hl'>(1) Ẩm thực</strong> (thức ăn nước uống), <strong class='hl'>(2) Y phục</strong> (áo mặc), <strong class='hl'>(3) Ngọa cụ / Sàng tòa</strong> (giường chõng, mền chiếu, phòng xá), và <strong class='hl'>(4) Thang dược</strong> (thuốc men trị bệnh).<br>- <strong>Thái độ khi thọ dụng:</strong> Phải luôn giữ tâm <strong class='hl'>thiểu dục tri túc và chánh niệm quán tưởng</strong>: chỉ xem tứ sự như phương tiện che thân, trị bệnh đói lạnh để duy trì mạng sống tu tập (như uống thuốc trị bệnh, như tra dầu vào xe); <strong class='hl'>không khởi tâm tham đắm tốt xấu, luôn biết hổ thẹn (tàm quý) và tinh tấn hành đạo</strong> để đền ơn thí chủ.",
+        kw: "Tứ sự: Ẩm thực, Y phục, Ngọa cụ (Sàng tòa), Thang dược • Thái độ: Thiểu dục tri túc, xem như thuốc trị bệnh để tu đạo, không tham đắm",
+        quiz: {
+            options: [
+                "Gồm Ẩm thực, Y phục, Ngọa cụ (Sàng tòa) và Thang dược; khi thọ dụng phải giữ tâm thiểu dục tri túc, quán tưởng như thuốc trị bệnh để duy trì sắc thân tu đạo, không tham đắm tốt xấu",
+                "Gồm Vàng bạc, Xe cộ, Nhà lầu và Danh vọng; khi thọ dụng càng nhiều càng tốt",
+                "Gồm Kinh sách, Chuông mõ, Tràng hạt và Hương đèn",
+                "Người xuất gia khi nhận tứ sự có quyền đòi hỏi đồ sang trọng và phàn nàn nếu không vừa ý"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 22,
+        q: "Câu 22. Người xuất gia cần quán tưởng những điều gì khi thọ dụng thức ăn?",
+        a: "Khi thọ dụng thức ăn, người xuất gia phải nhiếp tâm quán tưởng <strong class='hl'>5 điều (Thực tồn Ngũ quán)</strong>:<br>1. <strong class='hl'>Kế công đa thiểu, lượng bỉ lai xứ:</strong> Xét kỹ công lao vất vả nhiều ít làm ra thức ăn và nguồn gốc từ lòng thành của thí chủ.<br>2. <strong class='hl'>Thổn kỷ đức hạnh, toàn khuyết ứng cúng:</strong> Tự xét đức hạnh của mình đã đầy đủ hay còn thiếu kém để thọ nhận sự cúng dường.<br>3. <strong class='hl'>Phòng tâm ly quá, tham đẳng vi tông:</strong> Phòng hộ tâm ý xa lìa các lỗi tham, sân, si (ngon không tham, dở không sân, trung bình không si).<br>4. <strong class='hl'>Chánh sự lương dược, vị liệu hình khô:</strong> Xem thức ăn chính là vị thuốc hay để trị thân gầy yếu đói khát.<br>5. <strong class='hl'>Vị thành đạo nghiệp, ứng thọ thử thực:</strong> Vì muốn thành tựu đạo nghiệp giải thoát nên nay mới nhận thức ăn này.",
+        kw: "Ngũ quán khi ăn: (1) Xét công lao nguồn gốc • (2) Xét đức hạnh mình • (3) Phòng tâm lìa tham sân si • (4) Xem như thuốc trị thân khô • (5) Vì thành đạo nghiệp mới nhận ăn",
+        quiz: {
+            options: [
+                "Thực hành Ngũ quán: (1) Xét công lao nguồn gốc thức ăn, (2) Xét đức hạnh mình đủ hay thiếu, (3) Phòng tâm lìa lỗi tham sân si, (4) Xem thức ăn như thuốc trị thân khô héo, (5) Vì thành đạo nghiệp mới nhận ăn",
+                "Quán tưởng xem món nào ngon nhất trên bàn để ăn thật nhiều cho no bụng",
+                "Vừa ăn vừa bàn chuyện thế sự và phê bình người nấu ăn mặn nhạt",
+                "Không cần quán tưởng gì cả, chỉ cần ăn thật nhanh để đi nghỉ ngơi"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 23,
+        q: "Câu 23. Lục hòa là gì? Hãy kể đầy đủ sáu pháp hòa kính.",
+        a: "<strong>Lục hòa (Lục hòa kính)</strong> là 6 nguyên tắc sống chung hòa hợp, đoàn kết và tương kính của đoàn thể Tăng-già. Gồm 6 pháp:<br>1. <strong class='hl'>Thân hòa đồng trụ:</strong> Thân cùng ở chung một nơi hòa thuận, cùng gánh vác công việc chúng.<br>2. <strong class='hl'>Khẩu hòa vô tranh:</strong> Lời nói ôn hòa, từ ái, không cãi vã tranh hơn thua.<br>3. <strong class='hl'>Ý hòa đồng duyệt:</strong> Tâm ý cảm thông, hoan hỷ vui vẻ với nhau.<br>4. <strong class='hl'>Giới hòa đồng tu:</strong> Cùng nhau nghiêm chỉnh giữ gìn các giới luật đã thọ.<br>5. <strong class='hl'>Kiến hòa đồng giải:</strong> Cùng chia sẻ sự hiểu biết, thống nhất tư tưởng chánh kiến.<br>6. <strong class='hl'>Lợi hòa đồng quân:</strong> Lợi dưỡng, phẩm vật có được đều phân chia đồng đều, bình đẳng.",
+        kw: "6 pháp hòa hợp: Thân hòa đồng trụ • Khẩu hòa vô tranh • Ý hòa đồng duyệt • Giới hòa đồng tu • Kiến hòa đồng giải • Lợi hòa đồng quân",
+        quiz: {
+            options: [
+                "Là 6 nguyên tắc sống chung hòa hợp gồm: Thân hòa đồng trụ, Khẩu hòa vô tranh, Ý hòa đồng duyệt, Giới hòa đồng tu, Kiến hòa đồng giải và Lợi hòa đồng quân",
+                "Là 6 phép Ba-la-mật gồm: Bố thí, Trì giới, Nhẫn nhục, Tinh tấn, Thiền định và Trí tuệ",
+                "Là 6 pháp Thức-xoa-ma-na gồm: Không dâm, không đạo, không sát, không vọng, không phi thời thực và không uống rượu",
+                "Là 6 căn thanh tịnh gồm: Nhãn, Nhĩ, Tỷ, Thiệt, Thân và Ý"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 24,
+        q: "Câu 24. Vì sao người xuất gia phải sống hòa hợp với đại chúng và nghiêm chỉnh chấp hành thanh quy của tự viện?",
+        a: "Người xuất gia phải sống hòa hợp với đại chúng và chấp hành thanh quy tự viện vì:<br>1. <strong class='hl'>Đại chúng là môi trường rèn giũa bản ngã tốt nhất:</strong> Sống nương vào đại chúng (<em>“Y chúng khinh an”</em>) giúp người tu dẹp bỏ tính tự tư tự lợi, kiêu mạn, cùng sách tấn nhau tinh tấn.<br>2. <strong class='hl'>Thanh quy là rào chắn bảo vệ Giới luật và kỷ cương thiền môn:</strong> Nghiêm chỉnh chấp hành thời khóa và quy củ thiền môn giúp đại chúng an ổn tu học, giữ gìn mạng mạch Tăng đoàn thanh tịnh và làm mô phạm tốt đẹp cho hàng tín đồ.",
+        kw: "Y chúng khinh an, bào mòn bản ngã ích kỷ • Thanh quy giữ kỷ cương thiền môn, bảo hộ giới luật và tạo môi trường an tịnh tiến tu",
+        quiz: {
+            options: [
+                "Vì sống hòa hợp với đại chúng giúp bào mòn bản ngã ích kỷ, nương lực đại chúng cùng tiến tu; chấp hành thanh quy giúp giữ vững kỷ cương thiền môn và bảo hộ giới luật",
+                "Vì nếu ở một mình sẽ phải tự nấu ăn vất vả hơn ở trong đại chúng",
+                "Người xuất gia có thể tự do làm theo ý riêng, không cần tuân theo giờ giấc hay thanh quy của chùa",
+                "Chỉ chấp hành thanh quy khi có mặt Thầy trụ trì, khi vắng Thầy thì không cần giữ"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 25,
+        q: "Câu 25. Thế nào là thiểu dục, tri túc? Vì sao người xuất gia cần thực hành thiểu dục, tri túc trong đời sống phạm hạnh?",
+        a: "- <strong>Thiểu dục</strong> là <em>ham muốn ít</em> (không tham cầu quá đáng những thứ chưa có); <strong>Tri túc</strong> là <em>biết đủ</em> (bằng lòng và an vui với những gì hiện có hợp đạo lý).<br>- <strong>Vì sao người xuất gia cần thực hành:</strong> Theo <em>Kinh Di Giáo</em>, thiểu dục tri túc là <strong class='hl'>mảnh đất sinh trưởng mọi công đức lành và Niết-bàn</strong>. Thực hành thiểu dục tri túc giúp người xuất gia <strong class='hl'>không bị năm món ngũ dục thế gian cám dỗ sai sử, giữ trọn phẩm hạnh phạm hạnh thanh cao, tâm luôn an ổn tự tại</strong> để chuyên nhất tu tập giải thoát.",
+        kw: "Thiểu dục (muốn ít), Tri túc (biết đủ) • Giúp không bị ngũ dục sai sử, giữ trọn phạm hạnh thanh tịnh, tâm an lạc hướng đến Niết-bàn",
+        quiz: {
+            options: [
+                "Thiểu dục là muốn ít, Tri túc là biết đủ; thực hành hai pháp này giúp người xuất gia không bị ngũ dục trói buộc, giữ trọn phạm hạnh thanh cao và tâm luôn an ổn để tiến tu giải thoát",
+                "Thiểu dục là lười biếng không muốn học hỏi; Tri túc là tự mãn cho rằng mình đã chứng đạo",
+                "Người xuất gia cần phải tích lũy thật nhiều tài sản riêng để phòng khi tuổi già",
+                "Thiểu dục tri túc chỉ dành cho người nghèo ở thế gian, không cần thiết cho người xuất gia"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 26,
+        q: "Câu 26. Tỳ-ni nhật dụng thiết yếu do vị Tổ sư nào biên soạn? Tác phẩm ra đời vào thời gian nào?",
+        a: "Tác phẩm <strong>“Tỳ-ni Nhật Dụng Thiết Yếu”</strong> do Đại sư <strong class='hl'>Độc Thể (Hòa thượng Kiến Nguyệt Độc Thể)</strong> — vị Luật sư nổi tiếng trụ trì núi Bảo Hoa (Trung Quốc) biên soạn vào khoảng <strong class='hl'>cuối triều nhà Minh – đầu triều nhà Thanh (thế kỷ XVII)</strong>.",
+        kw: "Tác giả: Hòa thượng Độc Thể (Kiến Nguyệt Độc Thể) • Thời gian: Cuối đời Minh – đầu đời Thanh (Thế kỷ XVII)",
+        quiz: {
+            options: [
+                "Do Hòa thượng Độc Thể (Tổ Kiến Nguyệt) biên soạn vào cuối đời Minh – đầu đời Thanh (thế kỷ XVII)",
+                "Do Tổ Quy Sơn Linh Hựu biên soạn vào đời nhà Đường (thế kỷ IX)",
+                "Do Đại sư Liên Trì biên soạn vào đầu đời nhà Minh",
+                "Do Tôn giả Ưu-ba-li biên soạn ngay tại Ấn Độ thời Đức Phật còn tại thế"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 27,
+        q: "Câu 27. Mục đích cốt lõi của việc hành trì Tỳ-ni nhật dụng thiết yếu là gì?",
+        a: "Mục đích cốt lõi của việc học và hành trì <em>Tỳ-ni nhật dụng thiết yếu</em> là giúp người xuất gia <strong class='hl'>làm chủ tâm niệm, luôn an trú trong chánh niệm tỉnh giác</strong> qua từng oai nghi sinh hoạt nhỏ nhất hằng ngày (đi, đứng, nằm, ngồi, mặc y, thọ thực...); đồng thời <strong class='hl'>nuôi dưỡng tâm Bồ-đề và lòng đại bi rộng lớn</strong>, mọi cử chỉ đều hồi hướng nguyện cầu lợi lạc cho tất cả chúng sanh.",
+        kw: "Làm chủ tâm niệm (luôn an trú trong chánh niệm tỉnh giác hằng ngày) • Nuôi dưỡng tâm Bồ-đề và lòng đại bi vì chúng sanh",
+        quiz: {
+            options: [
+                "Giúp người xuất gia luôn giữ chánh niệm tỉnh giác trong mọi sinh hoạt hằng ngày và nuôi dưỡng tâm Bồ-đề từ bi hướng về lợi ích chúng sanh",
+                "Để có các câu thần chú cầu tài lộc và luyện phép thuật thần thông",
+                "Chỉ để đọc thuộc lòng trả bài trong kỳ thi khảo hạch rồi không cần ứng dụng",
+                "Để phân biệt thứ bậc cao thấp giữa các tu sĩ trong tự viện"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 28,
+        q: "Câu 28. Việc thực hành các bài kệ trong Tỳ-ni nhật dụng thiết yếu có ý nghĩa như thế nào đối với sự tu tập chánh niệm và giữ gìn giới hạnh?",
+        a: "Việc thực hành các bài kệ trong <em>Tỳ-ni nhật dụng</em> có ý nghĩa vô cùng thiết thực:<br>1. <strong>Đối với tu tập chánh niệm:</strong> Mỗi bài kệ gắn liền với một hành động cụ thể như tiếng chuông cảnh tỉnh giúp <strong class='hl'>thu nhiếp sáu căn không chạy theo sáu trần</strong>, dứt trừ vọng tưởng tán loạn ngay trong giây phút hiện tại.<br>2. <strong>Đối với giữ gìn giới hạnh:</strong> Giúp hành giả <strong class='hl'>phòng hộ ba nghiệp từ trong tâm niệm vi tế nhất</strong>, chuyển hóa mọi cử chỉ sinh hoạt phàm tình thành tịnh nghiệp vô lậu và viên mãn <strong>Tam tụ tịnh giới</strong> trong từng oai nghi.",
+        kw: "Thu nhiếp 6 căn an trú chánh niệm hiện tại • Phòng hộ 3 nghiệp vi tế, chuyển sinh hoạt thường nhật thành tịnh nghiệp và Tam tụ tịnh giới",
+        quiz: {
+            options: [
+                "Giúp thu nhiếp sáu căn an trú trong chánh niệm hiện tại, phòng hộ ba nghiệp từ vi tế và chuyển hóa mọi sinh hoạt thường nhật thành tịnh nghiệp giữ trọn Tam tụ tịnh giới",
+                "Chỉ là thói quen đọc nhẩm bằng miệng chứ không có tác dụng gì đối với việc giữ giới",
+                "Giúp người tu không cần phải giữ 10 giới Sa-di hay 250 giới Tỳ-kheo nữa",
+                "Làm cho việc sinh hoạt hằng ngày trở nên rườm rà và mất thời gian"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 29,
+        q: "Câu 29. Hãy đọc thuộc lòng bài kệ “Thế phát”.",
+        a: "<strong>1. Đọc Âm (Bài kệ Thế phát / Cạo tóc):</strong><div class='verse-box'><strong class='hl'>Thế trừ tu phát,<br>Đương nguyện chúng sanh,<br>Vĩnh ly phiền não,<br>Cứu cánh tịch diệt.<br>Án tất điện đô mạn đa ra bạt đà gia ta bà ha (3 lần).</strong></div><strong>2. Dịch nghĩa:</strong><br>Cạo bỏ râu tóc,<br>Nên nguyện chúng sanh,<br>Vĩnh viễn lìa xa phiền não,<br>Rốt ráo chứng cảnh tịch diệt (Niết-bàn).",
+        kw: "Thế trừ tu phát, Đương nguyện chúng sanh, Vĩnh ly phiền não, Cứu cánh tịch diệt",
+        quiz: {
+            options: [
+                "Thế trừ tu phát, Đương nguyện chúng sanh, Vĩnh ly phiền não, Cứu cánh tịch diệt. Án tất điện đô mạn đa ra bạt đà gia ta bà ha",
+                "Đại tai giải thoát phục, Vô tướng phước điền y, Phi phụng như giới hành, Quảng độ chư chúng sanh",
+                "Phật quán nhất bát thủy, Bát vạn tứ thiên trùng, Nhược bất trì thử chú, Như thực chúng sanh nhục",
+                "Thiện tai giải thoát phục, Vô tướng phước điền y, Ngã kim đảnh đới thọ, Quảng độ chư chúng sanh"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 30,
+        q: "Câu 30. Hãy đọc Âm và dịch nghĩa bài kệ “Ngũ y”.",
+        a: "<strong>1. Đọc Âm (Bài kệ Đắp y 5 điều – An-đà-hội):</strong><div class='verse-box'><strong class='hl'>Thiện tai giải thoát phục,<br>Vô tướng phước điền y,<br>Ngã kim đảnh đới thọ,<br>Quảng độ chư chúng sanh.<br>Án tất điện đô mạn đa ra bạt đà gia ta bà ha (3 lần).</strong></div><em>(Ghi chú: Câu thứ 4 trong nghi thức truyền giới còn đọc là “Thế thế bất xả ly” — Đời đời chẳng rời xa).</em><br><strong>2. Dịch nghĩa:</strong><br>Lành thay áo giải thoát,<br>Áo phước điền vô tướng,<br>Con nay vâng giữ lấy,<br>Rộng độ các chúng sanh.",
+        kw: "Ngũ y (An-đà-hội): Thiện tai giải thoát phục, Vô tướng phước điền y, Ngã kim đảnh đới thọ, Quảng độ chư chúng sanh",
+        quiz: {
+            options: [
+                "Thiện tai giải thoát phục, Vô tướng phước điền y, Ngã kim đảnh đới thọ, Quảng độ chư chúng sanh (Lành thay áo giải thoát, Áo phước điền vô tướng, Con nay vâng giữ lấy, Rộng độ các chúng sanh)",
+                "Thiện tai giải thoát phục, Vô tướng phước điền y, Phụng trì Như Lai mạng, Quảng độ chư chúng sanh (đây là kệ Thất y)",
+                "Đại tai giải thoát phục, Vô tướng phước điền y, Phi phụng như giới hành, Quảng độ chư chúng sanh (đây là kệ Đại y)",
+                "Chỉnh y thúc đái, Đương nguyện chúng sanh, Kiểm thúc thiện căn, Bất linh tán thất"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 31,
+        q: "Câu 31. Hãy đọc Âm và dịch nghĩa bài kệ “Thất y”.",
+        a: "<strong>1. Đọc Âm (Bài kệ Đắp y 7 điều – Uất-đa-la-tăng):</strong><div class='verse-box'><strong class='hl'>Thiện tai giải thoát phục,<br>Vô tướng phước điền y,<br>Phụng trì Như Lai mạng,<br>Quảng độ chư chúng sanh.<br>Án tất điện đô mạn đa ra bạt đà gia ta bà ha (3 lần).</strong></div><em>(Ghi chú: Trong đàn giới Tứ Phần Luật còn đọc câu 3-4 là: “Ngã kim đảnh đới thọ, Thế thế thường đắc phi”).</em><br><strong>2. Dịch nghĩa:</strong><br>Lành thay áo giải thoát,<br>Áo phước điền vô tướng,<br>Vâng giữ lời Phật dạy,<br>Rộng độ các chúng sanh.",
+        kw: "Thất y (Uất-đa-la-tăng): Thiện tai giải thoát phục, Vô tướng phước điền y, Phụng trì Như Lai mạng, Quảng độ chư chúng sanh",
+        quiz: {
+            options: [
+                "Thiện tai giải thoát phục, Vô tướng phước điền y, Phụng trì Như Lai mạng, Quảng độ chư chúng sanh (Lành thay áo giải thoát, Áo phước điền vô tướng, Vâng giữ lời Phật dạy, Rộng độ các chúng sanh)",
+                "Thiện tai giải thoát phục, Vô tướng phước điền y, Ngã kim đảnh đới thọ, Quảng độ chư chúng sanh (đây là kệ Ngũ y)",
+                "Đại tai giải thoát phục, Vô tướng phước điền y, Phi phụng như giới hành, Quảng độ chư chúng sanh (đây là kệ Đại y)",
+                "Thế trừ tu phát, Đương nguyện chúng sanh, Vĩnh ly phiền não, Cứu cánh tịch diệt"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 32,
+        q: "Câu 32. Hãy đọc Âm và dịch nghĩa bài kệ “Đại y”.",
+        a: "<strong>1. Đọc Âm (Bài kệ Đắp Đại y Tăng-già-lê từ 9 đến 25 điều):</strong><div class='verse-box'><strong class='hl'>Đại tai giải thoát phục,<br>Vô tướng phước điền y,<br>Phi phụng như giới hành,<br>Quảng độ chư chúng sanh.<br>Án tất điện đô mạn đa ra bạt đà gia ta bà ha (3 lần).</strong></div><strong>2. Dịch nghĩa:</strong><br>Lớn thay áo giải thoát,<br>Áo phước điền vô tướng,<br>Đắp mặc vâng giữ giới,<br>Rộng độ các chúng sanh.",
+        kw: "Đại y (Tăng-già-lê): Đại tai giải thoát phục, Vô tướng phước điền y, Phi phụng như giới hành, Quảng độ chư chúng sanh",
+        quiz: {
+            options: [
+                "Đại tai giải thoát phục, Vô tướng phước điền y, Phi phụng như giới hành, Quảng độ chư chúng sanh (Lớn thay áo giải thoát, Áo phước điền vô tướng, Đắp mặc vâng giữ giới, Rộng độ các chúng sanh)",
+                "Thiện tai giải thoát phục, Vô tướng phước điền y, Ngã kim đảnh đới thọ, Quảng độ chư chúng sanh",
+                "Thiện tai giải thoát phục, Vô tướng phước điền y, Phụng trì Như Lai mạng, Quảng độ chư chúng sanh",
+                "Như Lai ứng lượng khí, Ngã kim đắc phu triển, Nguyện cộng nhất thiết chúng, Đẳng tam luân không tịch"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 33,
+        q: "Câu 33. Hãy đọc Âm và dịch nghĩa bài kệ “Thọ bát”.",
+        a: "<strong>1. Bài kệ Chấp trì ứng khí (Cầm bình bát trong Tỳ-ni nhật dụng):</strong><div class='verse-box'><strong class='hl'>Chấp trì ứng khí,<br>Đương nguyện chúng sanh,<br>Thành tựu pháp khí,<br>Thọ thiên nhân cúng.<br>Án chỉ rị chỉ rị phạ nhựt ra hồng phấn tra (3 lần).</strong></div><strong>Dịch nghĩa:</strong> Cầm giữ bình bát / Nên nguyện chúng sanh / Thành tựu pháp khí / Nhận trời người cúng.<br><br><strong>2. Bài kệ Thọ bát / Triển bát (Mở bình bát):</strong><div class='verse-box'><strong class='hl'>Như Lai ứng lượng khí,<br>Ngã kim đắc phu triển,<br>Nguyện cộng nhất thiết chúng,<br>Đẳng tam luân không tịch.<br>Án tư ma ma ni ta bà ha (3 lần).</strong><br><em>(Kệ Thọ bát trong Giới đàn: Thiện tai ứng lượng khí, Vô thượng công đức thành, Ngã kim đảnh đới thọ, Quảng độ chư chúng sanh).</em></div><strong>Dịch nghĩa:</strong> Bát ứng lượng Như Lai / Nay con được mở bày / Nguyện cùng tất cả chúng / Bình đẳng ba luân không.",
+        kw: "Chấp trì ứng khí, Đương nguyện chúng sanh, Thành tựu pháp khí, Thọ thiên nhân cúng • Như Lai ứng lượng khí, Ngã kim đắc phu triển, Nguyện cộng nhất thiết chúng, Đẳng tam luân không tịch",
+        quiz: {
+            options: [
+                "Chấp trì ứng khí, Đương nguyện chúng sanh, Thành tựu pháp khí, Thọ thiên nhân cúng (kèm kệ Triển/Thọ bát: Như Lai ứng lượng khí, Ngã kim đắc phu triển, Nguyện cộng nhất thiết chúng, Đẳng tam luân không tịch)",
+                "Đại tai giải thoát phục, Vô tướng phước điền y, Phi phụng như giới hành, Quảng độ chư chúng sanh",
+                "Ngọa cụ khả thân cận, Thánh nhân chi sở dụng, Ngã kim đảnh đới thọ, Thế thế bất xả ly",
+                "Từ bi quán thủy nang, Cứu hộ chúng sanh mạng, Xuất ly sanh tử hải, Đồng sanh An Dưỡng quốc"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 34,
+        q: "Câu 34. Hãy đọc Âm và dịch nghĩa bài kệ “Ngọa cụ”.",
+        a: "<strong>1. Bài kệ Triển phu ngọa cụ (Trải tọa cụ trong Tỳ-ni nhật dụng):</strong><div class='verse-box'><strong class='hl'>Ngọa cụ khuể phu thời (Triển phu ngọa cụ),<br>Đương nguyện chúng sanh,<br>Khai phu thiện pháp,<br>Kiến chân thật tướng.<br>Án đàn ba đàn ba ta bà ha (3 lần).</strong></div><strong>Dịch nghĩa:</strong> Khi trải mở ngọa cụ / Nên nguyện chúng sanh / Mở bày các pháp lành / Thấy được tướng chân thật.<br><br><strong>2. Bài kệ Thọ ngọa cụ (Tọa cụ) trong Giới đàn:</strong><div class='verse-box'><strong class='hl'>Ngọa cụ khả thân cận,<br>Thánh nhân chi sở dụng,<br>Ngã kim đảnh đới thọ,<br>Thế thế bất xả ly.<br>Án đàn ba đàn ba ta bà ha (3 lần).</strong></div><strong>Dịch nghĩa:</strong> Ngọa cụ nên thân cận / Là đồ bậc Thánh dùng / Con nay vâng giữ lấy / Đời đời chẳng rời xa.",
+        kw: "Triển phu ngọa cụ, Đương nguyện chúng sanh, Khai phu thiện pháp, Kiến chân thật tướng • Ngọa cụ khả thân cận, Thánh nhân chi sở dụng, Ngã kim đảnh đới thọ, Thế thế bất xả ly",
+        quiz: {
+            options: [
+                "Triển phu ngọa cụ, Đương nguyện chúng sanh, Khai phu thiện pháp, Kiến chân thật tướng (và kệ Giới đàn: Ngọa cụ khả thân cận, Thánh nhân chi sở dụng, Ngã kim đảnh đới thọ, Thế thế bất xả ly)",
+                "Chấp trì ứng khí, Đương nguyện chúng sanh, Thành tựu pháp khí, Thọ thiên nhân cúng",
+                "Phật quán nhất bát thủy, Bát vạn tứ thiên trùng, Nhược bất trì thử chú, Như thực chúng sanh nhục",
+                "Chính thân đoan tọa, Đương nguyện chúng sanh, Tọa Bồ-đề tòa, Tâm vô sở trước"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 35,
+        q: "Câu 35. Hãy đọc Âm và dịch nghĩa bài kệ “Thọ đãy lọc nước”.",
+        a: "<strong>1. Bài kệ Thọ đãy lọc nước trong Giới đàn:</strong><div class='verse-box'><strong class='hl'>Từ bi quán thủy nang,<br>Cứu hộ chúng sanh mạng,<br>Xuất ly sanh tử hải,<br>Đồng sanh An Dưỡng quốc.</strong></div><strong>Dịch nghĩa:</strong> Từ bi nhận đãy lọc nước / Cứu hộ mạng chúng sanh / Thoát khỏi biển sanh tử / Đồng sanh cõi An Dưỡng.<br><br><strong>2. Bài kệ Quán thủy / Lọc nước uống (Tỳ-ni nhật dụng):</strong><div class='verse-box'><strong class='hl'>Phật quán nhất bát thủy,<br>Bát vạn tứ thiên trùng,<br>Nhược bất trì thử chú,<br>Như thực chúng sanh nhục.<br>Án phạ tất ba la ma ni ta bà ha (3 lần).</strong></div><strong>Dịch nghĩa:</strong> Phật xem một bát nước / Có tám vạn bốn ngàn vi trùng / Nếu không trì chú này / Như ăn thịt chúng sanh.",
+        kw: "Từ bi quán thủy nang, Cứu hộ chúng sanh mạng, Xuất ly sanh tử hải, Đồng sanh An Dưỡng quốc • Phật quán nhất bát thủy, Bát vạn tứ thiên trùng...",
+        quiz: {
+            options: [
+                "Từ bi quán thủy nang, Cứu hộ chúng sanh mạng, Xuất ly sanh tử hải, Đồng sanh An Dưỡng quốc (kèm kệ Quán thủy: Phật quán nhất bát thủy, Bát vạn tứ thiên trùng, Nhược bất trì thử chú, Như thực chúng sanh nhục)",
+                "Đại tiểu tiện thời, Đương nguyện chúng sanh, Khí tham sân si, Quyên trừ tội pháp",
+                "Tùng triêu dần đán trực chí mộ, Nhất thiết chúng sanh tự hồi hộ...",
+                "Thiện tai giải thoát phục, Vô tướng phước điền y, Ngã kim đảnh đới thọ, Quảng độ chư chúng sanh"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 36,
+        q: "Câu 36. Mỗi bài kệ Tỳ-ni đều có Tam tụ tịnh giới. Hãy đọc Âm bài kệ “Ẩm thủy” trong Tỳ-ni nhật dụng thiết yếu và trình bày Tam tụ tịnh giới được thể hiện qua bài kệ.",
+        a: "<strong>1. Đọc Âm bài kệ “Ẩm thủy” (Uống nước trong Tỳ-ni nhật dụng thiết yếu):</strong><div class='verse-box'><strong class='hl'>Phật quán nhất bát thủy,<br>Bát vạn tứ thiên trùng,<br>Nhược bất trì thử chú,<br>Như thực chúng sanh nhục.<br>Án phạ tất ba la ma ni ta bà ha (3 lần).</strong></div><strong>2. Trình bày Tam tụ tịnh giới thể hiện qua bài kệ “Ẩm thủy”:</strong><br>- <strong class='hl'>Nhiếp luật nghi giới (Đoạn tất cả điều ác):</strong> Nhớ lời Phật dạy trong bát nước có 8 vạn 4 ngàn vi trùng, hành giả khởi tâm phòng hộ giới sát sanh, lọc nước và trì chú cẩn thận để không phạm lỗi giết hại mạng sống sinh linh (<em>“Nhược bất trì thử chú, như thực chúng sanh nhục”</em>).<br>- <strong class='hl'>Nhiếp thiện pháp giới (Tu tất cả pháp lành):</strong> Ngay khi uống nước, hành giả thu nhiếp thân tâm an trú trong chánh niệm tỉnh giác, chí thành trì tụng mật chú và nuôi dưỡng hạt giống từ bi thanh tịnh.<br>- <strong class='hl'>Nhiêu ích hữu tình giới (Độ tất cả chúng sanh):</strong> Khởi lòng đại bi thương xót bảo hộ sinh mạng của các loài thủy trùng nhỏ bé, đồng thời nhờ thần lực mật chú gia trì giúp chúng thoát khổ ác đạo, kết duyên lành giải thoát.",
+        kw: "Kệ Ẩm thủy: Phật quán nhất bát thủy... • Nhiếp luật nghi (giữ giới bất sát trùng trong nước) • Nhiếp thiện pháp (chánh niệm trì chú, nuôi tâm từ) • Nhiêu ích hữu tình (bảo hộ mạng sống và siêu độ vi trùng)",
+        quiz: {
+            options: [
+                "Kệ: 'Phật quán nhất bát thủy, Bát vạn tứ thiên trùng, Nhược bất trì thử chú, Như thực chúng sanh nhục'; Nhiếp luật nghi là phòng hộ giới sát không hại trùng, Nhiếp thiện pháp là chánh niệm trì chú nuôi tâm từ, Nhiêu ích hữu tình là bảo hộ sinh mạng và gia trì cho loài vi trùng thoát khổ",
+                "Kệ: 'Thế trừ tu phát, Đương nguyện chúng sanh...'; chỉ có Nhiếp luật nghi giới chứ không có Nhiêu ích hữu tình giới",
+                "Kệ: 'Đại tiểu tiện thời, Đương nguyện chúng sanh...'; uống nước chỉ để giải khát chứ không liên quan đến Tam tụ tịnh giới",
+                "Kệ: 'Tùng triêu dần đán trực chí mộ...'; chỉ dành cho việc đi bộ ngoài đường"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 37,
+        q: "Câu 37. Theo Oai nghi, người đệ tử xuất gia có những bổn phận gì đối với Bổn sư?",
+        a: "Theo thiên <em>Sự Sư (Thờ Thầy)</em> trong Oai nghi Sa-di, người đệ tử xuất gia có những bổn phận đối với Bổn sư:<br>1. <strong class='hl'>Tôn kính Bổn sư như Đức Phật và như cha mẹ ruột</strong> (vì Thầy là người sinh dưỡng giới thân huệ mạng).<br>2. <strong class='hl'>Thức dậy sớm hơn thầy, đi ngủ muộn hơn thầy</strong>; lo liệu nước rửa mặt, quét dọn phòng thất, trải tòa ngồi và giữ gìn y bát của thầy trang nghiêm sạch sẽ.<br>3. <strong class='hl'>Tuyệt đối vâng lời giáo huấn chánh pháp</strong>; phàm làm việc gì đều phải bạch xin phép thầy trước, không được tự chuyên.<br>4. <strong class='hl'>Hết lòng phụng dưỡng thuốc thang, cơm cháo</strong> khi thầy già yếu hoặc đau bệnh.",
+        kw: "Kính thầy như Phật & cha mẹ • Dậy sớm ngủ muộn lo liệu y bát phòng thất • Vâng lời dạy, không tự chuyên • Tận tâm phụng dưỡng khi thầy bệnh",
+        quiz: {
+            options: [
+                "Kính thầy như Phật và cha mẹ, dậy sớm ngủ muộn lo liệu y bát phòng thất, vâng lời giáo huấn không tự chuyên và tận tâm phụng dưỡng khi thầy già bệnh",
+                "Chỉ cần chào hỏi thầy vào ngày rằm và mùng một hằng tháng",
+                "Mọi việc đi đứng hay giao thiệp đều tự ý quyết định không cần bạch hỏi thầy",
+                "Chỉ học kinh chữ với thầy chứ không có bổn phận hầu hạ hay chăm sóc thầy"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 38,
+        q: "Câu 38. Theo Oai nghi, khi hầu thầy, người đệ tử phải giữ gìn những oai nghi nào?",
+        a: "Khi đứng hầu thầy hoặc đi theo thầy, người đệ tử phải giữ gìn các oai nghi:<br>1. <strong class='hl'>Y phục phải chỉnh tề, nghiêm trang</strong>.<br>2. Khi đứng hầu phải <strong class='hl'>đứng nép ở phía bên cạnh</strong> (không đứng ngay chính diện trước mặt thầy, không đứng ở chỗ cao hơn thầy, không đứng dựa vào tường hay cột nhà).<br>3. Khi đi theo thầy phải <strong class='hl'>đi phía sau và không được giẫm lên bóng của thầy</strong>.<br>4. <strong class='hl'>Không nói cười lớn tiếng, không khạc nhổ, hắt hơi hay ngáp vươn vai</strong> trước mặt thầy; khi thầy chưa cho phép ngồi thì không được tự tiện ngồi.",
+        kw: "Y phục chỉnh tề • Đứng nép một bên (không đứng cao hơn, không dựa cột) • Không giẫm bóng thầy • Thầy chưa bảo ngồi không được tự ngồi",
+        quiz: {
+            options: [
+                "Mặc y phục chỉnh tề, đứng hầu nép một bên, không đứng cao hơn thầy hay dựa cột, không giẫm lên bóng thầy, thầy chưa bảo ngồi không được tự ngồi",
+                "Có thể tự nhiên ngồi ngang hàng với thầy và vừa hầu chuyện vừa cười đùa lớn tiếng",
+                "Đi vượt lên trước mặt thầy để đi cho nhanh",
+                "Đứng dựa lưng vào cột nhà hoặc chống nạnh trước mặt thầy"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 39,
+        q: "Câu 39. Theo Oai nghi, khi muốn thưa hỏi hoặc trình bạch với thầy, người đệ tử phải giữ thái độ và phép tắc như thế nào?",
+        a: "Khi muốn thưa hỏi kinh luật hoặc trình bạch công việc với thầy, người đệ tử phải giữ đúng phép tắc:<br>1. <strong class='hl'>Biết chọn đúng thời điểm</strong> (không thưa hỏi lúc thầy đang tụng kinh, tọa thiền, thọ thực, đánh răng súc miệng, tắm rửa, nghỉ ngơi hay đang giận).<br>2. <strong class='hl'>Chỉnh đốn y phục tề chỉnh</strong>, đến trước cửa phải đánh tiếng nhẹ hoặc gõ cửa 3 tiếng khoan thai, được thầy cho phép mới bước vào.<br>3. <strong class='hl'>Chắp tay cung kính (hoặc đảnh lễ), thưa trình bằng lời lẽ ôn hòa, khiêm hạ, rõ ràng, vừa đủ nghe</strong>; khi thầy dạy xong phải chí thành ghi nhớ, đảnh lễ hoặc xá rồi mới lui ra (không quay lưng đột ngột vào mặt thầy).",
+        kw: "Chọn lúc thầy rảnh • Chỉnh y phục, gõ cửa xin phép • Chắp tay/đảnh lễ, lời lẽ khiêm cung rõ ràng, ghi nhớ lời dạy rồi lễ tạ lui ra",
+        quiz: {
+            options: [
+                "Chọn lúc thầy rảnh, chỉnh y phục, gõ cửa xin phép, chắp tay cung kính thưa trình bằng lời lẽ khiêm hạ rõ ràng, ghi nhớ lời dạy rồi lễ tạ lui ra",
+                "Bất cứ lúc nào nghĩ ra câu hỏi là chạy thẳng vào phòng hỏi ngay kể cả khi thầy đang tụng kinh hay nghỉ ngơi",
+                "Đứng từ ngoài sân gọi vọng lớn tiếng vào phòng thầy để hỏi",
+                "Hỏi xong liền quay lưng bỏ đi ngay khi thầy chưa nói dứt lời"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 40,
+        q: "Câu 40. Theo Oai nghi, khi được thầy hoặc đại chúng chỉ dạy, quở trách về những lỗi lầm của mình, người xuất gia cần có thái độ như thế nào?",
+        a: "Khi được Bổn sư hoặc đại chúng chỉ dạy, quở trách lỗi lầm, người xuất gia cần có thái độ:<br>1. <strong class='hl'>Cung kính lắng nghe, không được cãi lời:</strong> Lập tức đứng dậy (hoặc quỳ xuống), chắp tay trang nghiêm, cúi đầu lắng nghe; tuyệt đối không được cãi lại, không tỏ vẻ bất mãn, giận dỗi hay bỏ đi.<br>2. <strong class='hl'>Thành tâm sám hối và sửa đổi:</strong> Nếu thực sự có lỗi thì lập tức nhận lỗi, đảnh lễ phát lồ sám hối và quyết tâm chừa bỏ. Nếu bị hiểu lầm (không có lỗi) cũng phải nhẫn nhục nghe hết, đợi thầy nguôi giận mới nhẹ nhàng trình bạch rõ sự thật.<br>3. <strong class='hl'>Khởi tâm tri ân sâu sắc:</strong> Quán tưởng người chỉ lỗi cho mình như <strong class='hl'>người chỉ chỗ chôn kho báu</strong>, vì lòng từ bi thương tưởng muốn mình tiêu trừ nghiệp chướng và thành tựu đạo hạnh.",
+        kw: "Cung kính lắng nghe, tuyệt đối không cãi lại • Có lỗi thành tâm sám hối sửa đổi (bị oan đợi nguôi giận mới trình bạch) • Tri ân người chỉ lỗi như người chỉ kho báu",
+        quiz: {
+            options: [
+                "Cung kính chắp tay lắng nghe không được cãi lại, có lỗi thì thành tâm sám hối sửa đổi (nếu bị hiểu lầm thì đợi thầy nguôi giận mới trình bạch nhẹ nhàng) và luôn tri ân người chỉ lỗi cho mình",
+                "Lập tức lớn tiếng cãi lại để bảo vệ tự ái cá nhân trước mặt thầy và đại chúng",
+                "Bỏ ra khỏi phòng với thái độ giận dỗi và bất mãn",
+                "Ngoài mặt giả vờ nghe nhưng trong lòng oán giận và tiếp tục tái phạm lỗi cũ"
+            ],
+            correct: 0
+        }
+    }
+];
+
+// Quản lý trạng thái thuộc bài (Lưu vào LocalStorage riêng cho bộ 40 câu Luật học)
+let masteredSet = new Set(JSON.parse(localStorage.getItem('sadi_luat40_mastered') || '[]'));
+let hideAllAnswers = false;
+let showOnlyUnmastered = false;
+
+function saveMastery() {
+    localStorage.setItem('sadi_luat40_mastered', JSON.stringify([...masteredSet]));
+    updateMasteryBar();
+}
+
+function updateMasteryBar() {
+    const count = masteredSet.size;
+    document.getElementById('mastery-count').innerText = `${count} / ${QA_DATA.length}`;
+    document.getElementById('mastery-fill').style.width = `${(count / QA_DATA.length) * 100}%`;
+}
+
+function resetMastery() {
+    if (confirm("Bạn muốn đặt lại tiến độ đánh dấu đã thuộc về 0?")) {
+        masteredSet.clear();
+        saveMastery();
+        renderStudyList();
+        updateFlashcardUI();
+    }
+}
+
+// Chuyển đổi Tab
+function switchMode(mode, btn) {
+    document.querySelectorAll('.mode-section').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('mode-' + mode).classList.add('active');
+    btn.classList.add('active');
+    if (mode === 'flashcard') updateFlashcardUI();
+}
+
+// CHẾ ĐỘ 1: HIỂN THỊ ĐỀ CƯƠNG
+function renderStudyList() {
+    const query = document.getElementById('search-box').value.toLowerCase().trim();
+    const container = document.getElementById('study-container');
+    container.innerHTML = '';
+
+    QA_DATA.forEach(item => {
+        const isMastered = masteredSet.has(item.id);
+        if (showOnlyUnmastered && isMastered) return;
+
+        const matchText = (item.q + ' ' + item.a + ' ' + item.kw).toLowerCase();
+        if (query && !matchText.includes(query)) return;
+
+        const card = document.createElement('div');
+        card.className = `qa-card ${isMastered ? 'mastered' : ''}`;
+        card.innerHTML = `
+            <div class="qa-header">
+                <div class="qa-question">${item.q}</div>
+                <button class="master-toggle" onclick="toggleMastery(${item.id})">
+                    ${isMastered ? '✅ Đã thuộc' : '⭕ Đánh dấu thuộc'}
+                </button>
+            </div>
+            <div class="qa-answer ${hideAllAnswers ? 'hidden-ans' : ''}" onclick="this.classList.toggle('hidden-ans')" title="Nhấp để ẩn/hiện đáp án câu này">
+                <div>${item.a}</div>
+                <div class="keyword-box">🔑 <strong>Từ khóa nhớ nhanh:</strong> ${item.kw}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function toggleMastery(id) {
+    if (masteredSet.has(id)) masteredSet.delete(id);
+    else masteredSet.add(id);
+    saveMastery();
+    renderStudyList();
+}
+
+function toggleAllAnswers() {
+    hideAllAnswers = !hideAllAnswers;
+    const btn = document.getElementById('btn-toggle-ans');
+    btn.innerText = hideAllAnswers ? '👁️ Hiện tất cả đáp án' : '🙈 Ẩn đáp án để tự dò bài';
+    renderStudyList();
+}
+
+function filterUnmastered() {
+    showOnlyUnmastered = !showOnlyUnmastered;
+    const btn = document.getElementById('btn-filter-unmastered');
+    btn.style.borderColor = showOnlyUnmastered ? 'var(--gold)' : '';
+    btn.innerText = showOnlyUnmastered ? `📋 Hiện tất cả ${QA_DATA.length} câu` : '📌 Chỉ hiện câu chưa thuộc';
+    renderStudyList();
+}
+
+// CHẾ ĐỘ 2: FLASHCARD 3D
+let fcIndex = 0;
+
+function updateFlashcardUI() {
+    const scene = document.getElementById('fc-scene');
+    scene.classList.remove('is-flipped');
+    const item = QA_DATA[fcIndex];
+    setTimeout(() => {
+        document.getElementById('fc-counter').innerText = `CÂU ${fcIndex + 1} / ${QA_DATA.length} (Nhấp vào thẻ hoặc phím Space để lật)`;
+        document.getElementById('fc-question').innerText = item.q;
+        document.getElementById('fc-hint').innerHTML = `💡 Gợi ý từ khóa: <strong>${item.kw}</strong>`;
+        document.getElementById('fc-answer').innerHTML = item.a;
+        const mBtn = document.getElementById('fc-master-btn');
+        if (masteredSet.has(item.id)) {
+            mBtn.innerText = '✅ Đã thuộc câu này';
+            mBtn.style.borderColor = 'var(--emerald)';
+            mBtn.style.color = 'var(--emerald)';
+        } else {
+            mBtn.innerText = '⭕ Đánh dấu Đã thuộc';
+            mBtn.style.borderColor = '';
+            mBtn.style.color = '';
+        }
+    }, 150);
+}
+
+function flipCard() {
+    document.getElementById('fc-scene').classList.toggle('is-flipped');
+}
+
+function nextCard() {
+    fcIndex = (fcIndex + 1) % QA_DATA.length;
+    updateFlashcardUI();
+}
+
+function prevCard() {
+    fcIndex = (fcIndex - 1 + QA_DATA.length) % QA_DATA.length;
+    updateFlashcardUI();
+}
+
+function randomCard() {
+    fcIndex = Math.floor(Math.random() * QA_DATA.length);
+    updateFlashcardUI();
+}
+
+function toggleCurrentCardMastery() {
+    const id = QA_DATA[fcIndex].id;
+    toggleMastery(id);
+    updateFlashcardUI();
+}
+
+// CHẾ ĐỘ 3: TRÒ CHƠI ĐẤU TRƯỜNG TRÍ TUỆ
+let quizOrder = [];
+let quizCursor = 0;
+let score = 0;
+let streak = 0;
+let bestScore = parseInt(localStorage.getItem('sadi_luat40_best_score') || '0', 10);
+
+function shuffleArray(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+function startNewGame() {
+    quizOrder = shuffleArray(QA_DATA);
+    quizCursor = 0;
+    score = 0;
+    streak = 0;
+    document.getElementById('game-best').innerText = bestScore;
+    loadQuizQuestion();
+}
+
+function loadQuizQuestion() {
+    if (quizCursor >= quizOrder.length) {
+        document.getElementById('quiz-question').innerHTML = `🎉 CHÚC MỪNG BẠN ĐÃ HOÀN THÀNH ${quizOrder.length} CÂU THỬ THÁCH LUẬT HỌC!<br><span style="color:var(--gold);font-size:1.3rem;">Tổng điểm: ${score} điểm</span>`;
+        document.getElementById('quiz-options').innerHTML = '';
+        document.getElementById('quiz-feedback').style.display = 'none';
+        document.getElementById('btn-next-quiz').style.display = 'none';
+        return;
+    }
+
+    const currentItem = quizOrder[quizCursor];
+    document.getElementById('game-q-num').innerText = `${quizCursor + 1} / ${quizOrder.length}`;
+    document.getElementById('game-score').innerText = score;
+    document.getElementById('game-streak').innerText = `🔥 ${streak}`;
+    document.getElementById('quiz-question').innerText = currentItem.q;
+    document.getElementById('quiz-feedback').style.display = 'none';
+    document.getElementById('btn-next-quiz').style.display = 'none';
+
+    const indexedOptions = currentItem.quiz.options.map((text, idx) => ({
+        text,
+        isCorrect: idx === currentItem.quiz.correct
+    }));
+    const shuffledOpts = shuffleArray(indexedOptions);
+
+    const optContainer = document.getElementById('quiz-options');
+    optContainer.innerHTML = '';
+    const labels = ['A', 'B', 'C', 'D'];
+
+    shuffledOpts.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `<strong>${labels[i]}.</strong> ${opt.text}`;
+        btn.onclick = () => selectAnswer(btn, opt.isCorrect, currentItem);
+        optContainer.appendChild(btn);
+    });
+}
+
+function selectAnswer(selectedBtn, isCorrect, item) {
+    const allBtns = document.querySelectorAll('.opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+
+    const fb = document.getElementById('quiz-feedback');
+    fb.style.display = 'block';
+
+    if (isCorrect) {
+        selectedBtn.classList.add('correct');
+        streak++;
+        const gained = 10 + (streak > 1 ? streak * 2 : 0);
+        score += gained;
+        if (score > bestScore) {
+            bestScore = score;
+            localStorage.setItem('sadi_luat40_best_score', bestScore);
+            document.getElementById('game-best').innerText = bestScore;
+        }
+        masteredSet.add(item.id);
+        saveMastery();
+        renderStudyList();
+        fb.innerHTML = `<strong style="color:var(--emerald);">✅ Chính xác! (+${gained} điểm)</strong><br>${item.a}`;
+    } else {
+        selectedBtn.classList.add('wrong');
+        streak = 0;
+        allBtns.forEach(b => {
+            if (b.innerText.includes(item.quiz.options[item.quiz.correct])) {
+                b.classList.add('correct');
+            }
+        });
+        fb.innerHTML = `<strong style="color:var(--crimson);">❌ Chưa chính xác! Đáp án đầy đủ:</strong><br>${item.a}`;
+    }
+
+    document.getElementById('game-score').innerText = score;
+    document.getElementById('game-streak').innerText = `🔥 ${streak}`;
+    document.getElementById('btn-next-quiz').style.display = 'inline-block';
+}
+
+function nextQuizQuestion() {
+    quizCursor++;
+    loadQuizQuestion();
+}
+
+// Phím tắt cho Flashcard
+document.addEventListener('keydown', (e) => {
+    const fcActive = document.getElementById('mode-flashcard').classList.contains('active');
+    if (!fcActive) return;
+    if (e.code === 'Space') { e.preventDefault(); flipCard(); }
+    if (e.code === 'ArrowRight') nextCard();
+    if (e.code === 'ArrowLeft') prevCard();
+});
+
+// HIỆU ỨNG BACKGROUND VŨ TRỤ SAO CHUYỂN ĐỘNG (CANVAS)
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function initStars() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({ length: 180 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.6 + 0.3,
+        speed: Math.random() * 0.35 + 0.08
+    }));
+}
+
+function animateStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+        s.y -= s.speed;
+        if (s.y < 0) { s.y = canvas.height; s.x = Math.random() * canvas.width; }
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + Math.abs(Math.sin(Date.now() * 0.001 + s.x)) * 0.6})`;
+        ctx.fill();
+    });
+    requestAnimationFrame(animateStars);
+}
+
+window.addEventListener('resize', initStars);
+
+// Khởi chạy ứng dụng
+window.onload = () => {
+    initStars();
+    animateStars();
+    updateMasteryBar();
+    renderStudyList();
+    updateFlashcardUI();
+    startNewGame();
+};
+</script>
+</body>
+</html>

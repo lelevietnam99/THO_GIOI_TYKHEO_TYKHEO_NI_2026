@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Chế độ No-Cache đảm bảo luôn tải phiên bản mới nhất trên GitHub Pages -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>I. Lịch Sử Đức Phật và Thánh Chúng (40 Câu Mở Rộng) - Phật Học Phổ Thông</title>
+    <style>
+        :root {
+            --gold: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.35);
+            --cyan: #00f2fe;
+            --emerald: #00e676;
+            --crimson: #ff5252;
+            --card-bg: rgba(15, 23, 42, 0.82);
+            --border-glass: rgba(255, 255, 255, 0.14);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #050814;
+            color: #e2e8f0;
+            line-height: 1.65;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas Vũ Trụ Sao Chuyển Động */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 25px 18px 60px;
+        }
+
+        header {
+            text-align: center;
+            padding: 28px 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-glow);
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            color: var(--gold);
+            font-size: 1.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Thanh Tiến Độ Thuộc Bài */
+        .mastery-bar-wrap {
+            margin-top: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .progress-track {
+            flex: 1;
+            min-width: 200px;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--emerald));
+            transition: width 0.4s ease;
+        }
+
+        /* Điều hướng Chế độ (Tabs) */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(30, 41, 59, 0.8);
+            color: #cbd5e1;
+            border: 1px solid var(--border-glass);
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--gold);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(0, 242, 254, 0.18));
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 18px var(--gold-glow);
+        }
+
+        .mode-section { display: none; }
+        .mode-section.active { display: block; animation: fadeIn 0.35s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Công cụ tìm kiếm và lọc trong Chế độ Đề Cương */
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 220px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 0.98rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--gold);
+        }
+
+        /* Danh sách thẻ Câu Hỏi */
+        .qa-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .qa-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            border-left: 4px solid var(--gold);
+            border-radius: 14px;
+            padding: 18px 20px;
+            transition: all 0.25s ease;
+        }
+
+        .qa-card.mastered {
+            border-left-color: var(--emerald);
+            background: rgba(16, 42, 45, 0.75);
+        }
+
+        .qa-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .qa-question {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .master-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #cbd5e1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .qa-card.mastered .master-toggle {
+            background: rgba(0, 230, 118, 0.2);
+            border-color: var(--emerald);
+            color: var(--emerald);
+        }
+
+        .qa-answer {
+            color: #f1f5f9;
+            font-size: 1rem;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.12);
+        }
+
+        .qa-answer.hidden-ans {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .qa-answer.hidden-ans:hover {
+            filter: blur(3px);
+        }
+
+        .keyword-box {
+            margin-top: 10px;
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--cyan);
+        }
+
+        strong.hl {
+            color: #00ffcc;
+            font-weight: 700;
+        }
+
+        /* CHẾ ĐỘ FLASHCARD 3D */
+        .flashcard-wrapper {
+            max-width: 720px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .flashcard-scene {
+            width: 100%;
+            height: 390px;
+            perspective: 1200px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard-scene.is-flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, rgba(20, 30, 55, 0.94), rgba(10, 15, 30, 0.96));
+            border: 2px solid var(--gold);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+            border-color: var(--cyan);
+        }
+
+        .fc-badge {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin-bottom: 14px;
+        }
+
+        .fc-Controls {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* CHẾ ĐỘ TRÒ CHƠI ĐẤU TRƯỜNG TRÍ TUỆ */
+        .game-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid var(--border-glass);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.45);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .quiz-question-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 18px;
+            border-left: 4px solid var(--cyan);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .opt-btn {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #e2e8f0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--gold);
+            transform: translateX(4px);
+        }
+
+        .opt-btn.correct {
+            background: rgba(0, 230, 118, 0.25) !important;
+            border-color: var(--emerald) !important;
+            color: #fff !important;
+            font-weight: 700;
+        }
+
+        .opt-btn.wrong {
+            background: rgba(255, 82, 82, 0.25) !important;
+            border-color: var(--crimson) !important;
+            color: #ffb4b4 !important;
+        }
+
+        .feedback-box {
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(0, 242, 254, 0.1);
+            border-left: 4px solid var(--cyan);
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        /* Cấu hình In A4 Ngang (@media print) */
+        @media print {
+            @page { size: A4 landscape; margin: 12mm; }
+            body { background: #fff !important; color: #000 !important; }
+            #starfield, .nav-tabs, .toolbar, .master-toggle, .mastery-bar-wrap { display: none !important; }
+            .container { max-width: 100%; padding: 0; margin: 0; }
+            header { box-shadow: none; border: 1px solid #000; background: #fff; color: #000; padding: 10px; margin-bottom: 15px; }
+            header h1 { color: #000; text-shadow: none; font-size: 1.4rem; }
+            .mode-section { display: none !important; }
+            #mode-study { display: block !important; }
+            .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+            .qa-card { background: #fff !important; border: 1px solid #444 !important; page-break-inside: avoid; padding: 10px; }
+            .qa-question { color: #000 !important; font-size: 0.95rem; }
+            .qa-answer { color: #111 !important; filter: none !important; font-size: 0.9rem; }
+            strong.hl, .keyword-box { color: #000 !important; border-color: #666 !important; background: #f5f5f5 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="container">
+    <header>
+        <h1>I. LỊCH SỬ ĐỨC PHẬT VÀ THÁNH CHÚNG</h1>
+        <p>Biên soạn theo "Phật Học Phổ Thông" – HT. Thiện Hoa | Bộ 40 Câu Hỏi Trọng Tâm Mở Rộng</p>
+        
+        <div class="mastery-bar-wrap">
+            <span>🎯 Tiến độ thuộc bài: <strong id="mastery-count" style="color: var(--gold);">0 / 41</strong> câu</span>
+            <div class="progress-track">
+                <div class="progress-fill" id="mastery-fill"></div>
+            </div>
+            <button class="action-btn" onclick="resetMastery()" style="padding: 5px 12px; font-size: 0.82rem;">Đặt lại tiến độ</button>
+        </div>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchMode('study', this)">📖 Đề Cương Chi Tiết (41 Câu)</button>
+        <button class="tab-btn" onclick="switchMode('flashcard', this)">🃏 Thẻ Nhớ Flashcard 3D</button>
+        <button class="tab-btn" onclick="switchMode('game', this)">🎮 Game Đấu Trường Trí Tuệ</button>
+    </div>
+
+    <!-- CHẾ ĐỘ 1: ĐỀ CƯƠNG CHI TIẾT -->
+    <section id="mode-study" class="mode-section active">
+        <div class="toolbar">
+            <input type="text" id="search-box" class="search-input" placeholder="🔍 Tìm theo số câu, tên vị Thánh Tăng, địa danh, kinh điển (Lăng Nghiêm, Kim Cang, A-dục...)" oninput="renderStudyList()">
+            <button class="action-btn" id="btn-toggle-ans" onclick="toggleAllAnswers()">🙈 Ẩn đáp án để tự dò bài</button>
+            <button class="action-btn" onclick="filterUnmastered()" id="btn-filter-unmastered">📌 Chỉ hiện câu chưa thuộc</button>
+            <button class="action-btn" onclick="window.print()">🖨️ In A4 Ngang</button>
+        </div>
+        <div class="qa-grid" id="study-container"></div>
+    </section>
+
+    <!-- CHẾ ĐỘ 2: FLASHCARD 3D -->
+    <section id="mode-flashcard" class="mode-section">
+        <div class="flashcard-wrapper">
+            <div class="flashcard-scene" id="fc-scene" onclick="flipCard()">
+                <div class="flashcard-inner">
+                    <div class="flashcard-face flashcard-front">
+                        <div class="fc-badge" id="fc-counter">CÂU 1 / 41 (Nhấp vào thẻ hoặc nhấn phím Space để lật)</div>
+                        <h3 id="fc-question" style="color: var(--gold); font-size: 1.32rem; margin-bottom: 18px;"></h3>
+                        <div class="keyword-box" id="fc-hint"></div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <div class="fc-badge" style="color: var(--cyan);">ĐÁP ÁN CHI TIẾT</div>
+                        <div id="fc-answer" style="font-size: 1.03rem; text-align: left; max-width: 96%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="fc-Controls">
+                <button class="action-btn" onclick="prevCard()">◀ Câu trước</button>
+                <button class="action-btn" onclick="flipCard()" style="border-color: var(--gold); color: var(--gold);">🔄 Lật thẻ</button>
+                <button class="action-btn" onclick="toggleCurrentCardMastery()" id="fc-master-btn">✅ Đánh dấu Đã thuộc</button>
+                <button class="action-btn" onclick="randomCard()">🎲 Ngẫu nhiên</button>
+                <button class="action-btn" onclick="nextCard()">Câu tiếp ▶</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHẾ ĐỘ 3: TRÒ CHƠI THỬ THÁCH -->
+    <section id="mode-game" class="mode-section">
+        <div class="game-panel">
+            <div class="game-stats">
+                <div class="stat-box">
+                    <div>Câu hỏi</div>
+                    <div class="stat-val" id="game-q-num">1 / 41</div>
+                </div>
+                <div class="stat-box">
+                    <div>Điểm số</div>
+                    <div class="stat-val" id="game-score" style="color: var(--emerald);">0</div>
+                </div>
+                <div class="stat-box">
+                    <div>Chuỗi đúng (Streak)</div>
+                    <div class="stat-val" id="game-streak" style="color: var(--cyan);">🔥 0</div>
+                </div>
+                <div class="stat-box">
+                    <div>Kỷ lục</div>
+                    <div class="stat-val" id="game-best">0</div>
+                </div>
+            </div>
+
+            <div id="game-play-area">
+                <div class="quiz-question-box" id="quiz-question"></div>
+                <div class="options-grid" id="quiz-options"></div>
+                <div class="feedback-box" id="quiz-feedback"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button class="action-btn" onclick="startNewGame()">🔄 Chơi lại từ đầu (Xáo trộn câu)</button>
+                    <button class="action-btn" id="btn-next-quiz" onclick="nextQuizQuestion()" style="display: none; background: rgba(0, 230, 118, 0.25); border-color: var(--emerald);">Câu tiếp theo ▶</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+const QA_DATA = [
+    {
+        id: 1,
+        q: "Câu 1 (a). Lý tưởng xuất gia của Thái tử Tất-đạt-đa là gì?",
+        a: "Lý tưởng xuất gia cao cả của Thái tử Tất-đạt-đa là <strong class='hl'>tìm ra con đường chân lý để giải thoát hoàn toàn khỏi sinh tử khổ đau (Sanh – Lão – Bệnh – Tử)</strong> không chỉ cho riêng bản thân, cho hoàng tộc mà cho tất cả nhân loại và muôn loài chúng sanh; đồng thời xóa bỏ sự bất công giai cấp, đem lại sự bình đẳng và an vui vĩnh cửu.",
+        kw: "Tìm con đường giải thoát khổ đau (Sanh, Lão, Bệnh, Tử) cho tất cả chúng sanh",
+        quiz: {
+            options: [
+                "Tìm ra con đường giải thoát khổ đau sanh tử cho nhân loại và muôn loài chúng sanh, đem lại bình đẳng và an vui vĩnh cửu",
+                "Rèn luyện thần thông để mở rộng lãnh thổ cho vương quốc Ca-tỳ-la-vệ",
+                "Lánh đời ẩn cư một mình trong rừng sâu để hưởng sự thanh nhàn",
+                "Tìm kiếm phương thuốc trường sinh bất tử để giữ mãi ngôi vị đế vương"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 2,
+        q: "Câu 1 (b). Thái tử Tất-đạt-đa xuất gia vào ngày, tháng nào? Khi ấy Ngài bao nhiêu tuổi?",
+        a: "Theo 'Phật học Phổ thông' của Hòa thượng Thiện Hoa, Thái tử Tất-đạt-đa xuất gia vào đêm <strong class='hl'>mùng 8 tháng 2 âm lịch</strong>, khi ấy Ngài <strong class='hl'>19 tuổi</strong> <em>(theo một số tư liệu lịch sử Phật giáo Nam truyền và quốc tế là 29 tuổi)</em>.",
+        kw: "Đêm mùng 8 tháng 2 âm lịch • 19 tuổi (theo Phật học Phổ thông) / 29 tuổi (theo lịch sử)",
+        quiz: {
+            options: [
+                "Đêm mùng 8 tháng 2 âm lịch, lúc Ngài 19 tuổi (theo Phật học Phổ thông)",
+                "Ngày Rằm tháng Tư âm lịch, lúc Ngài 25 tuổi",
+                "Đêm mùng 8 tháng Chạp âm lịch, lúc Ngài 30 tuổi",
+                "Ngày Rằm tháng Hai âm lịch, lúc Ngài 16 tuổi"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 3,
+        q: "Câu 2. Sau khi xuất gia, Thái tử Tất-đạt-đa đã học đạo với những vị đạo sư nào? Vì sao Ngài tiếp tục tìm đạo?",
+        a: "Sau khi xuất gia, Thái tử đã tìm đến học đạo với hai vị tiên nhân nổi tiếng là <strong class='hl'>A-la-la Ca-lam (Alara Kalama)</strong> — chứng cõi Vô sở hữu xứ, và <strong class='hl'>Uất-đầu Lam-phất (Uddaka Ramaputta)</strong> — chứng cõi Phi tưởng phi phi tưởng xứ. Ngài từ giã để tiếp tục tìm đạo vì nhận thấy pháp thiền định của họ tuy cao siêu nhưng <strong class='hl'>vẫn còn nằm trong tam giới luân hồi</strong>, chưa diệt tận gốc rễ phiền não sanh tử.",
+        kw: "Đạo sư: A-la-la Ca-lam & Uất-đầu Lam-phất • Lý do rời đi: Chưa thoát khỏi tam giới luân hồi",
+        quiz: {
+            options: [
+                "A-la-la Ca-lam và Uất-đầu Lam-phất; vì giáo lý thiền định của họ vẫn còn trong tam giới luân hồi, chưa giải thoát rốt ráo",
+                "Kiều-trần-như và Ma-ha Ca-diếp; vì họ khuyên Ngài quay về hoàng cung làm vua",
+                "Ưu-lâu-tần-loa Ca-diếp và Tu-bạt-đà-la; vì họ chỉ dạy nghi thức tế thần Lửa",
+                "Xá-lợi-phất và Mục-kiền-liên; vì pháp tu của họ thiên về tranh luận triết học"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 4,
+        q: "Câu 3. Thái tử tu khổ hạnh cùng những ai, trong bao lâu và kết quả thế nào?",
+        a: "Tại rừng khổ hạnh Ưu-lâu-tần-loa (Uruvela), Thái tử tu khổ hạnh cùng <strong class='hl'>5 anh em tôn giả Kiều-trần-như (Kondanna)</strong> trong thời gian <strong class='hl'>6 năm</strong>. Kết quả: Thân thể Ngài <strong class='hl'>suy kiệt trầm trọng</strong>, gầy gò chỉ còn da bọc xương và ngất xỉu bên bờ sông Ni-liên-thiền, nhưng <strong class='hl'>vẫn không đạt được đạo quả giác ngộ</strong>.",
+        kw: "Cùng 5 anh em Kiều-trần-như • Thời gian: 6 năm • Kết quả: Suy kiệt thân xác, chưa đắc đạo",
+        quiz: {
+            options: [
+                "Cùng 5 anh em Kiều-trần-như trong 6 năm; kết quả thân thể suy kiệt nhưng vẫn không đạt được giác ngộ",
+                "Cùng 3 anh em ông Ca-diếp trong 3 năm; kết quả chứng đắc Lục thông",
+                "Cùng 10 vị đại đệ tử trong 12 năm; kết quả chứng quả A-la-hán",
+                "Tu một mình trong 49 ngày; kết quả đạt đến cõi Phi tưởng phi phi tưởng xứ"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 5,
+        q: "Câu 4. Vì sao Thái tử từ bỏ lối tu khổ hạnh?",
+        a: "Thái tử từ bỏ lối tu khổ hạnh vì nhận ra rằng <strong class='hl'>hành hạ thể xác kiệt quệ chỉ làm tinh thần thêm mê mờ, không thể phát sinh trí tuệ giác ngộ</strong>. Ngài ngộ ra chân lý <strong class='hl'>Trung đạo</strong>: giống như chiếc đàn sắt, dây căng quá thì đứt, chùng quá thì không kêu; người tu không nên đắm chìm trong dục lạc mà cũng không nên ép xác khổ hạnh cực đoan.",
+        kw: "Ép xác làm trí tuệ mê mờ • Ngộ ra con đường Trung đạo (như dây đàn căng vừa phải)",
+        quiz: {
+            options: [
+                "Vì nhận ra ép xác cực đoan làm thân kiệt quệ, trí tuệ không thể phát sinh, cần tu theo con đường Trung đạo như dây đàn căng vừa phải",
+                "Vì 5 anh em Kiều-trần-như khuyên Ngài dừng khổ hạnh để về quê hương",
+                "Vì vua Tịnh Phạn cử đại thần mang quân đội đến đón Ngài về cung",
+                "Vì khu rừng Ưu-lâu-tần-loa bị ngập lụt không thể tiếp tục ở lại"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 6,
+        q: "Câu 5. Ai đã dâng cúng bát sữa cho Thái tử? Việc thọ nhận ấy có ý nghĩa gì?",
+        a: "Nàng thôn nữ <strong class='hl'>Tu-xà-đề (Sujata)</strong> đã dâng cúng bát cháo sữa cho Thái tử. Việc thọ nhận bát sữa có ý nghĩa: giúp Thái tử <strong class='hl'>phục hồi sinh lực</strong> để bước vào đại định dưới cội Bồ-đề, đồng thời <strong class='hl'>đánh dấu sự chấm dứt lối tu khổ hạnh ép xác cực đoan</strong> để chính thức bước lên con đường <strong class='hl'>Trung đạo</strong>.",
+        kw: "Người dâng: Thôn nữ Tu-xà-đề (Sujata) • Ý nghĩa: Hồi phục sức khỏe, từ bỏ cực đoan, mở đầu Trung đạo",
+        quiz: {
+            options: [
+                "Thôn nữ Tu-xà-đề (Sujata); giúp phục hồi sinh lực và đánh dấu việc từ bỏ khổ hạnh cực đoan để bước lên con đường Trung đạo",
+                "Di mẫu Kiều-đàm-di; thể hiện tình mẫu tử thiêng liêng trước khi thành đạo",
+                "Bà Tỳ-xá-khư (Visakha); mở đầu truyền thống cúng dường trai tăng của cư sĩ",
+                "Thợ rèn Thuần-đà (Cunda); cúng dường bữa ăn cuối cùng trước khi nhập Niết-bàn"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 7,
+        q: "Câu 6. Thái tử đã phát nguyện điều gì trước khi thành đạo dưới cội Bồ-đề?",
+        a: "Khi ngồi kiết-già trên tòa cỏ Cát-tường dưới cội cây Bồ-đề, Thái tử đã phát lời thệ nguyện dũng mãnh:<br><strong class='hl'>“Dù cho thịt nát xương tan, máu trong thân này có khô cạn, nếu ta chưa chứng được quả Vô thượng Chánh đẳng Chánh giác thì quyết không rời khỏi chỗ ngồi này!”</strong>",
+        kw: "Thịt nát xương tan, máu có khô cạn • Chưa thành Chánh giác quyết không rời tòa ngồi",
+        quiz: {
+            options: [
+                "Dù cho thịt nát xương tan, máu trong thân khô cạn, nếu chưa chứng quả Vô thượng Chánh đẳng Chánh giác thì quyết không rời khỏi chỗ ngồi này",
+                "Nguyện tiếp tục nhịn ăn thêm 49 ngày đêm để cảm hóa thiên ma Ba-tuần",
+                "Nguyện sau khi đắc đạo sẽ trở về làm Chuyển luân Thánh vương cai trị bốn châu thiên hạ",
+                "Nguyện chỉ thuyết pháp cho hàng vương tôn quý tộc thuộc giai cấp Sát-đế-lỵ"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 8,
+        q: "Câu 7. Đức Phật thành đạo vào ngày, tháng nào? Tại đâu, bao nhiêu tuổi và chứng ngộ điều gì?",
+        a: "Theo 'Phật học Phổ thông', Đức Phật thành đạo vào lúc sao Mai vừa mọc ngày <strong class='hl'>mùng 8 tháng 12 âm lịch</strong>, tại <strong class='hl'>cội cây Bồ-đề (Bồ-đề Đạo tràng – Bodh Gaya)</strong>, khi ấy Ngài <strong class='hl'>30 tuổi</strong> <em>(theo lịch sử là 35 tuổi)</em>. Ngài chứng đắc <strong class='hl'>Tam minh</strong> (Túc mạng minh, Thiên nhãn minh, Lậu tận minh), <strong class='hl'>Lục thông</strong>, thấu suốt lý <strong class='hl'>Duyên khởi (Thập nhị nhân duyên)</strong> và quả vị <strong class='hl'>Vô thượng Chánh đẳng Chánh giác</strong>.",
+        kw: "Mùng 8/12 ÂL (sao Mai mọc) • Cội Bồ-đề • 30 tuổi (lịch sử: 35 tuổi) • Chứng Tam minh, Lục thông, Phật quả",
+        quiz: {
+            options: [
+                "Mùng 8 tháng 12 âm lịch tại cội Bồ-đề lúc 30 tuổi; chứng Tam minh, Lục thông, Lý Duyên khởi và quả vị Vô thượng Chánh đẳng Chánh giác",
+                "Rằm tháng Tư âm lịch tại vườn Lâm-tỳ-ni lúc 35 tuổi; chứng quả A-la-hán",
+                "Rằm tháng Bảy âm lịch tại tịnh xá Trúc Lâm lúc 40 tuổi; chứng Tứ thiền bát định",
+                "Mùng 8 tháng 2 âm lịch tại vườn Lộc Uyển lúc 29 tuổi; chứng quả Bích-chi Phật"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 9,
+        q: "Câu 8. Sau khi thành đạo, Đức Phật đã trải qua bao nhiêu tuần lễ an trú tại khu vực cội Bồ-đề? Trong thời gian ấy, Ngài đã quán chiếu những gì?",
+        a: "Sau khi thành đạo, Đức Phật đã trải qua <strong class='hl'>7 tuần lễ (49 ngày)</strong> an trú tại khu vực xung quanh cội Bồ-đề. Trong thời gian ấy, Ngài thọ hưởng pháp lạc giải thoát, đứng nhìn cội Bồ-đề để biểu thị lòng tri ân, <strong class='hl'>quán chiếu sâu sắc lý Duyên khởi (Thập nhị nhân duyên)</strong> theo hai chiều lưu chuyển (thuận) và hoàn diệt (nghịch), đồng thời quán sát căn cơ chúng sanh để chuẩn bị chuyển Pháp luân.",
+        kw: "7 tuần lễ (49 ngày) • Thọ hưởng pháp lạc, tri ân cội Bồ-đề • Quán chiếu lý Duyên khởi (Thập nhị nhân duyên) & căn cơ chúng sanh",
+        quiz: {
+            options: [
+                "7 tuần lễ (49 ngày); thọ hưởng pháp lạc giải thoát, tri ân cội Bồ-đề, quán chiếu sâu sắc lý Duyên khởi (Thập nhị nhân duyên) và căn cơ chúng sanh",
+                "3 tuần lễ (21 ngày); chỉ chuyên luyện tập thần thông để hàng phục ngoại đạo",
+                "10 tuần lễ (70 ngày); đi khất thực khắp kinh thành Vương-xá và thành Xá-vệ",
+                "1 tuần lễ (7 ngày); lập tức lên đường đi thẳng đến vườn Lộc Uyển ngay hôm sau"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 10,
+        q: "Câu 9. Hai vị thương nhân đầu tiên cúng dường Đức Phật sau khi Ngài thành đạo là ai? Họ đã quy y những ngôi báu nào?",
+        a: "Hai vị thương nhân đầu tiên thành tâm dâng cúng bánh mật và bột rang cho Đức Phật (ở tuần lễ thứ 7 dưới cây Rajayatana) là <strong class='hl'>Đề-vị (Tapussa)</strong> và <strong class='hl'>Ba-lợi (Bhallika)</strong>. Họ đã xin <strong class='hl'>quy y Phật và quy y Pháp</strong> — trở thành hai người cư sĩ đầu tiên quy y Nhị bảo (vì lúc ấy Tăng bảo chưa xuất hiện).",
+        kw: "Thương nhân: Đề-vị (Tapussa) & Ba-lợi (Bhallika) • Quy y 2 ngôi báu: Phật Bảo và Pháp Bảo (Nhị bảo cư sĩ)",
+        quiz: {
+            options: [
+                "Đề-vị (Tapussa) và Ba-lợi (Bhallika); họ quy y Phật Bảo và Pháp Bảo (Nhị bảo cư sĩ đầu tiên)",
+                "Cấp Cô Độc và Kỳ-đà; họ quy y đầy đủ Phật, Pháp, Tăng",
+                "Vua Tần-bà-sa-la và Y sĩ Kỳ-bà; họ quy y Tăng Bảo",
+                "Thuần-đà và Tu-bạt-đà-la; họ xuất gia thành Tỳ-kheo ngay tại cội Bồ-đề"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 11,
+        q: "Câu 10. Vì sao sau khi thành đạo, Đức Phật có ý định không thuyết pháp? Ai đã thỉnh cầu Ngài chuyển bánh xe Chánh pháp?",
+        a: "- <strong>Lý do:</strong> Đức Phật do dự chưa thuyết pháp vì nhận thấy <strong class='hl'>giáo pháp Duyên khởi và Niết-bàn quá sâu mầu, vi diệu, ngược dòng thế gian</strong>, trong khi chúng sanh lại bị ngũ dục và vô minh che lấp dày đặc nên khó bề lĩnh hội.<br>- <strong>Người thỉnh cầu:</strong> <strong class='hl'>Đại Phạm Thiên Sahampati</strong> đã hiện thân đảnh lễ và tha thiết thỉnh cầu Đức Phật vì lòng đại bi mà chuyển bánh xe Chánh pháp cho những chúng sanh có căn lành, “ít bụi trần trong mắt” (như những đóa sen vươn lên khỏi mặt nước chờ ánh mặt trời).",
+        kw: "Lý do: Giáo pháp sâu mầu, chúng sanh nặng ngũ dục vô minh • Người thỉnh cầu: Đại Phạm Thiên Sahampati",
+        quiz: {
+            options: [
+                "Vì giáo pháp quá sâu mầu vi diệu còn chúng sanh nặng lòng tham ái vô minh; Đại Phạm Thiên Sahampati đã hiện thân thỉnh cầu Ngài thuyết pháp",
+                "Vì Đức Phật muốn nhập Niết-bàn ngay; Vua Tịnh Phạn đã đến thỉnh cầu Ngài ở lại",
+                "Vì chưa tìm được tịnh xá để giảng pháp; Trưởng giả Cấp Cô Độc đã đến thỉnh cầu",
+                "Vì 5 anh em Kiều-trần-như từ chối nghe pháp; Tôn giả A-nan đã đứng ra thỉnh cầu"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 12,
+        q: "Câu 11. Đức Phật thuyết bài pháp đầu tiên tại đâu, cho ai và nội dung gì?",
+        a: "Đức Phật thuyết bài pháp đầu tiên (<strong class='hl'>Kinh Chuyển Pháp Luân</strong>) tại <strong class='hl'>vườn Lộc Uyển (Sarnath – vườn Nai)</strong>, xứ Ba-la-nại, hóa độ cho <strong class='hl'>5 anh em tôn giả Kiều-trần-như</strong>. Nội dung cốt lõi là con đường <strong class='hl'>Trung đạo</strong>, <strong class='hl'>Tứ Diệu Đế</strong> (Khổ, Tập, Diệt, Đạo) và <strong class='hl'>Bát Chánh Đạo</strong>.",
+        kw: "Tại vườn Lộc Uyển • Độ 5 anh em Kiều-trần-như • Nội dung: Kinh Chuyển Pháp Luân (Trung đạo, Tứ Diệu Đế, Bát Chánh Đạo)",
+        quiz: {
+            options: [
+                "Tại vườn Lộc Uyển, độ cho 5 anh em Kiều-trần-như, nội dung là Kinh Chuyển Pháp Luân (Trung đạo, Tứ Diệu Đế và Bát Chánh Đạo)",
+                "Tại núi Linh Thứu, độ cho 1.250 vị Tỳ-kheo, nội dung là Kinh Diệu Pháp Liên Hoa",
+                "Tại tịnh xá Kỳ Viên, độ cho Tôn giả A-nan, nội dung là Kinh Thủ Lăng Nghiêm",
+                "Tại thành Vương-xá, độ cho vua Tần-bà-sa-la, nội dung là Kinh Thập Thiện"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 13,
+        q: "Câu 12. Trong bài pháp đầu tiên, Đức Phật đã chỉ dạy hai cực đoan nào cần tránh? Con đường Trung đạo mà Ngài chỉ dạy là gì?",
+        a: "- <strong>Hai cực đoan cần tránh:</strong> (1) <strong class='hl'>Đắm chìm trong dục lạc thế gian</strong> (thấp hèn, phàm tục, không lợi ích), và (2) <strong class='hl'>Tự hành hạ ép xác khổ hạnh</strong> (khổ đau, không xứng bậc Thánh, không đem lại trí tuệ).<br>- <strong>Con đường Trung đạo:</strong> Chính là <strong class='hl'>Bát Chánh Đạo</strong> (gồm 8 nhánh: Chánh kiến, Chánh tư duy, Chánh ngữ, Chánh nghiệp, Chánh mạng, Chánh tinh tấn, Chánh niệm, Chánh định) — con đường mở mắt trí tuệ, đưa đến tịch tịnh và Niết-bàn.",
+        kw: "2 cực đoan: Đắm chìm dục lạc & Ép xác khổ hạnh • Trung đạo = Bát Chánh Đạo (8 nhánh chánh chân)",
+        quiz: {
+            options: [
+                "Hai cực đoan là đắm chìm dục lạc và ép xác khổ hạnh; con đường Trung đạo chính là Bát Chánh Đạo",
+                "Hai cực đoan là giàu sang và nghèo hèn; con đường Trung đạo là làm nghề buôn bán vừa phải",
+                "Hai cực đoan là thức khuya và dậy sớm; con đường Trung đạo là ngủ đủ 12 tiếng mỗi ngày",
+                "Hai cực đoan là học nhiều và không học; con đường Trung đạo là chỉ cần tụng chú"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 14,
+        q: "Câu 13. Ai là đệ tử đầu tiên chứng quả A-la-hán? Năm anh em Kiều-trần-như đã chứng đắc quả vị gì?",
+        a: "Tôn giả <strong class='hl'>Kiều-trần-như (Kondanna)</strong> là vị đệ tử đầu tiên ngộ đạo và chứng quả A-la-hán sớm nhất trong giáo đoàn. Sau khi nghe Đức Phật thuyết tiếp <em>Kinh Vô Ngã Tướng</em>, cả <strong class='hl'>5 anh em Kiều-trần-như đều chứng đắc quả vị A-la-hán</strong>.",
+        kw: "Đầu tiên: Tôn giả Kiều-trần-như • Cả 5 anh em Kiều-trần-như đều đắc quả A-la-hán",
+        quiz: {
+            options: [
+                "Tôn giả Kiều-trần-như là vị đầu tiên; cả 5 anh em Kiều-trần-như đều chứng đắc quả vị A-la-hán",
+                "Tôn giả Xá-lợi-phất là vị đầu tiên; 5 anh em Kiều-trần-như chứng quả Tu-đà-hoàn",
+                "Tôn giả Ma-ha Ca-diếp là vị đầu tiên; 5 anh em Kiều-trần-như chứng quả Tư-đà-hàm",
+                "Công tử Da-xá (Yasa) là vị đầu tiên; 5 anh em Kiều-trần-như chứng quả A-na-hàm"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 15,
+        q: "Câu 14. Tam Bảo được hình thành đầy đủ vào thời điểm nào? Sự kiện ấy có ý nghĩa gì đối với lịch sử Phật giáo?",
+        a: "- <strong>Thời điểm:</strong> Tam Bảo được hình thành đầy đủ tại <strong class='hl'>vườn Lộc Uyển</strong> khi Đức Phật (<strong>Phật Bảo</strong>) thuyết bài pháp đầu tiên <em>Kinh Chuyển Pháp Luân</em> (<strong>Pháp Bảo</strong>) hóa độ cho 5 anh em Kiều-trần-như xuất gia chứng quả (<strong>Tăng Bảo</strong>).<br>- <strong>Ý nghĩa lịch sử:</strong> Đánh dấu <strong class='hl'>sự ra đời chính thức của Đạo Phật và Giáo đoàn Tăng-già trên thế gian</strong>, thiết lập trọn vẹn ba ngôi báu làm nơi nương tựa tâm linh cho trời và người.",
+        kw: "Tại vườn Lộc Uyển khi độ 5 anh em Kiều-trần-như • Ý nghĩa: Đánh dấu sự ra đời chính thức của Đạo Phật và Tăng đoàn trên thế gian",
+        quiz: {
+            options: [
+                "Khi Đức Phật thuyết pháp độ 5 anh em Kiều-trần-như tại vườn Lộc Uyển; đánh dấu sự ra đời chính thức của Đạo Phật và Tăng đoàn trên thế gian",
+                "Khi Thái tử Tất-đạt-đa đản sanh tại vườn Lâm-tỳ-ni; đánh dấu sự hưng thịnh của vương tộc Thích-ca",
+                "Khi hai thương nhân Đề-vị và Ba-lợi dâng bánh mật; đánh dấu sự hình thành hàng cư sĩ",
+                "Khi hội nghị kiết tập kinh điển lần thứ nhất diễn ra; đánh dấu việc hoàn tất kinh điển"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 16,
+        q: "Câu 15. Thanh niên Da-xá (Yasa) đã gặp Đức Phật trong hoàn cảnh nào?",
+        a: "<strong>Da-xá (Yasa)</strong> là công tử con một trưởng giả giàu có ở thành Ba-la-nại, sống trong nhung lụa. Sau một đêm yến tiệc, chàng thức dậy thấy cảnh các ca vũ nữ ngủ say mê mệt với hình tướng bất tịnh chẳng khác nào bãi tha ma, liền <strong class='hl'>khởi tâm nhàm chán cuộc đời giả tạm và bỏ nhà đi trong đêm đến vườn Lộc Uyển</strong>, vừa đi vừa than: <em>“Ôi nguy khốn thay! Ôi khổ não thay!”</em>. Đức Phật nghe thấy liền gọi: <em>“Này Da-xá, nơi đây không nguy khốn, nơi đây không khổ não, hãy đến đây!”</em>, rồi thuyết pháp độ cho chàng đắc quả A-la-hán.",
+        kw: "Tỉnh dậy sau đêm tiệc thấy cảnh bất tịnh như bãi tha ma • Khởi tâm nhàm chán đi đến vườn Lộc Uyển trong đêm và được Phật độ",
+        quiz: {
+            options: [
+                "Sau đêm yến tiệc thấy cảnh các vũ nữ ngủ say bất tịnh như bãi tha ma, chàng nhàm chán bỏ nhà đi trong đêm đến vườn Lộc Uyển và gặp Phật",
+                "Đang đi buôn bán đường xa qua rừng khổ hạnh thì gặp Đức Phật đang ngồi thiền",
+                "Đến thách đấu biện luận với Đức Phật tại kinh thành Vương-xá",
+                "Theo cha mẹ mang lễ vật đến Tịnh xá Kỳ Viên để cầu xin con nối dõi"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 17,
+        q: "Câu 16. Đức Phật đã khuyến khích 60 vị A-la-hán đầu tiên đi hoằng pháp với mục đích gì?",
+        a: "Khi giáo đoàn có đủ 60 vị A-la-hán đầu tiên, Đức Phật khuyến khích các vị chia nhau lên đường du hành hoằng pháp khắp các phương (không đi hai người cùng một hướng) với mục đích:<br><strong class='hl'>“Vì hạnh phúc, vì an lạc cho số đông, vì lòng thương tưởng cho thế gian, vì lợi ích, vì hạnh phúc, vì an lạc cho chư thiên và loài người”</strong>, tuyên thuyết Phạm hạnh toàn thiện, thanh tịnh.",
+        kw: "Vì hạnh phúc, vì an lạc cho số đông • Vì lòng thương tưởng thế gian • Vì lợi ích, an lạc cho chư thiên và loài người",
+        quiz: {
+            options: [
+                "Vì hạnh phúc, vì an lạc cho số đông, vì lòng thương tưởng thế gian, vì lợi ích và an lạc cho chư thiên và loài người",
+                "Để quyên góp vàng bạc xây dựng thật nhiều ngôi chùa lớn tại thành Ba-la-nại",
+                "Để đi tìm các vị vua chúa xin phong tước hiệu quốc sư cho Tăng đoàn",
+                "Để đi tranh luận thắng tất cả các giáo phái ngoại đạo tại Ấn Độ"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 18,
+        q: "Câu 17. Ba anh em Ca-diếp được Đức Phật giáo hóa là những ai? Trước khi xuất gia theo Phật, họ tu theo đạo gì?",
+        a: "Ba anh em Ca-diếp được Đức Phật giáo hóa (cùng 1.000 đệ tử của họ) gồm:<br>1. <strong class='hl'>Ưu-lâu-tần-loa Ca-diếp (Uruvela Kassapa)</strong>.<br>2. <strong class='hl'>Na-đề Ca-diếp (Nadi Kassapa)</strong>.<br>3. <strong class='hl'>Già-da Ca-diếp (Gaya Kassapa)</strong>.<br>Trước khi xuất gia theo Phật, họ là những đạo sĩ ngoại đạo bện tóc <strong class='hl'>tu theo đạo thờ thần Lửa (Bái hỏa giáo)</strong>.",
+        kw: "3 anh em: Ưu-lâu-tần-loa Ca-diếp, Na-đề Ca-diếp, Già-da Ca-diếp • Trước đó tu theo đạo thờ thần Lửa (Bái hỏa giáo)",
+        quiz: {
+            options: [
+                "Ưu-lâu-tần-loa Ca-diếp, Na-đề Ca-diếp và Già-da Ca-diếp; trước đó họ tu theo đạo thờ thần Lửa (Bái hỏa giáo)",
+                "Ma-ha Ca-diếp, thập lực Ca-diếp và Đồng-tử Ca-diếp; trước đó họ tu theo Kỳ-na giáo",
+                "Xá-lợi-phất, Mục-kiền-liên và Phú-lâu-na; trước đó họ tu theo phái Hoài nghi luận",
+                "Kiều-trần-như, Ác-bệ và Bạt-đề; trước đó họ tu theo đạo thờ thần Mặt Trời"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 19,
+        q: "Câu 18. Ai cúng dường ngôi tịnh xá đầu tiên cho Đức Phật? Tịnh xá ấy tên gì?",
+        a: "<strong class='hl'>Vua Tần-bà-sa-la (Bimbisara)</strong> của vương quốc Ma-kiệt-đà (cùng trưởng giả Ca-lan-đà) đã dâng cúng ngôi tịnh xá đầu tiên cho Đức Phật và Tăng đoàn. Ngôi tịnh xá ấy có tên là <strong class='hl'>Tịnh xá Trúc Lâm (Venuvana)</strong>.",
+        kw: "Người cúng: Vua Tần-bà-sa-la • Tên: Tịnh xá Trúc Lâm (Venuvana)",
+        quiz: {
+            options: [
+                "Vua Tần-bà-sa-la cúng dường; tên là Tịnh xá Trúc Lâm (Venuvana)",
+                "Trưởng giả Cấp Cô Độc cúng dường; tên là Tịnh xá Kỳ Viên (Jetavana)",
+                "Bà Tỳ-xá-khư cúng dường; tên là Đông Phương Lộc Mẫu Giảng Đường",
+                "Y sĩ Kỳ-bà (Jivaka) cúng dường; tên là Tịnh xá Xoài Viên"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 20,
+        q: "Câu 19. Hai vị đại đệ tử Xá-lợi-phất và Mục-kiền-liên đã gặp Chánh pháp qua nhân duyên nào?",
+        a: "Tại thành Vương-xá, đạo sĩ <strong>Xá-lợi-phất</strong> gặp Tôn giả <strong class='hl'>Ác-bệ (Assaji / Mã Thắng</strong> — một trong 5 anh em Kiều-trần-như) đang đi khất thực với oai nghi an tịnh, giải thoát tuyệt vời. Khi thưa hỏi về giáo lý của Đạo sư, Tôn giả Ác-bệ đã đọc bài kệ Nhân duyên: <em>“Các pháp do duyên sanh, lại cũng do duyên diệt, Thầy ta Đại Sa-môn, thường thuyết giảng như vậy”</em>. Xá-lợi-phất nghe xong liền đắc quả Tu-đà-hoàn, rồi thuật lại bài kệ cho bạn đồng tu là <strong>Mục-kiền-liên</strong> cùng chứng ngộ và dẫn 200 đệ tử về Tịnh xá Trúc Lâm xuất gia theo Phật.",
+        kw: "Xá-lợi-phất gặp Tôn giả Ác-bệ (Mã Thắng) đi khất thực • Nghe bài kệ Nhân duyên liền đắc pháp nhãn rồi truyền lại cho Mục-kiền-liên",
+        quiz: {
+            options: [
+                "Nhờ Xá-lợi-phất gặp Tôn giả Ác-bệ (Mã Thắng) đi khất thực với oai nghi thanh tịnh và được nghe bài kệ Nhân duyên sinh khởi, rồi thuật lại cho Mục-kiền-liên",
+                "Nhờ vua Tần-bà-sa-la trực tiếp mời hai vị vào hoàng cung nghe Phật thuyết pháp",
+                "Nhờ đọc được kinh sách chép trên lá bối tại thư viện thành Ba-la-nại",
+                "Nhờ Tôn giả A-nan đến tận học đường của hai vị để thuyết giảng Tứ Diệu Đế"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 21,
+        q: "Câu 20. Trưởng giả Cấp Cô Độc là ai? Vì sao ông được xem là một vị đại thí chủ hộ trì Phật pháp?",
+        a: "Trưởng giả Cấp Cô Độc tên thật là <strong class='hl'>Tu-đạt-đa (Sudatta)</strong>, một thương gia giàu có ở thành Xá-vệ (Savatthi); vì ông thường đem tài sản cứu giúp người nghèo khổ, cô quả không nơi nương tựa nên được tôn xưng là <strong>Cấp Cô Độc (Anathapindika)</strong>. Ông được xem là vị đại thí chủ hộ trì Phật pháp bậc nhất vì đã <strong class='hl'>đem vàng trải kín mặt đất vườn cây của Thái tử Kỳ-đà để mua đất xây dựng Tịnh xá Kỳ Viên (Jetavana)</strong> cúng dường Đức Phật và Tăng đoàn (nơi Phật thuyết pháp suốt 25 mùa hạ), đồng thời trọn đời tận tâm hộ trì Tam Bảo.",
+        kw: "Tên thật: Tu-đạt-đa (Sudatta) ở thành Xá-vệ • Trải vàng mua đất xây Tịnh xá Kỳ Viên (Jetavana) cúng dường Phật & Tăng đoàn",
+        quiz: {
+            options: [
+                "Tên thật là Tu-đạt-đa ở thành Xá-vệ, hay giúp người cô quả; ông đã trải vàng mua đất xây Tịnh xá Kỳ Viên cúng dường Phật và trọn đời hộ trì Tam Bảo",
+                "Là quốc vương nước Ma-kiệt-đà; ông đã cúng dường Tịnh xá Trúc Lâm cho Đức Phật",
+                "Là vị lương y nổi tiếng thành Vương-xá; ông chuyên chữa bệnh miễn phí cho chư Tăng",
+                "Là vị thương nhân đầu tiên dâng bánh mật cho Đức Phật ngay dưới cội Bồ-đề"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 22,
+        q: "Câu 21. Hai vị đại đệ tử thượng thủ của Đức Phật là ai? Mỗi vị được tôn xưng là bậc đệ nhất về công hạnh gì?",
+        a: "Hai vị đại đệ tử thượng thủ của Đức Phật là:<br>1. Tôn giả <strong class='hl'>Xá-lợi-phất (Sariputta)</strong>: Được tôn xưng là <strong class='hl'>“Trí tuệ đệ nhất”</strong>.<br>2. Tôn giả <strong class='hl'>Mục-kiền-liên (Moggallana)</strong>: Được tôn xưng là <strong class='hl'>“Thần thông đệ nhất”</strong>.",
+        kw: "Xá-lợi-phất (Trí tuệ đệ nhất) • Mục-kiền-liên (Thần thông đệ nhất)",
+        quiz: {
+            options: [
+                "Tôn giả Xá-lợi-phất (Trí tuệ đệ nhất) và Tôn giả Mục-kiền-liên (Thần thông đệ nhất)",
+                "Tôn giả Đại Ca-diếp (Đầu-đà đệ nhất) và Tôn giả A-nan (Đa văn đệ nhất)",
+                "Tôn giả Phú-lâu-na (Thuyết pháp đệ nhất) và Tôn giả Ưu-ba-li (Trì luật đệ nhất)",
+                "Tôn giả Tu-bồ-đề (Giải không đệ nhất) và Tôn giả A-na-luật (Thiên nhãn đệ nhất)"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 23,
+        q: "Câu 22. Đức Phật trở về thành Ca-tỳ-la-vệ lần đầu sau khi thành đạo, những người nào trong hoàng tộc đã xuất gia theo Phật?",
+        a: "Khi Đức Phật trở về kinh thành Ca-tỳ-la-vệ giáo hóa hoàng tộc, các vương tử dòng Thích-ca đã phát tâm xuất gia theo Phật gồm: Thái tử <strong class='hl'>Nan-đà</strong> (em cùng cha khác mẹ của Phật), <strong class='hl'>La-hầu-la</strong> (con trai Thái tử Tất-đạt-đa), cùng các vương tử <strong class='hl'>A-nan (Ananda), A-na-luật (Anuruddha), Bạt-đề (Bhaddiya), Kim-tỳ-la (Kimbila), Bà-kỳ-đề (Bhagu), Đề-bà-đạt-đa (Devadatta)</strong> (và người thợ cạo hoàng cung là <strong class='hl'>Ưu-ba-li</strong>).",
+        kw: "Nan-đà, La-hầu-la, A-nan, A-na-luật, Bạt-đề, Kim-tỳ-la, Bà-kỳ-đề, Đề-bà-đạt-đa (cùng thợ cạo Ưu-ba-li)",
+        quiz: {
+            options: [
+                "Nan-đà, La-hầu-la, A-nan, A-na-luật, Bạt-đề, Kim-tỳ-la, Bà-kỳ-đề, Đề-bà-đạt-đa (cùng người thợ cạo Ưu-ba-li)",
+                "5 anh em Kiều-trần-như và 3 anh em ông Ca-diếp",
+                "Vua Tần-bà-sa-la, vua Ba-tư-nặc và Thái tử Kỳ-đà",
+                "Xá-lợi-phất, Mục-kiền-liên, Phú-lâu-na và Tu-bồ-đề"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 24,
+        q: "Câu 23. Vị Sa-di đầu tiên trong giáo đoàn là ai? Xuất gia lúc bao nhiêu tuổi?",
+        a: "Vị Sa-di đầu tiên trong giáo đoàn của Đức Phật là <strong class='hl'>La-hầu-la (Rahula)</strong> (con trai của Thái tử Tất-đạt-đa). Khi xuất gia (dưới sự thế độ của Tôn giả Xá-lợi-phất), Ngài mới <strong class='hl'>7 tuổi</strong>. Về sau Ngài chứng quả A-la-hán và được tôn xưng là bậc <em>“Mật hạnh đệ nhất”</em>.",
+        kw: "Sa-di đầu tiên: La-hầu-la (Rahula) • Xuất gia lúc 7 tuổi",
+        quiz: {
+            options: [
+                "La-hầu-la (Rahula), xuất gia lúc 7 tuổi",
+                "A-nan (Ananda), xuất gia lúc 12 tuổi",
+                "Nan-đà (Nanda), xuất gia lúc 10 tuổi",
+                "Kỳ-đà (Jeta), xuất gia lúc 9 tuổi"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 25,
+        q: "Câu 24. Vị Tỳ-kheo-ni đầu tiên trong lịch sử Phật giáo là ai? Bà có mối quan hệ như thế nào với Đức Phật?",
+        a: "Vị Tỳ-kheo-ni đầu tiên trong lịch sử Phật giáo là Di mẫu <strong class='hl'>Kiều-đàm-di (Ma-ha Ba-xà-ba-đề / Mahapajapati Gotami)</strong>. Bà là <strong class='hl'>dì ruột</strong> (em gái ruột của Hoàng hậu Ma-da) và đồng thời là <strong class='hl'>dưỡng mẫu (kế mẫu)</strong> đã trực tiếp bú mớm, hết lòng nuôi dưỡng Thái tử Tất-đạt-đa sau khi Hoàng hậu Ma-da qua đời.",
+        kw: "Tỳ-kheo-ni đầu tiên: Di mẫu Kiều-đàm-di (Ma-ha Ba-xà-ba-đề) • Quan hệ: Dì ruột kiêm Dưỡng mẫu nuôi Thái tử từ nhỏ",
+        quiz: {
+            options: [
+                "Di mẫu Kiều-đàm-di (Ma-ha Ba-xà-ba-đề); bà là dì ruột kiêm dưỡng mẫu đã nuôi dưỡng Thái tử từ nhỏ",
+                "Công chúa Da-du-đà-la; bà là vợ của Thái tử Tất-đạt-đa khi còn ở hoàng cung",
+                "Tín nữ Tu-xà-đề; bà là người dâng bát cháo sữa cho Thái tử bên sông Ni-liên-thiền",
+                "Bà Tỳ-xá-khư (Lộc Mẫu); bà là đại thí chủ tại thành Xá-vệ"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 26,
+        q: "Câu 25. Ni đoàn được thành lập trong hoàn cảnh nào? Tôn giả nào đã thay mặt các vị nữ giới thỉnh cầu Đức Phật cho phép xuất gia?",
+        a: "- <strong>Hoàn cảnh:</strong> Sau khi vua Tịnh Phạn băng hà, Di mẫu Kiều-đàm-di cùng 500 phụ nữ dòng Thích-ca tự cắt tóc, đắp y vàng, đi bộ chân trần sưng tấy từ Ca-tỳ-la-vệ đến Tỳ-xá-ly (Vesali) tha thiết cầu xin xuất gia.<br>- <strong>Người thỉnh cầu:</strong> <strong class='hl'>Tôn giả A-nan (Ananda)</strong> đã thay mặt các vị nữ giới ba lần chí thành thỉnh cầu Đức Phật (nhắc lại ân đức dưỡng dục của Di mẫu và xác nhận nữ giới cũng có khả năng chứng đắc tứ thánh quả). Đức Phật chấp thuận với điều kiện thọ trì <strong class='hl'>Bát Kỉnh Pháp</strong>, từ đó Ni đoàn chính thức được thành lập.",
+        kw: "Kiều-đàm-di cùng 500 nữ vương đi bộ đến Tỳ-xá-ly cầu đạo • Tôn giả A-nan 3 lần thỉnh cầu Phật • Thọ Bát Kỉnh Pháp lập Ni đoàn",
+        quiz: {
+            options: [
+                "Di mẫu Kiều-đàm-di cùng 500 phụ nữ dòng Thích-ca đi bộ chân trần đến Tỳ-xá-ly cầu đạo; Tôn giả A-nan đã 3 lần thay mặt thỉnh cầu Đức Phật",
+                "Hoàng hậu Ma-da xin xuất gia ngay tại vườn Lâm-tỳ-ni; Tôn giả Xá-lợi-phất đã thay mặt thỉnh cầu",
+                "Bà Liên Hoa Sắc cùng 100 thiếu nữ đến thành Vương-xá cầu đạo; Tôn giả Đại Ca-diếp đã thỉnh cầu",
+                "Công chúa Da-du-đà-la xin lập Ni đoàn tại hoàng cung; Vua Tịnh Phạn đã đứng ra thỉnh cầu"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 27,
+        q: "Câu 26. Ai được tôn xưng là “Thuyết pháp đệ nhất”? Ngài có hạnh nguyện gì đặc biệt?",
+        a: "Tôn giả <strong class='hl'>Phú-lâu-na (Punna)</strong> được tôn xưng là bậc <strong class='hl'>“Thuyết pháp đệ nhất”</strong>. Ngài có hạnh nguyện đặc biệt về <strong class='hl'>lòng đại bi, nhẫn nhục vô úy và dấn thân hoằng pháp nơi vùng đất hiểm ác</strong>: Ngài tình nguyện một mình đến xứ Du-lô-na (Sunaparanta) — nơi dân chúng nổi tiếng hung bạo, thô dữ — để truyền đạo, sẵn sàng chịu đựng mọi sự chửi mắng, đánh đập hay sát hại bằng tâm từ mẫn không oán giận, cuối cùng cảm hóa được hàng ngàn người quy y Tam Bảo.",
+        kw: "Tôn giả Phú-lâu-na (Thuyết pháp đệ nhất) • Hạnh nguyện nhẫn nhục đại bi, dấn thân hoằng pháp tại vùng đất hung bạo Du-lô-na",
+        quiz: {
+            options: [
+                "Tôn giả Phú-lâu-na; có hạnh nguyện nhẫn nhục đại bi vô úy, tình nguyện dấn thân đến vùng đất hung bạo Du-lô-na để hoằng pháp độ sanh",
+                "Tôn giả Ca-chiên-diên; có hạnh nguyện chỉ thuyết pháp cho các nhà thông thái Bà-la-môn",
+                "Tôn giả Mục-kiền-liên; có hạnh nguyện dùng thần thông bay đến các cõi trời thuyết pháp",
+                "Tôn giả La-hầu-la; có hạnh nguyện im lặng tu tập mật hạnh không bao giờ thuyết giảng"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 28,
+        q: "Câu 27. Ai là vị thị giả thường xuyên hầu cận Đức Phật? Vị ấy được tôn xưng là bậc đệ nhất về công hạnh gì?",
+        a: "Vị thị giả thường xuyên hầu cận Đức Phật suốt 25 năm cuối đời là Tôn giả <strong class='hl'>A-nan (Ananda)</strong>. Nhờ trí nhớ siêu việt ghi nhớ trọn vẹn các thời pháp của Phật, Ngài được tôn xưng là bậc <strong class='hl'>“Đa văn đệ nhất”</strong> (nghe nhiều nhớ rộng nhất).",
+        kw: "Thị giả: Tôn giả A-nan (Ananda) • Tôn xưng: Đa văn đệ nhất",
+        quiz: {
+            options: [
+                "Tôn giả A-nan (Ananda); được tôn xưng là 'Đa văn đệ nhất'",
+                "Tôn giả La-hầu-la (Rahula); được tôn xưng là 'Mật hạnh đệ nhất'",
+                "Tôn giả Ưu-ba-li (Upali); được tôn xưng là 'Trì luật đệ nhất'",
+                "Tôn giả A-na-luật (Anuruddha); được tôn xưng là 'Thiên nhãn đệ nhất'"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 29,
+        q: "Câu 28. Tôn giả Đại Ca-diếp được Đức Phật tán thán là bậc đệ nhất về hạnh gì? Ngài có vai trò gì sau khi Đức Phật nhập Niết-bàn?",
+        a: "- Tôn giả <strong>Đại Ca-diếp (Ma-ha Ca-diếp)</strong> được Đức Phật tán thán là bậc <strong class='hl'>“Đầu-đà đệ nhất”</strong> (tu hạnh khổ hạnh viễn ly thanh tịnh đệ nhất).<br>- <strong>Vai trò sau khi Phật nhập Niết-bàn:</strong> Ngài là vị Sơ tổ Thiền tông Ấn Độ (được Phật trao Chánh pháp nhãn tạng), giữ vai trò <strong class='hl'>bậc Thượng thủ thống lĩnh Tăng đoàn và chủ trì cuộc Kiết tập kinh điển lần thứ nhất</strong> tại động Thất-diệp để kết tập Kinh tạng và Luật tạng.",
+        kw: "Đầu-đà đệ nhất • Vai trò: Lãnh đạo Tăng đoàn & Chủ trì cuộc Kiết tập kinh điển lần thứ I tại động Thất-diệp",
+        quiz: {
+            options: [
+                "Đầu-đà đệ nhất; sau khi Phật nhập Niết-bàn, Ngài lãnh đạo Tăng đoàn và chủ trì cuộc Kiết tập kinh điển lần thứ nhất",
+                "Trí tuệ đệ nhất; sau khi Phật nhập Niết-bàn, Ngài đi truyền giáo sang đảo quốc Tích Lan",
+                "Thần thông đệ nhất; Ngài nhập Niết-bàn trước Đức Phật tại thành Vương-xá",
+                "Đa văn đệ nhất; Ngài trực tiếp trùng tuyên Kinh tạng tại động Thất-diệp"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 30,
+        q: "Câu 29. Tôn giả Ưu-ba-ly xuất thân từ giai cấp nào? Vì sao Ngài được tôn xưng là bậc Trì luật đệ nhất?",
+        a: "- <strong>Xuất thân:</strong> Tôn giả <strong>Ưu-ba-li (Upali)</strong> xuất thân từ giai cấp <strong class='hl'>Thủ-đà-la (Sudra)</strong> — giai cấp nô lệ/tiện dân thấp nhất trong xã hội Ấn Độ cổ đại (làm nghề thợ cạo trong hoàng cung Ca-tỳ-la-vệ).<br>- <strong>Lý do được tôn xưng “Trì luật đệ nhất”:</strong> Vì từ khi xuất gia Ngài <strong class='hl'>giữ gìn giới luật vô cùng thanh tịnh, thông suốt tường tận từng nhân duyên chế giới và các điều khoản khai – giá – trì – phạm</strong>, được đại hội 500 vị A-la-hán suy cử trùng tuyên <strong>Luật tạng</strong> trong kỳ Kiết tập lần thứ nhất.",
+        kw: "Giai cấp Thủ-đà-la (thợ cạo hoàng cung) • Giữ giới tinh nghiêm, thông suốt mọi điều khoản Luật tạng & trùng tuyên Luật tạng",
+        quiz: {
+            options: [
+                "Xuất thân giai cấp Thủ-đà-la (thợ cạo); vì Ngài giữ giới cực kỳ tinh nghiêm, thông suốt tường tận các điều luật Phật chế và trùng tuyên Luật tạng",
+                "Xuất thân giai cấp Sát-đế-lỵ (vương tử); vì Ngài là người đặt ra các quy tắc hành chính trong hoàng cung",
+                "Xuất thân giai cấp Bà-la-môn (giáo sĩ); vì Ngài thông thuộc bốn bộ kinh Vệ-đà",
+                "Xuất thân giai cấp Vệ-xá (thương nhân); vì Ngài quản lý tài chính của các tịnh xá"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 31,
+        q: "Câu 30. Tôn giả A-na-luật được Đức Phật tán thán là bậc đệ nhất về công hạnh gì? Nhân duyên nào dẫn đến sự chứng đắc ấy?",
+        a: "- Tôn giả <strong>A-na-luật (Anuruddha)</strong> được Đức Phật tán thán là bậc <strong class='hl'>“Thiên nhãn đệ nhất”</strong>.<br>- <strong>Nhân duyên chứng đắc:</strong> Trong một lần nghe Phật thuyết pháp, Ngài ngủ gật và bị Đức Phật quở trách; ăn năn hổ thẹn, Ngài <strong class='hl'>phát nguyện thức trắng suốt 7 ngày đêm không ngủ để tinh tấn tu tập, dẫn đến bị mù cả hai mắt thịt</strong>. Đức Phật thương xót truyền dạy pháp định <strong class='hl'>“Kim Cang Chiếu Minh Tam-muội” (Nhạo Kiến Chiếu Minh)</strong>, nhờ đó Ngài đắc quả A-la-hán và chứng được <strong>Thiên nhãn thông</strong> thấy suốt đại thiên thế giới.",
+        kw: "Thiên nhãn đệ nhất • Do thức trắng 7 ngày đêm tinh tấn đến mù mắt thịt, được Phật dạy định Kim Cang Chiếu Minh mà đắc Thiên nhãn",
+        quiz: {
+            options: [
+                "Thiên nhãn đệ nhất; do bị Phật quở trách việc ngủ gật nên phát nguyện thức trắng tinh tấn đến mù hai mắt thịt, được Phật dạy định Kim Cang Chiếu Minh mà chứng Thiên nhãn",
+                "Thần thông đệ nhất; do tu luyện phép bay lượn từ thời còn làm đạo sĩ ngoại đạo",
+                "Luận nghị đệ nhất; do thường xuyên tranh luận thắng các học giả ngoại đạo",
+                "Mật hạnh đệ nhất; do xuất gia từ lúc mới 7 tuổi dưới sự dạy dỗ của Xá-lợi-phất"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 32,
+        q: "Câu 31. Tôn giả Tu-bồ-đề được tán thán là bậc đệ nhất về phương diện nào? Ngài có vai trò nổi bật trong kinh điển Đại thừa nào?",
+        a: "Tôn giả <strong>Tu-bồ-đề (Subhuti)</strong> được Đức Phật tán thán là bậc <strong class='hl'>“Giải không đệ nhất”</strong> (thấu suốt lý Tánh Không đệ nhất). Trong kinh điển Đại thừa, Ngài là vị đương cơ thưa hỏi chính trong hệ thống <strong class='hl'>Kinh Bát-nhã</strong>, đặc biệt nổi bật nhất là trong bộ <strong class='hl'>Kinh Kim Cang Bát-nhã Ba-la-mật</strong>.",
+        kw: "Giải không đệ nhất • Vị đương cơ thưa hỏi chính trong hệ Kinh Bát-nhã (đặc biệt là Kinh Kim Cang)",
+        quiz: {
+            options: [
+                "Giải không đệ nhất; có vai trò đương cơ thưa hỏi nổi bật trong hệ Kinh Bát-nhã, đặc biệt là Kinh Kim Cang",
+                "Đa văn đệ nhất; có vai trò nổi bật nhất trong Kinh Thủ Lăng Nghiêm",
+                "Trí tuệ đệ nhất; có vai trò nổi bật nhất trong Kinh Pháp Hoa và Kinh A-di-đà",
+                "Trì luật đệ nhất; có vai trò nổi bật nhất trong Kinh Phạm Võng"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 33,
+        q: "Câu 32. Nhân duyên Tôn giả A-nan gặp nạn Ma-đăng-già, Đức Phật đã thuyết kinh gì? Nội dung trọng yếu của kinh là gì?",
+        a: "- Nhân duyên Tôn giả A-nan khi đi khất thực bị tà chú Tiên-đà-la của mẹ con nàng <strong>Ma-đăng-già (Matangi)</strong> mê hoặc suýt phạm giới thể, Đức Phật đã sai Văn-thù Bồ-tát đem thần chú cứu về và tuyên thuyết bộ <strong class='hl'>Kinh Thủ Lăng Nghiêm (Đại Phật Đảnh Thủ Lăng Nghiêm)</strong>.<br>- <strong>Nội dung trọng yếu của kinh:</strong> Chỉ rõ vọng tâm sinh diệt hư dối để hiển bày <strong class='hl'>Chân tâm Thường trụ (Như Lai Tạng Diệu Chân Như Tánh)</strong> (qua <em>“Thất xứ trưng tâm, bát hoàn biện kiến”</em>), đồng thời dạy phương pháp tu tập <strong class='hl'>Nhĩ căn viên thông, nghiêm trì 4 giới trọng (Tứ thanh tịnh minh hối) và trì Chú Lăng Nghiêm</strong> để xa lìa ma sự, thành tựu Đại định giải thoát.",
+        kw: "Thuyết Kinh Thủ Lăng Nghiêm • Nội dung: Phá vọng tâm hiển Chân tâm Thường trụ, dạy Nhĩ căn viên thông & 4 giới trọng thanh tịnh",
+        quiz: {
+            options: [
+                "Đức Phật thuyết Kinh Thủ Lăng Nghiêm; nội dung trọng yếu là phá vọng tâm hiển Chân tâm Thường trụ, dạy tu Nhĩ căn viên thông và giữ nghiêm 4 giới trọng thanh tịnh",
+                "Đức Phật thuyết Kinh Kim Cang; nội dung trọng yếu là phá tướng chấp ngã và bố thí không trụ tướng",
+                "Đức Phật thuyết Kinh Địa Tạng; nội dung trọng yếu là hiếu đạo và nhân quả tội phước nơi địa ngục",
+                "Đức Phật thuyết Kinh Di Giáo; nội dung trọng yếu là lời dặn dò cuối cùng trước khi nhập Niết-bàn"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 34,
+        q: "Câu 33. Vì sao Đức Phật được tôn xưng là bậc “Đại hùng – Đại bi – Đại xả”?",
+        a: "Đức Phật được tôn xưng 3 danh hiệu cao quý này vì:<br>1. <strong class='hl'>Đại hùng (Đại hùng lực):</strong> Do Ngài có năng lực tự mình chiến thắng mọi nội ma (phiền não tham, sân, si) và ngoại chướng (thiên ma Ba-tuần).<br>2. <strong class='hl'>Đại bi (Đại từ bi):</strong> Do Ngài có lòng từ bi vô lượng, muốn cứu khổ ban vui cho tất cả chúng sanh.<br>3. <strong class='hl'>Đại xả (Đại hỷ xả):</strong> Do Ngài hoan hỷ từ bỏ ngôi báu với cung vàng điện ngọc, vợ đẹp, con ngoan và các thứ dục lạc ở đời để xuất gia tầm đạo.",
+        kw: "Đại hùng (thắng nội ma ngoại chướng) • Đại bi (cứu khổ ban vui) • Đại xả (từ bỏ ngôi báu, dục lạc)",
+        quiz: {
+            options: [
+                "Đại hùng vì tự thắng nội ma ngoại chướng; Đại bi vì cứu khổ ban vui cho chúng sanh; Đại xả vì từ bỏ ngôi báu và dục lạc thế gian",
+                "Đại hùng vì giỏi võ nghệ; Đại bi vì hay khóc thương người nghèo; Đại xả vì đem ngân khố hoàng cung phát chẩn",
+                "Đại hùng vì thống lĩnh vạn quân; Đại bi vì tha thứ cho kẻ thù; Đại xả vì nhường ngôi cho em trai",
+                "Đại hùng vì tu khổ hạnh 6 năm; Đại bi vì ăn chay trường; Đại xả vì không nhận sự cúng dường"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 35,
+        q: "Câu 34. Ai cúng dường bữa ăn cuối cùng cho Đức Phật? Người ấy làm nghề gì và dâng cúng món gì?",
+        a: "Người cúng dường bữa ăn cuối cùng cho Đức Phật trước khi Ngài nhập Niết-bàn là ông <strong class='hl'>Thuần-đà (Cunda)</strong> tại thành Ba-bà (Pava). Ông làm nghề <strong class='hl'>thợ rèn (thợ sắt / kim hoàn)</strong> và đã thành kính dâng cúng món <strong class='hl'>nấm hương (Mộc nhĩ / Sukaramaddava)</strong>.",
+        kw: "Ông Thuần-đà (Cunda) • Nghề thợ rèn (thợ sắt) • Món nấm hương (Mộc nhĩ / Sukaramaddava)",
+        quiz: {
+            options: [
+                "Ông Thuần-đà (Cunda), làm nghề thợ rèn, dâng cúng món nấm hương (Mộc nhĩ / Sukaramaddava)",
+                "Nàng Tu-xà-đề (Sujata), làm nghề chăn bò, dâng cúng món cháo sữa",
+                "Hai thương nhân Đề-vị và Ba-lợi, làm nghề buôn bán, dâng cúng bánh mật",
+                "Trưởng giả Cấp Cô Độc, làm nghề thương gia, dâng cúng cơm sen bách hợp"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 36,
+        q: "Câu 35. Vị đệ tử xuất gia cuối cùng của Đức Phật là ai? Bao nhiêu tuổi và thọ giới gì?",
+        a: "Vị đệ tử xuất gia cuối cùng khi Đức Phật còn tại thế là đạo sĩ ngoại đạo <strong class='hl'>Tu-bạt-đà-la (Subhadda)</strong>. Ông đến cầu đạo ngay trong đêm Đức Phật sắp nhập Niết-bàn khi đã <strong class='hl'>120 tuổi</strong>, được Đức Phật trực tiếp truyền thọ <strong class='hl'>Cụ túc giới (Tỳ-kheo)</strong> và chứng đắc quả vị A-la-hán ngay trong đêm ấy.",
+        kw: "Tu-bạt-đà-la (Subhadda) • 120 tuổi • Thọ Cụ túc giới (Tỳ-kheo) và đắc quả A-la-hán",
+        quiz: {
+            options: [
+                "Tu-bạt-đà-la (Subhadda), 120 tuổi, thọ Cụ túc giới (Tỳ-kheo) và chứng quả A-la-hán ngay trong đêm Phật nhập Niết-bàn",
+                "La-hầu-la (Rahula), 7 tuổi, thọ giới Sa-di",
+                "Thuần-đà (Cunda), 80 tuổi, thọ Tam quy Ngũ giới",
+                "Vua A-xà-thế, 50 tuổi, thọ Bát quan trai giới"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 37,
+        q: "Câu 36. Trước khi nhập Niết-bàn, Đức Phật đã căn dặn hàng đệ tử những điều gì?",
+        a: "Trước khi nhập Niết-bàn (qua <em>Kinh Di Giáo</em> và <em>Kinh Đại Bát Niết-bàn</em>), Đức Phật ân cần căn dặn hàng đệ tử các điều cốt tủy:<br>1. <strong class='hl'>Lấy Giới luật (Ba-la-đề-mộc-xoa) làm Thầy</strong>: Giữ gìn giới luật thanh tịnh như chính Đức Phật còn tại thế.<br>2. <strong class='hl'>Tự mình thắp đuốc lên mà đi (Tự quy y, Pháp quy y)</strong>: Hãy nương tựa chính mình và Chánh pháp, sống an trú quán chiếu <strong class='hl'>Tứ Niệm Xứ</strong>.<br>3. Nhận rõ các pháp hữu vi đều vô thường, phải <strong class='hl'>luôn tinh tấn, chớ có phóng dật (buông lung)</strong>.",
+        kw: "Lấy Giới luật làm Thầy • Tự thắp đuốc lên mà đi (y Tứ Niệm Xứ) • Tinh tấn không phóng dật",
+        quiz: {
+            options: [
+                "Lấy Giới luật làm Thầy, tự mình thắp đuốc lên mà đi (nương tựa Chánh pháp, Tứ Niệm Xứ) và luôn tinh tấn không phóng dật",
+                "Bầu Tôn giả A-nan làm Giáo chủ kế vị để lãnh đạo toàn bộ Tăng đoàn",
+                "Xây dựng thật nhiều bảo tháp bằng vàng bạc để thờ xá-lợi và cầu phước báo nhân thiên",
+                "Rời bỏ các tịnh xá vào rừng sâu tu khổ hạnh ép xác như thời kỳ đầu"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 38,
+        q: "Câu 37. Đức Phật nhập Niết-bàn vào ngày, tháng nào? Tại đâu và bao nhiêu tuổi?",
+        a: "Theo 'Phật học Phổ thông' của HT. Thiện Hoa, Đức Phật nhập đại Niết-bàn vào ngày <strong class='hl'>Rằm tháng Hai (15/2 âm lịch)</strong>, tại rừng cây <strong class='hl'>Ta-la song thọ (Sala)</strong> thuộc xứ <strong class='hl'>Câu-thi-na (Kusinagara)</strong>, khi ấy Ngài <strong class='hl'>80 tuổi</strong> (sau 49 năm thuyết pháp độ sanh).",
+        kw: "Rằm tháng Hai (15/2 ÂL) • Rừng Ta-la song thọ, xứ Câu-thi-na • 80 tuổi",
+        quiz: {
+            options: [
+                "Rằm tháng Hai (15/2 âm lịch), tại rừng Ta-la song thọ xứ Câu-thi-na, khi Ngài 80 tuổi",
+                "Rằm tháng Tư (15/4 âm lịch), tại vườn Lâm-tỳ-ni, khi Ngài 80 tuổi",
+                "Mùng 8 tháng Chạp âm lịch, tại núi Linh Thứu thành Vương-xá, khi Ngài 79 tuổi",
+                "Rằm tháng Bảy âm lịch, tại tịnh xá Kỳ Viên thành Xá-vệ, khi Ngài 85 tuổi"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 39,
+        q: "Câu 38. Ai chủ trì cuộc kiết tập kinh điển lần thứ nhất? Tổ chức tại đâu? Ai trùng tuyên Kinh tạng và Luật tạng?",
+        a: "Cuộc kiết tập kinh điển lần thứ nhất (3 tháng sau khi Phật nhập diệt) có 500 vị Đại A-la-hán tham dự:<br>- <strong>Chủ trì:</strong> Tôn giả <strong class='hl'>Ma-ha Ca-diếp (Maha Kassapa)</strong>.<br>- <strong>Địa điểm:</strong> Tại <strong class='hl'>động Thất-diệp (hang Tất-bát-la / Sattapanni)</strong> gần thành <strong class='hl'>Vương-xá (Rajagaha)</strong>, dưới sự hộ trì của vua A-xà-thế.<br>- <strong>Trùng tuyên Kinh tạng:</strong> Tôn giả <strong class='hl'>A-nan (Ananda)</strong>.<br>- <strong>Trùng tuyên Luật tạng:</strong> Tôn giả <strong class='hl'>Ưu-ba-li (Upali)</strong>.",
+        kw: "Chủ trì: Ma-ha Ca-diếp • Tại: Động Thất-diệp (thành Vương-xá) • Kinh: A-nan • Luật: Ưu-ba-li",
+        quiz: {
+            options: [
+                "Chủ trì: Tôn giả Ma-ha Ca-diếp; tại động Thất-diệp (thành Vương-xá); A-nan trùng tuyên Kinh tạng, Ưu-ba-li trùng tuyên Luật tạng",
+                "Chủ trì: Tôn giả Xá-lợi-phất; tại tịnh xá Trúc Lâm; Phú-lâu-na trùng tuyên Kinh tạng, Mục-kiền-liên trùng tuyên Luật tạng",
+                "Chủ trì: Tôn giả A-nan; tại thành Tỳ-xá-ly; Ma-ha Ca-diếp trùng tuyên Kinh tạng, La-hầu-la trùng tuyên Luật tạng",
+                "Chủ trì: Tôn giả Mục-kiền-liên-tử Đế-tu; tại thành Hoa Thị; vua A-dục trùng tuyên Luật tạng"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 40,
+        q: "Câu 39. Cuộc kiết tập kinh điển lần thứ hai diễn ra khoảng bao nhiêu năm sau khi Đức Phật nhập Niết-bàn? Nguyên nhân chính dẫn đến cuộc kiết tập là gì?",
+        a: "- <strong>Thời gian:</strong> Diễn ra khoảng <strong class='hl'>100 năm sau khi Đức Phật nhập Niết-bàn</strong> tại thành <strong>Tỳ-xá-ly (Vesali)</strong> với sự tham dự của 700 vị A-la-hán (do trưởng lão Da-xá / Yasa khởi xướng).<br>- <strong>Nguyên nhân chính:</strong> Do nhóm Tỳ-kheo thuộc bộ tộc Bạt-kỳ (Vajji) ở Tỳ-xá-ly chủ trương <strong class='hl'>“Thập sự phi pháp” (10 điều trái giới luật Phật chế</strong>, nghiêm trọng nhất là việc nhận và cất giữ tiền bạc, vàng ngọc của tín thí), nên chư vị trưởng lão mở đại hội để phán quyết 10 điều ấy là phi pháp và chấn chỉnh sự thanh tịnh của Luật tạng.",
+        kw: "Khoảng 100 năm sau Phật nhập Niết-bàn (tại Tỳ-xá-ly) • Nguyên nhân: Xử lý 'Thập sự phi pháp' (10 điều trái giới luật, nhất là việc nhận giữ tiền bạc) của nhóm Tỳ-kheo Bạt-kỳ",
+        quiz: {
+            options: [
+                "Khoảng 100 năm sau khi Phật nhập Niết-bàn; nguyên nhân do nhóm Tỳ-kheo Bạt-kỳ ở Tỳ-xá-ly chủ trương 'Thập sự phi pháp' (10 điều trái giới luật, nhất là nhận tiền bạc)",
+                "Khoảng 3 tháng sau khi Phật nhập Niết-bàn; nguyên nhân do Tỳ-kheo Bạt-nan-đà vui mừng khi Phật nhập diệt",
+                "Khoảng 300 năm sau khi Phật nhập Niết-bàn; nguyên nhân do ngoại đạo trà trộn vào Tăng đoàn dưới thời vua A-dục",
+                "Khoảng 500 năm sau khi Phật nhập Niết-bàn; nguyên nhân để khắc toàn bộ kinh điển lên lá đồng dưới thời vua Ca-nị-sắc-ca"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 41,
+        q: "Câu 40. Vua A-dục có những đóng góp quan trọng nào trong việc hộ trì và truyền bá Phật giáo ra ngoài Ấn Độ?",
+        a: "Vua <strong class='hl'>A-dục (Asoka</strong>, thế kỷ III TCN) có những đóng góp vô cùng trọng đại đối với lịch sử Phật giáo:<br>1. <strong class='hl'>Lấy Chánh pháp trị quốc và xây dựng 84.000 bảo tháp:</strong> Từ bỏ chiến tranh bạo lực, xây 84.000 ngôi tháp thờ xá-lợi Phật và dựng các trụ đá khắc sắc lệnh đạo đức Phật giáo khắp đế quốc.<br>2. <strong class='hl'>Hộ trì cuộc Kiết tập kinh điển lần thứ ba:</strong> Tổ chức tại kinh đô Hoa Thị (Pataliputra) do Tôn giả <strong>Mục-kiền-liên-tử Đế-tu</strong> chủ trì cùng 1.000 vị A-la-hán để thanh lọc Tăng đoàn và hoàn chỉnh Tam tạng.<br>3. <strong class='hl'>Cử 9 phái đoàn hoằng pháp ra ngoài Ấn Độ:</strong> Đưa Phật giáo truyền lan khắp các vương quốc Á – Âu (đặc biệt là cử thái tử A-la-hán <strong>Ma-hi-đà</strong> và công chúa Tỳ-kheo-ni <strong>Tăng-già-mật-đa</strong> mang nhánh cây Bồ-đề sang <strong>Tích Lan / Sri Lanka</strong>), biến Phật giáo trở thành tôn giáo thế giới.",
+        kw: "Xây 84.000 bảo tháp & trụ đá • Hộ trì Kiết tập lần thứ III tại Hoa Thị • Cử 9 phái đoàn truyền bá Phật giáo ra ngoài Ấn Độ (Tích Lan, Á - Âu)",
+        quiz: {
+            options: [
+                "Dùng Chánh pháp trị nước, xây 84.000 bảo tháp, hộ trì Kiết tập kinh điển lần thứ III và cử 9 phái đoàn truyền bá Phật giáo ra ngoài Ấn Độ (như Tích Lan, Á – Âu)",
+                "Là vị vua đầu tiên cúng dường Tịnh xá Trúc Lâm cho Đức Phật khi Ngài còn tại thế",
+                "Là người trực tiếp chủ trì cuộc Kiết tập kinh điển lần thứ nhất tại động Thất-diệp",
+                "Là vị vua đã dịch toàn bộ kinh điển tiếng Phạn sang chữ Hán vào thế kỷ thứ I"
+            ],
+            correct: 0
+        }
+    }
+];
+
+// Quản lý trạng thái thuộc bài (Lưu vào LocalStorage)
+let masteredSet = new Set(JSON.parse(localStorage.getItem('sadi_lichsu40_mastered') || '[]'));
+let hideAllAnswers = false;
+let showOnlyUnmastered = false;
+
+function saveMastery() {
+    localStorage.setItem('sadi_lichsu40_mastered', JSON.stringify([...masteredSet]));
+    updateMasteryBar();
+}
+
+function updateMasteryBar() {
+    const count = masteredSet.size;
+    document.getElementById('mastery-count').innerText = `${count} / ${QA_DATA.length}`;
+    document.getElementById('mastery-fill').style.width = `${(count / QA_DATA.length) * 100}%`;
+}
+
+function resetMastery() {
+    if (confirm("Bạn muốn đặt lại tiến độ đánh dấu đã thuộc về 0?")) {
+        masteredSet.clear();
+        saveMastery();
+        renderStudyList();
+        updateFlashcardUI();
+    }
+}
+
+// Chuyển đổi Tab
+function switchMode(mode, btn) {
+    document.querySelectorAll('.mode-section').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('mode-' + mode).classList.add('active');
+    btn.classList.add('active');
+    if (mode === 'flashcard') updateFlashcardUI();
+}
+
+// CHẾ ĐỘ 1: HIỂN THỊ ĐỀ CƯƠNG
+function renderStudyList() {
+    const query = document.getElementById('search-box').value.toLowerCase().trim();
+    const container = document.getElementById('study-container');
+    container.innerHTML = '';
+
+    QA_DATA.forEach(item => {
+        const isMastered = masteredSet.has(item.id);
+        if (showOnlyUnmastered && isMastered) return;
+
+        const matchText = (item.q + ' ' + item.a + ' ' + item.kw).toLowerCase();
+        if (query && !matchText.includes(query)) return;
+
+        const card = document.createElement('div');
+        card.className = `qa-card ${isMastered ? 'mastered' : ''}`;
+        card.innerHTML = `
+            <div class="qa-header">
+                <div class="qa-question">${item.q}</div>
+                <button class="master-toggle" onclick="toggleMastery(${item.id})">
+                    ${isMastered ? '✅ Đã thuộc' : '⭕ Đánh dấu thuộc'}
+                </button>
+            </div>
+            <div class="qa-answer ${hideAllAnswers ? 'hidden-ans' : ''}" onclick="this.classList.toggle('hidden-ans')" title="Nhấp để ẩn/hiện đáp án câu này">
+                <div>${item.a}</div>
+                <div class="keyword-box">🔑 <strong>Từ khóa nhớ nhanh:</strong> ${item.kw}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function toggleMastery(id) {
+    if (masteredSet.has(id)) masteredSet.delete(id);
+    else masteredSet.add(id);
+    saveMastery();
+    renderStudyList();
+}
+
+function toggleAllAnswers() {
+    hideAllAnswers = !hideAllAnswers;
+    const btn = document.getElementById('btn-toggle-ans');
+    btn.innerText = hideAllAnswers ? '👁️ Hiện tất cả đáp án' : '🙈 Ẩn đáp án để tự dò bài';
+    renderStudyList();
+}
+
+function filterUnmastered() {
+    showOnlyUnmastered = !showOnlyUnmastered;
+    const btn = document.getElementById('btn-filter-unmastered');
+    btn.style.borderColor = showOnlyUnmastered ? 'var(--gold)' : '';
+    btn.innerText = showOnlyUnmastered ? `📋 Hiện tất cả ${QA_DATA.length} câu` : '📌 Chỉ hiện câu chưa thuộc';
+    renderStudyList();
+}
+
+// CHẾ ĐỘ 2: FLASHCARD 3D
+let fcIndex = 0;
+
+function updateFlashcardUI() {
+    const scene = document.getElementById('fc-scene');
+    scene.classList.remove('is-flipped');
+    const item = QA_DATA[fcIndex];
+    setTimeout(() => {
+        document.getElementById('fc-counter').innerText = `CÂU ${fcIndex + 1} / ${QA_DATA.length} (Nhấp vào thẻ hoặc phím Space để lật)`;
+        document.getElementById('fc-question').innerText = item.q;
+        document.getElementById('fc-hint').innerHTML = `💡 Gợi ý từ khóa: <strong>${item.kw}</strong>`;
+        document.getElementById('fc-answer').innerHTML = item.a;
+        const mBtn = document.getElementById('fc-master-btn');
+        if (masteredSet.has(item.id)) {
+            mBtn.innerText = '✅ Đã thuộc câu này';
+            mBtn.style.borderColor = 'var(--emerald)';
+            mBtn.style.color = 'var(--emerald)';
+        } else {
+            mBtn.innerText = '⭕ Đánh dấu Đã thuộc';
+            mBtn.style.borderColor = '';
+            mBtn.style.color = '';
+        }
+    }, 150);
+}
+
+function flipCard() {
+    document.getElementById('fc-scene').classList.toggle('is-flipped');
+}
+
+function nextCard() {
+    fcIndex = (fcIndex + 1) % QA_DATA.length;
+    updateFlashcardUI();
+}
+
+function prevCard() {
+    fcIndex = (fcIndex - 1 + QA_DATA.length) % QA_DATA.length;
+    updateFlashcardUI();
+}
+
+function randomCard() {
+    fcIndex = Math.floor(Math.random() * QA_DATA.length);
+    updateFlashcardUI();
+}
+
+function toggleCurrentCardMastery() {
+    const id = QA_DATA[fcIndex].id;
+    toggleMastery(id);
+    updateFlashcardUI();
+}
+
+// CHẾ ĐỘ 3: TRÒ CHƠI ĐẤU TRƯỜNG TRÍ TUỆ
+let quizOrder = [];
+let quizCursor = 0;
+let score = 0;
+let streak = 0;
+let bestScore = parseInt(localStorage.getItem('sadi_lichsu40_best_score') || '0', 10);
+
+function shuffleArray(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+function startNewGame() {
+    quizOrder = shuffleArray(QA_DATA);
+    quizCursor = 0;
+    score = 0;
+    streak = 0;
+    document.getElementById('game-best').innerText = bestScore;
+    loadQuizQuestion();
+}
+
+function loadQuizQuestion() {
+    if (quizCursor >= quizOrder.length) {
+        document.getElementById('quiz-question').innerHTML = `🎉 CHÚC MỪNG BẠN ĐÃ HOÀN THÀNH ${quizOrder.length} CÂU THỬ THÁCH LỊCH SỬ!<br><span style="color:var(--gold);font-size:1.3rem;">Tổng điểm: ${score} điểm</span>`;
+        document.getElementById('quiz-options').innerHTML = '';
+        document.getElementById('quiz-feedback').style.display = 'none';
+        document.getElementById('btn-next-quiz').style.display = 'none';
+        return;
+    }
+
+    const currentItem = quizOrder[quizCursor];
+    document.getElementById('game-q-num').innerText = `${quizCursor + 1} / ${quizOrder.length}`;
+    document.getElementById('game-score').innerText = score;
+    document.getElementById('game-streak').innerText = `🔥 ${streak}`;
+    document.getElementById('quiz-question').innerText = currentItem.q;
+    document.getElementById('quiz-feedback').style.display = 'none';
+    document.getElementById('btn-next-quiz').style.display = 'none';
+
+    const indexedOptions = currentItem.quiz.options.map((text, idx) => ({
+        text,
+        isCorrect: idx === currentItem.quiz.correct
+    }));
+    const shuffledOpts = shuffleArray(indexedOptions);
+
+    const optContainer = document.getElementById('quiz-options');
+    optContainer.innerHTML = '';
+    const labels = ['A', 'B', 'C', 'D'];
+
+    shuffledOpts.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `<strong>${labels[i]}.</strong> ${opt.text}`;
+        btn.onclick = () => selectAnswer(btn, opt.isCorrect, currentItem);
+        optContainer.appendChild(btn);
+    });
+}
+
+function selectAnswer(selectedBtn, isCorrect, item) {
+    const allBtns = document.querySelectorAll('.opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+
+    const fb = document.getElementById('quiz-feedback');
+    fb.style.display = 'block';
+
+    if (isCorrect) {
+        selectedBtn.classList.add('correct');
+        streak++;
+        const gained = 10 + (streak > 1 ? streak * 2 : 0);
+        score += gained;
+        if (score > bestScore) {
+            bestScore = score;
+            localStorage.setItem('sadi_lichsu40_best_score', bestScore);
+            document.getElementById('game-best').innerText = bestScore;
+        }
+        masteredSet.add(item.id);
+        saveMastery();
+        renderStudyList();
+        fb.innerHTML = `<strong style="color:var(--emerald);">✅ Chính xác! (+${gained} điểm)</strong><br>${item.a}`;
+    } else {
+        selectedBtn.classList.add('wrong');
+        streak = 0;
+        allBtns.forEach(b => {
+            if (b.innerText.includes(item.quiz.options[item.quiz.correct])) {
+                b.classList.add('correct');
+            }
+        });
+        fb.innerHTML = `<strong style="color:var(--crimson);">❌ Chưa chính xác! Đáp án đầy đủ:</strong><br>${item.a}`;
+    }
+
+    document.getElementById('game-score').innerText = score;
+    document.getElementById('game-streak').innerText = `🔥 ${streak}`;
+    document.getElementById('btn-next-quiz').style.display = 'inline-block';
+}
+
+function nextQuizQuestion() {
+    quizCursor++;
+    loadQuizQuestion();
+}
+
+// Phím tắt cho Flashcard
+document.addEventListener('keydown', (e) => {
+    const fcActive = document.getElementById('mode-flashcard').classList.contains('active');
+    if (!fcActive) return;
+    if (e.code === 'Space') { e.preventDefault(); flipCard(); }
+    if (e.code === 'ArrowRight') nextCard();
+    if (e.code === 'ArrowLeft') prevCard();
+});
+
+// HIỆU ỨNG BACKGROUND VŨ TRỤ SAO CHUYỂN ĐỘNG (CANVAS)
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function initStars() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({ length: 180 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.6 + 0.3,
+        speed: Math.random() * 0.35 + 0.08
+    }));
+}
+
+function animateStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+        s.y -= s.speed;
+        if (s.y < 0) { s.y = canvas.height; s.x = Math.random() * canvas.width; }
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + Math.abs(Math.sin(Date.now() * 0.001 + s.x)) * 0.6})`;
+        ctx.fill();
+    });
+    requestAnimationFrame(animateStars);
+}
+
+window.addEventListener('resize', initStars);
+
+// Khởi chạy ứng dụng
+window.onload = () => {
+    initStars();
+    animateStars();
+    updateMasteryBar();
+    renderStudyList();
+    updateFlashcardUI();
+    startNewGame();
+};
+</script>
+</body>
+</html>

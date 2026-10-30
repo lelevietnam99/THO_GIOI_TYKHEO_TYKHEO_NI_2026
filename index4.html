@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Chế độ No-Cache đảm bảo luôn tải phiên bản mới nhất trên GitHub Pages -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>IV. Hiến Chương Giáo Hội & Quy Chế Ban Tăng Sự Trung Ương (10 Câu Trọng Tâm)</title>
+    <style>
+        :root {
+            --gold: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.35);
+            --cyan: #00f2fe;
+            --emerald: #00e676;
+            --crimson: #ff5252;
+            --card-bg: rgba(15, 23, 42, 0.82);
+            --border-glass: rgba(255, 255, 255, 0.14);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #050814;
+            color: #e2e8f0;
+            line-height: 1.65;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas Vũ Trụ Sao Chuyển Động */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+        }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 25px 18px 60px;
+        }
+
+        header {
+            text-align: center;
+            padding: 28px 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-glow);
+            margin-bottom: 24px;
+        }
+
+        header h1 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1rem;
+        }
+
+        /* Thanh Tiến Độ Thuộc Bài */
+        .mastery-bar-wrap {
+            margin-top: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .progress-track {
+            flex: 1;
+            min-width: 200px;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--emerald));
+            transition: width 0.4s ease;
+        }
+
+        /* Điều hướng Chế độ (Tabs) */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(30, 41, 59, 0.8);
+            color: #cbd5e1;
+            border: 1px solid var(--border-glass);
+            padding: 12px 22px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            border-color: var(--gold);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(0, 242, 254, 0.18));
+            border-color: var(--gold);
+            color: var(--gold);
+            box-shadow: 0 0 18px var(--gold-glow);
+        }
+
+        .mode-section { display: none; }
+        .mode-section.active { display: block; animation: fadeIn 0.35s ease; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Công cụ tìm kiếm và lọc trong Chế độ Đề Cương */
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 220px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            font-size: 0.98rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: var(--gold);
+        }
+
+        /* Danh sách thẻ Câu Hỏi */
+        .qa-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .qa-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            border-left: 4px solid var(--gold);
+            border-radius: 14px;
+            padding: 18px 20px;
+            transition: all 0.25s ease;
+        }
+
+        .qa-card.mastered {
+            border-left-color: var(--emerald);
+            background: rgba(16, 42, 45, 0.75);
+        }
+
+        .qa-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .qa-question {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .master-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #cbd5e1;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .qa-card.mastered .master-toggle {
+            background: rgba(0, 230, 118, 0.2);
+            border-color: var(--emerald);
+            color: var(--emerald);
+        }
+
+        .qa-answer {
+            color: #f1f5f9;
+            font-size: 1rem;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.12);
+        }
+
+        .qa-answer.hidden-ans {
+            filter: blur(6px);
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .qa-answer.hidden-ans:hover {
+            filter: blur(3px);
+        }
+
+        .keyword-box {
+            margin-top: 10px;
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--cyan);
+        }
+
+        strong.hl {
+            color: #00ffcc;
+            font-weight: 700;
+        }
+
+        .law-box {
+            background: rgba(255, 215, 0, 0.07);
+            border-left: 3px solid var(--gold);
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        /* CHẾ ĐỘ FLASHCARD 3D */
+        .flashcard-wrapper {
+            max-width: 720px;
+            margin: 10px auto;
+            text-align: center;
+        }
+
+        .flashcard-scene {
+            width: 100%;
+            height: 410px;
+            perspective: 1200px;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard-scene.is-flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, rgba(20, 30, 55, 0.94), rgba(10, 15, 30, 0.96));
+            border: 2px solid var(--gold);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+            border-color: var(--cyan);
+        }
+
+        .fc-badge {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            margin-bottom: 14px;
+        }
+
+        .fc-Controls {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* CHẾ ĐỘ TRÒ CHƠI ĐẤU TRƯỜNG TRÍ TUỆ */
+        .game-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid var(--border-glass);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.45);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .quiz-question-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 18px;
+            border-left: 4px solid var(--cyan);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .opt-btn {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #e2e8f0;
+            padding: 14px 18px;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--gold);
+            transform: translateX(4px);
+        }
+
+        .opt-btn.correct {
+            background: rgba(0, 230, 118, 0.25) !important;
+            border-color: var(--emerald) !important;
+            color: #fff !important;
+            font-weight: 700;
+        }
+
+        .opt-btn.wrong {
+            background: rgba(255, 82, 82, 0.25) !important;
+            border-color: var(--crimson) !important;
+            color: #ffb4b4 !important;
+        }
+
+        .feedback-box {
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(0, 242, 254, 0.1);
+            border-left: 4px solid var(--cyan);
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        /* Cấu hình In A4 Ngang (@media print) */
+        @media print {
+            @page { size: A4 landscape; margin: 12mm; }
+            body { background: #fff !important; color: #000 !important; }
+            #starfield, .nav-tabs, .toolbar, .master-toggle, .mastery-bar-wrap { display: none !important; }
+            .container { max-width: 100%; padding: 0; margin: 0; }
+            header { box-shadow: none; border: 1px solid #000; background: #fff; color: #000; padding: 10px; margin-bottom: 15px; }
+            header h1 { color: #000; text-shadow: none; font-size: 1.35rem; }
+            .mode-section { display: none !important; }
+            #mode-study { display: block !important; }
+            .qa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+            .qa-card { background: #fff !important; border: 1px solid #444 !important; page-break-inside: avoid; padding: 10px; }
+            .qa-question { color: #000 !important; font-size: 0.95rem; }
+            .qa-answer { color: #111 !important; filter: none !important; font-size: 0.9rem; }
+            strong.hl, .keyword-box, .law-box { color: #000 !important; border-color: #666 !important; background: #f5f5f5 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="container">
+    <header>
+        <h1>IV. HIẾN CHƯƠNG GIÁO HỘI – QUY CHẾ BAN TĂNG SỰ TRUNG ƯƠNG</h1>
+        <p>Đề cương Ôn tập Khảo hạch Giới tử (Bộ 10 Câu Đầy Đủ) | Hệ thống Ôn luyện & Trò chơi Trí tuệ</p>
+        
+        <div class="mastery-bar-wrap">
+            <span>🎯 Tiến độ thuộc bài: <strong id="mastery-count" style="color: var(--gold);">0 / 10</strong> câu</span>
+            <div class="progress-track">
+                <div class="progress-fill" id="mastery-fill"></div>
+            </div>
+            <button class="action-btn" onclick="resetMastery()" style="padding: 5px 12px; font-size: 0.82rem;">Đặt lại tiến độ</button>
+        </div>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchMode('study', this)">📖 Đề Cương Chi Tiết (10 Câu)</button>
+        <button class="tab-btn" onclick="switchMode('flashcard', this)">🃏 Thẻ Nhớ Flashcard 3D</button>
+        <button class="tab-btn" onclick="switchMode('game', this)">🎮 Game Đấu Trường Trí Tuệ</button>
+    </div>
+
+    <!-- CHẾ ĐỘ 1: ĐỀ CƯƠNG CHI TIẾT -->
+    <section id="mode-study" class="mode-section active">
+        <div class="toolbar">
+            <input type="text" id="search-box" class="search-input" placeholder="🔍 Tìm theo số câu, từ khóa (1981, Quán Sứ, Pháp chủ, Điều 43, lần thứ VII, 14 chương 87 điều...)" oninput="renderStudyList()">
+            <button class="action-btn" id="btn-toggle-ans" onclick="toggleAllAnswers()">🙈 Ẩn đáp án để tự dò bài</button>
+            <button class="action-btn" onclick="filterUnmastered()" id="btn-filter-unmastered">📌 Chỉ hiện câu chưa thuộc</button>
+            <button class="action-btn" onclick="window.print()">🖨️ In A4 Ngang</button>
+        </div>
+        <div class="qa-grid" id="study-container"></div>
+    </section>
+
+    <!-- CHẾ ĐỘ 2: FLASHCARD 3D -->
+    <section id="mode-flashcard" class="mode-section">
+        <div class="flashcard-wrapper">
+            <div class="flashcard-scene" id="fc-scene" onclick="flipCard()">
+                <div class="flashcard-inner">
+                    <div class="flashcard-face flashcard-front">
+                        <div class="fc-badge" id="fc-counter">CÂU 1 / 10 (Nhấp vào thẻ hoặc nhấn phím Space để lật)</div>
+                        <h3 id="fc-question" style="color: var(--gold); font-size: 1.32rem; margin-bottom: 18px;"></h3>
+                        <div class="keyword-box" id="fc-hint"></div>
+                    </div>
+                    <div class="flashcard-face flashcard-back">
+                        <div class="fc-badge" style="color: var(--cyan);">ĐÁP ÁN CHI TIẾT</div>
+                        <div id="fc-answer" style="font-size: 1rem; text-align: left; max-width: 96%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="fc-Controls">
+                <button class="action-btn" onclick="prevCard()">◀ Câu trước</button>
+                <button class="action-btn" onclick="flipCard()" style="border-color: var(--gold); color: var(--gold);">🔄 Lật thẻ</button>
+                <button class="action-btn" onclick="toggleCurrentCardMastery()" id="fc-master-btn">✅ Đánh dấu Đã thuộc</button>
+                <button class="action-btn" onclick="randomCard()">🎲 Ngẫu nhiên</button>
+                <button class="action-btn" onclick="nextCard()">Câu tiếp ▶</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHẾ ĐỘ 3: TRÒ CHƠI THỬ THÁCH -->
+    <section id="mode-game" class="mode-section">
+        <div class="game-panel">
+            <div class="game-stats">
+                <div class="stat-box">
+                    <div>Câu hỏi</div>
+                    <div class="stat-val" id="game-q-num">1 / 10</div>
+                </div>
+                <div class="stat-box">
+                    <div>Điểm số</div>
+                    <div class="stat-val" id="game-score" style="color: var(--emerald);">0</div>
+                </div>
+                <div class="stat-box">
+                    <div>Chuỗi đúng (Streak)</div>
+                    <div class="stat-val" id="game-streak" style="color: var(--cyan);">🔥 0</div>
+                </div>
+                <div class="stat-box">
+                    <div>Kỷ lục</div>
+                    <div class="stat-val" id="game-best">0</div>
+                </div>
+            </div>
+
+            <div id="game-play-area">
+                <div class="quiz-question-box" id="quiz-question"></div>
+                <div class="options-grid" id="quiz-options"></div>
+                <div class="feedback-box" id="quiz-feedback"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button class="action-btn" onclick="startNewGame()">🔄 Chơi lại từ đầu (Xáo trộn câu)</button>
+                    <button class="action-btn" id="btn-next-quiz" onclick="nextQuizQuestion()" style="display: none; background: rgba(0, 230, 118, 0.25); border-color: var(--emerald);">Câu tiếp theo ▶</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+const QA_DATA = [
+    {
+        id: 1,
+        q: "Câu 1. Giáo hội Phật giáo Việt Nam được thành lập vào ngày, tháng, năm nào? Tại đâu?",
+        a: "Giáo hội Phật giáo Việt Nam (GHPGVN) được chính thức thành lập vào ngày <strong class='hl'>07 tháng 11 năm 1981</strong> (nhằm ngày 11 tháng 10 năm Tân Dậu, tại Hội nghị Đại biểu thống nhất Phật giáo Việt Nam diễn ra từ ngày 04 đến 07/11/1981), tại <strong class='hl'>Chùa Quán Sứ (số 73 phố Quán Sứ, quận Hoàn Kiếm, Thủ đô Hà Nội)</strong> trên cơ sở tự nguyện thống nhất 9 tổ chức, hệ phái Phật giáo trong cả nước.",
+        kw: "Ngày 07/11/1981 (Hội nghị 04–07/11/1981) • Tại Chùa Quán Sứ, Thủ đô Hà Nội • Thống nhất 9 tổ chức, hệ phái",
+        quiz: {
+            options: [
+                "Ngày 07 tháng 11 năm 1981 tại Chùa Quán Sứ, Thủ đô Hà Nội",
+                "Ngày 15 tháng 05 năm 1975 tại Tổ đình Ấn Quang, TP. Hồ Chí Minh",
+                "Ngày 29 tháng 11 năm 1981 tại Thiền viện Quảng Đức, TP. Hồ Chí Minh",
+                "Ngày 04 tháng 01 năm 1964 tại Chùa Xá Lợi, Sài Gòn"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 2,
+        q: "Câu 2. Đức Pháp chủ đầu tiên của Giáo hội Phật giáo Việt Nam là vị nào?",
+        a: "Đức Pháp chủ đầu tiên (Đệ nhất Pháp chủ Hội đồng Chứng minh) của Giáo hội Phật giáo Việt Nam là Đại lão Hòa thượng <strong class='hl'>Thích Đức Nhuận</strong> (1897–1993, thế danh Phạm Đức Hạp). Ngài được suy tôn ngôi vị Pháp chủ tại Đại hội lần thứ I (tháng 11/1981) và tại vị cho đến ngày viên tịch (23/12/1993).",
+        kw: "Đệ nhất Pháp chủ HĐCM: Đại lão Hòa thượng Thích Đức Nhuận (1897–1993)",
+        quiz: {
+            options: [
+                "Đại lão Hòa thượng Thích Đức Nhuận",
+                "Đại lão Hòa thượng Thích Trí Thủ",
+                "Đại lão Hòa thượng Thích Tâm Tịch",
+                "Đại lão Hòa thượng Thích Phổ Tuệ"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 3,
+        q: "Câu 3. Vị Chủ tịch Hội đồng Trị sự đầu tiên của Giáo hội Phật giáo Việt Nam là ai?",
+        a: "Vị Chủ tịch Hội đồng Trị sự đầu tiên của Giáo hội Phật giáo Việt Nam là Đại lão Hòa thượng <strong class='hl'>Thích Trí Thủ</strong> (1909–1984, thế danh Nguyễn Văn Kính, nguyên Trưởng ban Vận động Thống nhất Phật giáo Việt Nam).",
+        kw: "Chủ tịch HĐTS đầu tiên: Đại lão Hòa thượng Thích Trí Thủ (1909–1984)",
+        quiz: {
+            options: [
+                "Đại lão Hòa thượng Thích Trí Thủ",
+                "Đại lão Hòa thượng Thích Trí Tịnh",
+                "Đại lão Hòa thượng Thích Đức Nhuận",
+                "Đại lão Hòa thượng Thích Thế Long"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 4,
+        q: "Câu 4. Trung ương Giáo hội Phật giáo Việt Nam có mấy văn phòng? Đặt tại đâu?",
+        a: "Theo Hiến chương GHPGVN, Trung ương Giáo hội Phật giáo Việt Nam có <strong class='hl'>02 Văn phòng</strong>:<br>1. <strong class='hl'>Văn phòng 1 (Trụ sở Trung ương GHPGVN):</strong> Đặt tại <strong class='hl'>Chùa Quán Sứ</strong> (số 73 phố Quán Sứ, phường Trần Hưng Đạo, quận Hoàn Kiếm, <strong class='hl'>Thủ đô Hà Nội</strong>).<br>2. <strong class='hl'>Văn phòng 2 (Văn phòng Thường trực Trung ương GHPGVN phía Nam):</strong> Đặt tại <strong class='hl'>Thiền viện Quảng Đức</strong> (số 294 đường Nam Kỳ Khởi Nghĩa, phường Võ Thị Sáu, Quận 3, <strong class='hl'>Thành phố Hồ Chí Minh</strong>).",
+        kw: "02 Văn phòng: Văn phòng 1 tại Chùa Quán Sứ (Hà Nội) • Văn phòng 2 tại Thiền viện Quảng Đức (TP. Hồ Chí Minh)",
+        quiz: {
+            options: [
+                "Có 02 văn phòng: Văn phòng 1 tại Chùa Quán Sứ (Hà Nội) và Văn phòng 2 tại Thiền viện Quảng Đức (TP. Hồ Chí Minh)",
+                "Có 01 văn phòng duy nhất đặt tại Chùa Quán Sứ (Thủ đô Hà Nội)",
+                "Có 03 văn phòng đặt tại Hà Nội, Huế (Chùa Từ Đàm) và TP. Hồ Chí Minh (Việt Nam Quốc Tự)",
+                "Có 02 văn phòng đặt tại Chùa Trấn Quốc (Hà Nội) và Chùa Vĩnh Nghiêm (TP. Hồ Chí Minh)"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 5,
+        q: "Câu 5. Điều 43, Chương IX, Quy chế Ban Tăng sự Trung ương GHPGVN nhiệm kỳ IX (2022–2027) quy định những nội dung gì?",
+        a: "<div class='law-box'><strong>Điều 43, Chương IX (Giới đàn và Thọ giới), Quy chế Ban Tăng sự Trung ương GHPGVN nhiệm kỳ IX (2022–2027)</strong> quy định về <strong class='hl'>Điều kiện thọ giới tại Đại giới đàn</strong> (đối với Giới tử Tỳ-kheo, Tỳ-kheo-ni và Sa-di, Sa-di-ni, Thức-xoa-ma-na):</div>1. <strong class='hl'>Về tư cách và thời gian tu học:</strong><br>- <em>Thọ Tỳ-kheo, Tỳ-kheo-ni:</em> Đã thọ giới Sa-di ít nhất <strong class='hl'>02 năm</strong> (với Tăng), hoặc thọ Sa-di-ni <strong class='hl'>02 năm</strong> và học giới Thức-xoa-ma-na <strong class='hl'>02 năm</strong> (với Ni).<br>- <em>Thọ Sa-di, Sa-di-ni:</em> Đã thế phát xuất gia tại tự viện hợp pháp và có <strong>Giấy chứng nhận xuất gia</strong> do Ban Trị sự cấp tỉnh cấp (tập sự từ 01–02 năm).<br>2. <strong class='hl'>Về độ tuổi và trình độ học vấn:</strong><br>- <em>Thọ Tỳ-kheo, Tỳ-kheo-ni:</em> Tuổi đời từ đủ <strong class='hl'>20 tuổi đến 60 tuổi</strong>; có bằng tốt nghiệp <strong class='hl'>Trung học phổ thông (lớp 12)</strong> hoặc tương đương và đã tốt nghiệp <strong class='hl'>Trung cấp Phật học</strong> trở lên.<br>- <em>Thọ Sa-di, Sa-di-ni:</em> Tuổi đời từ đủ <strong class='hl'>15 tuổi đến 60 tuổi</strong>; tốt nghiệp <strong class='hl'>Trung học cơ sở (lớp 9)</strong> trở lên.<br>3. <strong class='hl'>Về đạo hạnh, pháp luật và căn thân:</strong> Đạo hạnh tốt, không vi phạm pháp luật Nhà nước; thân thể khỏe mạnh, sáu căn đầy đủ, không mắc bệnh truyền nhiễm hay tâm thần, không phạm các già nạn (13 nạn, 16 già) theo Luật Phật.<br>4. <strong class='hl'>Về hồ sơ và khảo hạch:</strong> Được Bổn sư/Y chỉ sư bảo lãnh hồ sơ hợp lệ và <strong class='hl'>vượt qua kỳ thi khảo hạch Giới tử</strong> tại Đại giới đàn.",
+        kw: "Quy định Điều kiện thọ giới: Tỳ-kheo (20–60t, đã thọ Sa-di/Thức-xoa đủ 2 năm, tốt nghiệp THPT & Trung cấp Phật học) • Sa-di (15–60t, có Giấy chứng nhận xuất gia, tốt nghiệp THCS) • Sáu căn đầy đủ, không phạm già nạn, đạt khảo hạch",
+        quiz: {
+            options: [
+                "Quy định các tiêu chuẩn và điều kiện thọ giới tại Đại giới đàn (về thời gian tu học, độ tuổi, trình độ văn hóa và Phật học, đạo hạnh, sáu căn đầy đủ không phạm già nạn và đạt kỳ khảo hạch Giới tử)",
+                "Quy định về thủ tục bổ nhiệm Trụ trì và thành lập Ban Quản trị cơ sở tự viện",
+                "Quy định về tiêu chuẩn tấn phong Giáo phẩm Hòa thượng, Thượng tọa, Ni trưởng, Ni sư",
+                "Quy định về việc quản lý tài chính và con dấu của Ban Trị sự cấp huyện"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 6,
+        q: "Câu 6. Hiến chương GHPGVN sửa đổi lần thứ VII được thông qua ngày, tháng, năm nào? Gồm bao nhiêu chương và điều?",
+        a: "Hiến chương Giáo hội Phật giáo Việt Nam sửa đổi lần thứ VII được Đại hội Đại biểu Phật giáo toàn quốc lần thứ IX thông qua vào ngày <strong class='hl'>29 tháng 11 năm 2022</strong> tại Thủ đô Hà Nội.<br>Bản Hiến chương sửa đổi lần thứ VII gồm <strong class='hl'>Lời nói đầu, 14 Chương và 87 Điều</strong> (tăng thêm 1 chương và 16 điều so với Hiến chương sửa đổi lần thứ VI).",
+        kw: "Thông qua ngày 29/11/2022 (tại Đại hội IX) • Gồm: Lời nói đầu, 14 Chương và 87 Điều",
+        quiz: {
+            options: [
+                "Thông qua ngày 29/11/2022 tại Đại hội IX; gồm Lời nói đầu, 14 Chương và 87 Điều",
+                "Thông qua ngày 07/11/1981 tại Đại hội I; gồm 11 Chương và 48 Điều",
+                "Thông qua ngày 22/11/2017 tại Đại hội VIII; gồm 13 Chương và 71 Điều",
+                "Thông qua ngày 15/10/2020 tại TP. Hồ Chí Minh; gồm 15 Chương và 90 Điều"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 7,
+        q: "Câu 7. Phương châm hoạt động của Giáo hội Phật giáo Việt Nam là gì?",
+        a: "Theo Hiến chương Giáo hội Phật giáo Việt Nam, phương châm hoạt động xuyên suốt của Giáo hội từ khi thành lập (1981) đến nay là:<br><strong class='hl'>“Đạo pháp – Dân tộc – Chủ nghĩa xã hội”</strong>.",
+        kw: "Phương châm hoạt động: “Đạo pháp – Dân tộc – Chủ nghĩa xã hội”",
+        quiz: {
+            options: [
+                "Đạo pháp – Dân tộc – Chủ nghĩa xã hội",
+                "Từ bi – Trí tuệ – Hùng lực",
+                "Giới luật – Thiền định – Trí tuệ",
+                "Đoàn kết – Hòa hợp – Trưởng dưỡng đạo tâm"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 8,
+        q: "Câu 8. Trung ương Giáo hội Phật giáo Việt Nam có hai Hội đồng nào? Chức năng căn bản của mỗi Hội đồng là gì?",
+        a: "Ở cấp Trung ương, Giáo hội Phật giáo Việt Nam có hai Hội đồng là <strong class='hl'>Hội đồng Chứng minh (HĐCM)</strong> và <strong class='hl'>Hội đồng Trị sự (HĐTS)</strong>:<br>1. <strong class='hl'>Hội đồng Chứng minh:</strong> Là cơ quan lãnh đạo tối cao về <strong class='hl'>Đạo pháp và Giới luật</strong> của GHPGVN; có chức năng chứng minh, giám sát tối cao các hoạt động của Giáo hội, suy tôn Đức Pháp chủ, quyết định tấn phong Giáo phẩm Hòa thượng, Ni trưởng và ban hành giáo chỉ.<br>2. <strong class='hl'>Hội đồng Trị sự:</strong> Là cơ quan <strong class='hl'>điều hành, quản lý hành chính cao nhất</strong> của GHPGVN về mọi mặt hoạt động Phật sự giữa hai kỳ Đại hội toàn quốc; tổ chức thực hiện Hiến chương, Nghị quyết Đại hội và điều hành Phật sự qua các Ban, Viện Trung ương và Ban Trị sự các cấp.",
+        kw: "2 Hội đồng: Hội đồng Chứng minh (tối cao về Đạo pháp & Giới luật) • Hội đồng Trị sự (điều hành, quản lý hành chính cao nhất)",
+        quiz: {
+            options: [
+                "Hội đồng Chứng minh (cơ quan lãnh đạo tối cao về Đạo pháp và Giới luật) và Hội đồng Trị sự (cơ quan điều hành, quản lý hành chính cao nhất của Giáo hội)",
+                "Hội đồng Giám luật và Hội đồng Hoằng pháp",
+                "Hội đồng Tăng sự và Hội đồng Giáo dục Phật giáo",
+                "Hội đồng Chứng minh (quản lý hành chính sự vụ) và Hội đồng Trị sự (chỉ làm nhiệm vụ chứng minh nghi lễ)"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 9,
+        q: "Câu 9. Hiến chương GHPGVN có giá trị như thế nào đối với tổ chức và hoạt động của Giáo hội?",
+        a: "Hiến chương GHPGVN có giá trị là <strong class='hl'>văn bản pháp quy (đạo luật gốc) tối cao</strong> của Giáo hội Phật giáo Việt Nam:<br>1. Là <strong class='hl'>nền tảng pháp lý và kim chỉ nam</strong> định hướng cho toàn bộ cơ cấu tổ chức, hệ thống quản trị hành chính và mọi hoạt động Phật sự của Giáo hội các cấp từ Trung ương đến địa phương.<br>2. Là căn cứ gốc để xây dựng và ban hành Quy chế của Hội đồng Chứng minh, Hội đồng Trị sự, Ban Tăng sự Trung ương cùng các Ban, Viện, Ban Trị sự các cấp.<br>3. Đảm bảo sự <strong class='hl'>thống nhất ý chí và hành động, giữ vững kỷ cương Giới luật và tinh thần Lục hòa</strong> của Tăng Ni, Phật tử Việt Nam trong và ngoài nước, đồng thời kết nối hài hòa giữa Đạo pháp với Pháp luật Nhà nước.",
+        kw: "Văn bản pháp quy tối cao • Nền tảng pháp lý & kim chỉ nam cho tổ chức và hoạt động • Căn cứ ban hành Quy chế các cấp • Giữ vững sự thống nhất và kỷ cương Lục hòa",
+        quiz: {
+            options: [
+                "Là văn bản pháp quy tối cao, làm nền tảng pháp lý và kim chỉ nam cho mọi tổ chức, hoạt động của Giáo hội các cấp, đảm bảo sự thống nhất và kỷ cương Lục hòa",
+                "Chỉ là tài liệu tham khảo lịch sử, không có giá trị bắt buộc đối với các tự viện địa phương",
+                "Chỉ áp dụng cho cư sĩ Phật tử tại gia chứ không áp dụng cho hàng giáo phẩm Tăng Ni",
+                "Chỉ có hiệu lực trong phạm vi hai văn phòng Trung ương tại Hà Nội và TP. Hồ Chí Minh"
+            ],
+            correct: 0
+        }
+    },
+    {
+        id: 10,
+        q: "Câu 10. Tăng Ni có trách nhiệm gì trong việc chấp hành Hiến chương, Quy chế Ban Tăng sự và các quy định của Giáo hội?",
+        a: "Là thành phần nòng cốt của Giáo hội, Tăng Ni có những trách nhiệm trọng yếu sau:<br>1. <strong class='hl'>Nghiêm chỉnh tôn trọng và chấp hành</strong> Hiến chương GHPGVN, Quy chế hoạt động Ban Tăng sự Trung ương, Nội quy các Ban, Viện, các nghị quyết của Giáo hội và tuân thủ Pháp luật Nhà nước.<br>2. <strong class='hl'>Nghiêm trì Giới luật Phật chế, trau dồi giới đức và phạm hạnh</strong>, thực hiện đúng quy củ thiền môn (an cư kiết hạ, bố-tát tụng giới, sinh hoạt tại tự viện hợp pháp dưới sự quản lý của Ban Trị sự).<br>3. <strong class='hl'>Bảo vệ sự thanh tịnh, đoàn kết hòa hợp (Lục hòa) và uy tín của Giáo hội</strong>, tích cực phụng sự Đạo pháp và Dân tộc qua công tác hoằng pháp, giáo dục và từ thiện xã hội.",
+        kw: "Nghiêm chỉnh chấp hành Hiến chương, Quy chế Tăng sự & Pháp luật • Nghiêm trì Giới luật, an cư bố-tát • Bảo vệ sự thanh tịnh, hòa hợp và uy tín của Giáo hội",
+        quiz: {
+            options: [
+                "Nghiêm chỉnh chấp hành Hiến chương, Quy chế Tăng sự và Pháp luật; nghiêm trì Giới luật, thực hiện an cư bố-tát; bảo vệ sự thanh tịnh, đoàn kết hòa hợp và uy tín của Giáo hội",
+                "Chỉ cần tự tu tập cá nhân, không cần đăng ký danh bộ Tăng Ni hay tham gia an cư kiết hạ của Giáo hội",
+                "Có thể tự ý lập cơ sở tôn giáo riêng mà không cần thông qua Ban Trị sự địa phương",
+                "Việc chấp hành Hiến chương và Quy chế Tăng sự chỉ dành cho các vị giữ chức vụ trong Ban Trị sự"
+            ],
+            correct: 0
+        }
+    }
+];
+
+// Quản lý trạng thái thuộc bài (Lưu vào LocalStorage đồng bộ)
+let masteredSet = new Set(JSON.parse(localStorage.getItem('sadi_hienchuong_mastered') || '[]'));
+let hideAllAnswers = false;
+let showOnlyUnmastered = false;
+
+function saveMastery() {
+    localStorage.setItem('sadi_hienchuong_mastered', JSON.stringify([...masteredSet]));
+    updateMasteryBar();
+}
+
+function updateMasteryBar() {
+    const count = masteredSet.size;
+    document.getElementById('mastery-count').innerText = `${count} / ${QA_DATA.length}`;
+    document.getElementById('mastery-fill').style.width = `${(count / QA_DATA.length) * 100}%`;
+}
+
+function resetMastery() {
+    if (confirm("Bạn muốn đặt lại tiến độ đánh dấu đã thuộc về 0?")) {
+        masteredSet.clear();
+        saveMastery();
+        renderStudyList();
+        updateFlashcardUI();
+    }
+}
+
+// Chuyển đổi Tab
+function switchMode(mode, btn) {
+    document.querySelectorAll('.mode-section').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('mode-' + mode).classList.add('active');
+    btn.classList.add('active');
+    if (mode === 'flashcard') updateFlashcardUI();
+}
+
+// CHẾ ĐỘ 1: HIỂN THỊ ĐỀ CƯƠNG
+function renderStudyList() {
+    const query = document.getElementById('search-box').value.toLowerCase().trim();
+    const container = document.getElementById('study-container');
+    container.innerHTML = '';
+
+    QA_DATA.forEach(item => {
+        const isMastered = masteredSet.has(item.id);
+        if (showOnlyUnmastered && isMastered) return;
+
+        const matchText = (item.q + ' ' + item.a + ' ' + item.kw).toLowerCase();
+        if (query && !matchText.includes(query)) return;
+
+        const card = document.createElement('div');
+        card.className = `qa-card ${isMastered ? 'mastered' : ''}`;
+        card.innerHTML = `
+            <div class="qa-header">
+                <div class="qa-question">${item.q}</div>
+                <button class="master-toggle" onclick="toggleMastery(${item.id})">
+                    ${isMastered ? '✅ Đã thuộc' : '⭕ Đánh dấu thuộc'}
+                </button>
+            </div>
+            <div class="qa-answer ${hideAllAnswers ? 'hidden-ans' : ''}" onclick="this.classList.toggle('hidden-ans')" title="Nhấp để ẩn/hiện đáp án câu này">
+                <div>${item.a}</div>
+                <div class="keyword-box">🔑 <strong>Từ khóa nhớ nhanh:</strong> ${item.kw}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function toggleMastery(id) {
+    if (masteredSet.has(id)) masteredSet.delete(id);
+    else masteredSet.add(id);
+    saveMastery();
+    renderStudyList();
+}
+
+function toggleAllAnswers() {
+    hideAllAnswers = !hideAllAnswers;
+    const btn = document.getElementById('btn-toggle-ans');
+    btn.innerText = hideAllAnswers ? '👁️ Hiện tất cả đáp án' : '🙈 Ẩn đáp án để tự dò bài';
+    renderStudyList();
+}
+
+function filterUnmastered() {
+    showOnlyUnmastered = !showOnlyUnmastered;
+    const btn = document.getElementById('btn-filter-unmastered');
+    btn.style.borderColor = showOnlyUnmastered ? 'var(--gold)' : '';
+    btn.innerText = showOnlyUnmastered ? `📋 Hiện tất cả ${QA_DATA.length} câu` : '📌 Chỉ hiện câu chưa thuộc';
+    renderStudyList();
+}
+
+// CHẾ ĐỘ 2: FLASHCARD 3D
+let fcIndex = 0;
+
+function updateFlashcardUI() {
+    const scene = document.getElementById('fc-scene');
+    scene.classList.remove('is-flipped');
+    const item = QA_DATA[fcIndex];
+    setTimeout(() => {
+        document.getElementById('fc-counter').innerText = `CÂU ${fcIndex + 1} / ${QA_DATA.length} (Nhấp vào thẻ hoặc phím Space để lật)`;
+        document.getElementById('fc-question').innerText = item.q;
+        document.getElementById('fc-hint').innerHTML = `💡 Gợi ý từ khóa: <strong>${item.kw}</strong>`;
+        document.getElementById('fc-answer').innerHTML = item.a;
+        const mBtn = document.getElementById('fc-master-btn');
+        if (masteredSet.has(item.id)) {
+            mBtn.innerText = '✅ Đã thuộc câu này';
+            mBtn.style.borderColor = 'var(--emerald)';
+            mBtn.style.color = 'var(--emerald)';
+        } else {
+            mBtn.innerText = '⭕ Đánh dấu Đã thuộc';
+            mBtn.style.borderColor = '';
+            mBtn.style.color = '';
+        }
+    }, 150);
+}
+
+function flipCard() {
+    document.getElementById('fc-scene').classList.toggle('is-flipped');
+}
+
+function nextCard() {
+    fcIndex = (fcIndex + 1) % QA_DATA.length;
+    updateFlashcardUI();
+}
+
+function prevCard() {
+    fcIndex = (fcIndex - 1 + QA_DATA.length) % QA_DATA.length;
+    updateFlashcardUI();
+}
+
+function randomCard() {
+    fcIndex = Math.floor(Math.random() * QA_DATA.length);
+    updateFlashcardUI();
+}
+
+function toggleCurrentCardMastery() {
+    const id = QA_DATA[fcIndex].id;
+    toggleMastery(id);
+    updateFlashcardUI();
+}
+
+// CHẾ ĐỘ 3: TRÒ CHƠI ĐẤU TRƯỜNG TRÍ TUỆ
+let quizOrder = [];
+let quizCursor = 0;
+let score = 0;
+let streak = 0;
+let bestScore = parseInt(localStorage.getItem('sadi_hienchuong10_best_score') || '0', 10);
+
+function shuffleArray(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+function startNewGame() {
+    quizOrder = shuffleArray(QA_DATA);
+    quizCursor = 0;
+    score = 0;
+    streak = 0;
+    document.getElementById('game-best').innerText = bestScore;
+    loadQuizQuestion();
+}
+
+function loadQuizQuestion() {
+    if (quizCursor >= quizOrder.length) {
+        document.getElementById('quiz-question').innerHTML = `🎉 CHÚC MỪNG BẠN ĐÃ HOÀN THÀNH ${quizOrder.length} CÂU THỬ THÁCH HIẾN CHƯƠNG & QUY CHẾ!<br><span style="color:var(--gold);font-size:1.3rem;">Tổng điểm: ${score} điểm</span>`;
+        document.getElementById('quiz-options').innerHTML = '';
+        document.getElementById('quiz-feedback').style.display = 'none';
+        document.getElementById('btn-next-quiz').style.display = 'none';
+        return;
+    }
+
+    const currentItem = quizOrder[quizCursor];
+    document.getElementById('game-q-num').innerText = `${quizCursor + 1} / ${quizOrder.length}`;
+    document.getElementById('game-score').innerText = score;
+    document.getElementById('game-streak').innerText = `🔥 ${streak}`;
+    document.getElementById('quiz-question').innerText = currentItem.q;
+    document.getElementById('quiz-feedback').style.display = 'none';
+    document.getElementById('btn-next-quiz').style.display = 'none';
+
+    const indexedOptions = currentItem.quiz.options.map((text, idx) => ({
+        text,
+        isCorrect: idx === currentItem.quiz.correct
+    }));
+    const shuffledOpts = shuffleArray(indexedOptions);
+
+    const optContainer = document.getElementById('quiz-options');
+    optContainer.innerHTML = '';
+    const labels = ['A', 'B', 'C', 'D'];
+
+    shuffledOpts.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `<strong>${labels[i]}.</strong> ${opt.text}`;
+        btn.onclick = () => selectAnswer(btn, opt.isCorrect, currentItem);
+        optContainer.appendChild(btn);
+    });
+}
+
+function selectAnswer(selectedBtn, isCorrect, item) {
+    const allBtns = document.querySelectorAll('.opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+
+    const fb = document.getElementById('quiz-feedback');
+    fb.style.display = 'block';
+
+    if (isCorrect) {
+        selectedBtn.classList.add('correct');
+        streak++;
+        const gained = 10 + (streak > 1 ? streak * 2 : 0);
+        score += gained;
+        if (score > bestScore) {
+            bestScore = score;
+            localStorage.setItem('sadi_hienchuong10_best_score', bestScore);
+            document.getElementById('game-best').innerText = bestScore;
+        }
+        masteredSet.add(item.id);
+        saveMastery();
+        renderStudyList();
+        fb.innerHTML = `<strong style="color:var(--emerald);">✅ Chính xác! (+${gained} điểm)</strong><br>${item.a}`;
+    } else {
+        selectedBtn.classList.add('wrong');
+        streak = 0;
+        allBtns.forEach(b => {
+            if (b.innerText.includes(item.quiz.options[item.quiz.correct])) {
+                b.classList.add('correct');
+            }
+        });
+        fb.innerHTML = `<strong style="color:var(--crimson);">❌ Chưa chính xác! Đáp án đầy đủ:</strong><br>${item.a}`;
+    }
+
+    document.getElementById('game-score').innerText = score;
+    document.getElementById('game-streak').innerText = `🔥 ${streak}`;
+    document.getElementById('btn-next-quiz').style.display = 'inline-block';
+}
+
+function nextQuizQuestion() {
+    quizCursor++;
+    loadQuizQuestion();
+}
+
+// Phím tắt cho Flashcard
+document.addEventListener('keydown', (e) => {
+    const fcActive = document.getElementById('mode-flashcard').classList.contains('active');
+    if (!fcActive) return;
+    if (e.code === 'Space') { e.preventDefault(); flipCard(); }
+    if (e.code === 'ArrowRight') nextCard();
+    if (e.code === 'ArrowLeft') prevCard();
+});
+
+// HIỆU ỨNG BACKGROUND VŨ TRỤ SAO CHUYỂN ĐỘNG (CANVAS)
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function initStars() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = Array.from({ length: 180 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.6 + 0.3,
+        speed: Math.random() * 0.35 + 0.08
+    }));
+}
+
+function animateStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+        s.y -= s.speed;
+        if (s.y < 0) { s.y = canvas.height; s.x = Math.random() * canvas.width; }
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + Math.abs(Math.sin(Date.now() * 0.001 + s.x)) * 0.6})`;
+        ctx.fill();
+    });
+    requestAnimationFrame(animateStars);
+}
+
+window.addEventListener('resize', initStars);
+
+// Khởi chạy ứng dụng
+window.onload = () => {
+    initStars();
+    animateStars();
+    updateMasteryBar();
+    renderStudyList();
+    updateFlashcardUI();
+    startNewGame();
+};
+</script>
+</body>
+</html>
